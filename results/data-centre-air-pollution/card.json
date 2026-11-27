@@ -470,7 +470,62 @@
  ],
  "breakdown": null,
  "breakdown_not_modelled": "No source read yet splits AI data-centre electricity by access mode (open-weight, API frontier, locally-run frontier).",
- "baselines": [],
+ "baselines": [
+  {
+   "id": "air-pollution",
+   "label": "air pollution",
+   "geography": "global",
+   "dalys_window": 1161541885,
+   "ratio": 2.8417622108214233e-05,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "child-maternal-malnutrition",
+   "label": "child and maternal malnutrition",
+   "geography": "global",
+   "dalys_window": 1379280170,
+   "ratio": 2.393151084800475e-05,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "high-fasting-plasma-glucose",
+   "label": "high fasting plasma glucose",
+   "geography": "global",
+   "dalys_window": 808901880,
+   "ratio": 4.0806257429878685e-05,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "high-systolic-blood-pressure",
+   "label": "high systolic blood pressure",
+   "geography": "global",
+   "dalys_window": 1167556255,
+   "ratio": 2.8271235933546375e-05,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "tobacco",
+   "label": "tobacco",
+   "geography": "global",
+   "dalys_window": 1018669645,
+   "ratio": 3.2403300238511415e-05,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "unsafe-wash",
+   "label": "unsafe water, sanitation and handwashing",
+   "geography": "global",
+   "dalys_window": 307502895,
+   "ratio": 0.00010734291900176366,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  }
+ ],
  "params": [
   {
    "param": "study",
@@ -1002,7 +1057,7 @@
  "provenance": {
   "model": "models/data_centre_air_pollution.py",
   "card_source": "cards/data-centre-air-pollution.md",
-  "commit": "e7b7a0a",
+  "commit": "42c7d56",
   "uncommitted_input_changes": false,
   "seed": 20261125,
   "draws": 100000

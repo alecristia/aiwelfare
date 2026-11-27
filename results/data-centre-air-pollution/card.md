@@ -9,7 +9,7 @@
 | | |
 |---|---|
 | **Expected harm, 2027–2031** | **~33k DALYs** (90% range: 12k → 66k) |
-| **Magnitude** | order of 10^4 DALYs · no sourced baselines yet |
+| **Magnitude** | order of 10^4 DALYs · 2.8e-05× air pollution (global) · 2.4e-05× child and maternal malnutrition (global) · 4.1e-05× high fasting plasma glucose (global) · 2.8e-05× high systolic blood pressure (global) · 3.2e-05× tobacco (global) · 0.00011× unsafe water, sanitation and handwashing (global) |
 | **Confidence** | 🔸 **Medium**. Not tail-dominated (top 5% of futures give 11% of the expected value) |
 | **Mainly comes from** | not modelled yet |
 | **Compared with** | AI frozen at 2026 levels |
@@ -31,7 +31,8 @@ In the model, the median future has **30k DALYs** over 2027–2031, and 90% of s
 ![Quantile dotplot](dotplot.svg)
 
 ```
-aiwelfare dist risk/data-centre-air-pollution  # quantile dotplot + percentiles in the terminal
+aiwelfare dist risk/data-centre-air-pollution                            # quantile dotplot + percentiles in the terminal
+aiwelfare compare risk/data-centre-air-pollution baseline/air-pollution  # side by side, same window and units
 ```
 
 ## Why it might be much bigger, or much smaller
@@ -169,7 +170,7 @@ Medium. Top 5% of futures give 11% of the expected value (tail-dominated above 5
 
 ### Index and provenance
 
-MIT AI Risk Repository mapping not done yet (D3) · model `models/data_centre_air_pollution.py` · prose `cards/data-centre-air-pollution.md` · inputs as of commit `e7b7a0a` · seed 20261125, 100,000 draws
+MIT AI Risk Repository mapping not done yet (D3) · model `models/data_centre_air_pollution.py` · prose `cards/data-centre-air-pollution.md` · inputs as of commit `42c7d56` · seed 20261125, 100,000 draws
 
 ### Changelog
 
