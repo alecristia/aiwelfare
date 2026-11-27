@@ -217,5 +217,7 @@ def test_committed_cards_are_current():
             pytest.skip(f"{path} not built yet")
         ds = data.load(ROOT, include_mock=mock)
         fresh = card.analyse(ds, risk, with_changelog=False)
-        stored = json.loads(path.read_text())
-        assert stored["summary"] == pytest.approx(json.loads(json.dumps(fresh["summary"])))
+        stored = json.loads(path.read_text())["summary"]
+        new = json.loads(json.dumps(fresh["summary"]))
+        assert stored.pop("dotplot_quantiles") == pytest.approx(new.pop("dotplot_quantiles"))
+        assert stored == pytest.approx(new)
