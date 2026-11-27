@@ -50,7 +50,6 @@ The six global baselines are in `baselines/` (GBD 2023, year 2023), generated fr
 | Metabolic | High systolic blood pressure; high fasting plasma glucose |
 
 Still to do:
-- deaths and DALYs attributable to ambient particulate matter pollution, for the environmental-footprint card (maintainer downloading)
 - check that the six sit at the same level of the GBD risk hierarchy (the download does not record it)
 
 ### 2. Clinical AI (net)
@@ -89,7 +88,7 @@ Rounds 1–5 are done and merged (PRs #1, #2). Open items:
 Every entry goes to a card, a card's "leaves out" list, or the scope cuts above. Unmapped entries are coverage gaps.
 
 ### Environmental footprint: from US to global
-The built card covers the contiguous US only, and is not shown until a global estimate exists. Its other known gaps (the `open-only` counterfactual, the access-mode breakdown, a source for energy-efficient ML) are listed on the card. GBD deaths and DALYs for ambient particulate matter pollution would replace its DALYs-per-death assumption.
+The built card covers the contiguous US only, and is not shown until a global estimate exists. Its other known gaps (the `open-only` counterfactual, the access-mode breakdown, a source for energy-efficient ML) are listed on the card. GBD 2023 deaths and DALYs attributable to ambient particulate matter (global) are now claims 036–037: about 25 DALYs per death globally, against the US model's assumed 8–15. The global card should use the GBD ratio; the US model keeps its assumption, since a global ratio does not fit a US population.
 
 ### Overview chart details (D7)
 Row counts, colours and layout: deferred by D7 until real estimates exist.

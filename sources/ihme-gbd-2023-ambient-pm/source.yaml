@@ -1,0 +1,25 @@
+id: ihme-gbd-2023-ambient-pm
+mock: false
+title: "Global Burden of Disease Study 2023 (GBD 2023) Results: deaths and DALYs attributable to ambient particulate matter pollution, global, 2023"
+authors: [Global Burden of Disease Collaborative Network]
+publisher: Institute for Health Metrics and Evaluation (IHME), Seattle
+type: dataset
+evidence_date: "2023"
+published: "2024"
+version: "GBD 2023, GBD Results tool export IHME-GBD_2023_DATA-bb2acef0-1, downloaded 2026-11-27"
+accessed: 2026-11-27
+url: https://vizhub.healthdata.org/gbd-results/
+license: IHME Free-of-Charge Non-Commercial User Agreement
+redistribution: url-only
+sha256: 7f9b29529114be9ad3277aedc3d5de3c7f8116915846572110c3871ed5163108
+evidence_basis: [modelled]
+author_interests:
+  - kind: funder
+    note: IHME (University of Washington); GBD is funded mainly by the Gates Foundation.
+notes: >
+  The file lives in the GBD subdataset, baselines/gbd/2023-ambient-pm/ (zip and extracted CSV,
+  annexed, never pushed). The sha256 is the zip's. Query: context risk; risk ambient particulate
+  matter pollution; cause all causes; location global; year 2023; all ages; both sexes; deaths
+  and DALYs; number. Citation as given in the download: Global Burden of Disease Collaborative
+  Network. GBD 2023 Results. IHME, 2024. Outputs must carry "Source: Institute for Health
+  Metrics and Evaluation".

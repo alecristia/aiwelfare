@@ -1,0 +1,34 @@
+id: data-centre-air-pollution-037
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: ihme-gbd-2023-ambient-pm
+locator:
+  table: IHME-GBD_2023_DATA-bb2acef0-1.csv, rei_id 86, measure DALYs
+quote: Ambient particulate matter pollution
+quantity: global_ambient_pm_dalys
+description: DALYs attributable to ambient particulate matter pollution, global, 2023, all causes.
+value:
+  interval:
+    low: 101250153
+    mid: 123374527
+    high: 147254218
+    kind: ci95
+units: DALYs per year
+geography: global
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: not-applicable
+conditions: GBD 2023; all ages; both sexes; attributable to the risk factor across all causes.
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- conversion/dalys
+- global
+notes: Row label quoted (a table cell has no prose). Interval is GBD's 95% uncertainty interval, recorded as ci95.
+  Values copied from the CSV by script and rounded to whole numbers. For the global environmental-footprint card;
+  the current US-only model does not use it.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'
