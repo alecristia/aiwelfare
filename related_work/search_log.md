@@ -107,6 +107,25 @@ Seed items not reached by a query: kapoor-open-foundation-models-2024 (seed in t
 
 **Round 4 result:** new tier A: 0. New tier B *on a new pathway or at population scale*: 0. One further within-pathway tier B study (Fang et al., chatbot psychosocial effects) was catalogued. → **second consecutive round with no new A or B, as operationalised below. Stopping rule met after 4 rounds.**
 
+## Round 5 (2026-11-27): AI-enabled autocratisation and AI in organised violence
+
+Added after review. The maintainer asked why nothing covered harms from autocracy or organised violence. Rounds 1–4 had one query on autonomous weapons (q56) and none on autocratisation, repression or power concentration, because the brief's pathway list did not name them and the search treated that list as its scope. This round fills that gap. Standard and extended web search; results screened from search summaries; items catalogued only after their abstract or text was read.
+
+| # | Query | Screened | Catalogued |
+|---|---|---|---|
+| 58 | AI-enabled authoritarianism surveillance repression health mortality quantified estimate (extended) | 9 | 0 (mechanism papers only; no health quantity) |
+| 59 | democracy and health life expectancy causal effect estimate Bollyky Lancet | 10 | bollyky-democracy-mortality-2019 (tier E) |
+| 60 | democratic backsliding autocratization effect on mortality or life expectancy V-Dem | 10 | wigley-autocratisation-uhc-2020 (tier E) |
+| 61 | AI-enabled coups power concentration probability forecast 2030 expert survey (extended) | 9 | 0 (Forethought scenario analysis, no probabilities; individual blog estimates; the 2030 elicitation found is Saeri et al., already catalogued) |
+| 62 | AI targeting civilian casualties Gaza Lavender deaths attributable AI decision support (extended) | 9 | 0 (journalism and legal analysis; no attributable-death estimate) |
+| 63 | autonomous drones war casualties share of deaths Ukraine 2025 | 17 | 0 (official claims that drones cause 70–80% of battlefield casualties; mostly remotely piloted, not AI, and from interested parties) |
+| 64 | AI risk of interstate war or nuclear escalation probability forecast 2030 (extended) | 9 | rivera-llm-escalation-wargames-2024 (tier D); XPT and LEAP already catalogued |
+| 65 | machine learning conflict early warning ViEWS lives saved | 10 | 0 (forecast-accuracy evaluations; no lives-saved estimate) |
+
+Also in this round: the *Lancet* Commission's full text (supplied by the maintainer) was read and its catalogue entry updated. It names autonomous weapons, autonomous nuclear weapons and mass political deepfakes inside its malicious-AI category, and estimates conventional conflict (not AI) at 7.71 billion amenable DALYs to 2100.
+
+**Round 5 result:** no tier A or B item exists for either pathway. Two tier E items (health effect of autocratisation, not AI-specific) and one tier D item. A single targeted round, not run to the stopping rule.
+
 ## How the stopping rule was applied (read this)
 
 The brief says to stop after two consecutive rounds with no new tier A or B items. Taken literally, that rule cannot stop in the clinical-AI literature: there are hundreds of single-site evaluations and trials of clinical AI tools, and each would be a "new tier B item". **I therefore counted a tier B item as "new" for the stopping rule only if it added a pathway not yet represented in the catalogue, or a population-level estimate for an existing pathway.** Further single-site or single-tool studies of a pathway already covered were catalogued when found (e.g. Fang et al. in round 4), but did not reset the counter.
@@ -129,10 +148,10 @@ Under a literal reading, round 4 would not count as empty, and the search would 
   - the XPT working paper (Karger et al. 2023);
   - the ransomware manuscript (McGlave et al.).
 - **Mirrors** for EA Forum and LessWrong posts that returned HTTP 429: `ea.greaterwrong.com` and `www.greaterwrong.com`.
-- **One attempt to fetch the Lancet abstract with a browser user-agent header was blocked by the session's permission system** and was not pursued. The Lancet Commission is catalogued from press material only.
+- **One attempt to fetch the Lancet abstract with a browser user-agent header was blocked by the session's permission system** and was not pursued. The Lancet Commission was catalogued from press material until round 5, when the maintainer supplied the full text.
 
 ## Totals
 
-- Queries: 57 web searches, about 620 results screened, plus about 15 direct API retrievals.
-- Catalogue: 53 items (A 3, B 23, C 11, D 16), all opened and read, at least at abstract level.
+- Queries: 65 web searches, about 700 results screened, plus about 17 direct API retrievals (two more in round 5).
+- Catalogue: 56 items (A 3, B 23, C 11, D 17, E 2), all opened and read, at least at abstract level.
 - Not accessed: see `docs/related-work.md`, section "Not accessed".

@@ -22,9 +22,9 @@ It differs from this repo in five ways:
 2. **Granularity:** AI is a single "malicious use" row, not risk by risk. Misuse pathways are not split, and malfunctions and systemic risks are absent.
 3. **Benefits:** no AI benefit is quantified.
 4. **Quantity:** "amenable" DALYs are the gap between a best-case and a worst-case future. They are not an expected burden against a counterfactual.
-5. **Evidence:** the AI figure rests on expert and superforecaster judgement, and coverage says the method is not described in detail.
+5. **Evidence:** the AI figure rests on expert and superforecaster judgement (FRI tournament), and the Commission calls it "qualitative and largely subjective".
 
-We could read this item only through press material: the journal blocked access. Its appendix should be read before the repo cites the figure.
+The full main text has now been read (supplied by the maintainer). The AI figure is 10.4 billion with a 95% UI of 0.00–15.6. Its method is in the appendix (pp 109–14), which has not been obtained and should be read before the repo cites the figure.
 
 **Other near-misses:**
 - **Rethink Priorities' Cross-Cause Model (2023) and its follow-up on short horizons** are the methodological precedent. They differ in what they estimate: intervention cost-effectiveness rather than risk size, generic existential risk rather than AI pathways, and centuries rather than five years.
@@ -99,6 +99,19 @@ Also relevant to tier B:
 - The OECD and MIT incident trackers, which are possible future anchors for observed harms but give no counts of deaths.
 - The International AI Safety Report 2026, which states that systematic data on how common harms are, and how severe, remain limited.
 
+## Gap found after review: autocratisation and organised violence
+
+The first four rounds did not search these pathways (one query on autonomous weapons; none on autocratisation). A fifth, targeted round (search log, round 5) found:
+
+- **No quantified health estimate exists** for either AI-enabled autocratisation or AI's role in armed conflict, at any horizon. The work found is mechanism analysis (AI-enabled coups, digital repression), journalism and legal analysis (AI targeting in Gaza), interested-party casualty shares (drones in Ukraine, mostly not AI) and wargame simulations (LLM escalation).
+- **The pieces for a probability × severity model exist separately:**
+  - *Probability:* Saeri et al.'s Delphi study (already catalogued) has 2025–2030 severity distributions for the MIT power-centralisation and weapons subdomains. They have not yet been extracted from the full text.
+  - *Severity of autocratisation:* Wigley et al. (BMJ 2020) estimate that autocratising countries gained 2.2% in life expectancy at age 5 over ten years versus 3.5% without autocratisation; Bollyky et al. (Lancet 2019) give the mirror image for democratisation. Both are observational (synthetic control) and not about AI.
+  - *Severity of conflict:* the *Lancet* Commission estimates conventional conflict at 7.71 billion amenable DALYs to 2100. GBD gives current conflict deaths, which would serve as a baseline.
+- **The *Lancet* Commission already folds part of this into "malicious use of AI"**: its second pathway names autonomous weapons, autonomous nuclear weapons and mass political deepfakes. It does not quantify them separately.
+
+So the verdict above holds, and these two pathways are among the least quantified in the whole field.
+
 ## Candidate new risk cards, checked against D2
 
 Adding cards needs the maintainer's approval (`CLAUDE.md`). These are proposals only.
@@ -116,15 +129,17 @@ D2 criteria: (1) a distinct causal pathway, (2) its own evidence, (3) a differen
 | **Consumer chatbot medical-advice errors** | partly | partly: Draelos red-teaming | same work as `clinical-errors` | **Probably merge** into `clinical-errors`, with a consumer-facing component. |
 | **Labour displacement → mortality** | yes | yes: O'Brien (analogue), LEAP | yes: economic policy, not ML | **Passes D2.** Most of its harm is "not captured in DALYs", and it is far from ML engineering. |
 | **AI-accelerated biomedical research** | yes | weak within the window: LEAP Wave 10 is dated 2050; no AlphaFold-to-lives estimate | yes | **Fails (2) for 2026–2031 at present.** Keep as a register entry. |
+| **AI-enabled power concentration / autocratisation** (AI lowers the cost of surveillance, repression or seizing power → autocratisation → worse health) *(round 5)* | yes | partly: severity measured (Wigley, Bollyky); probability only from expert judgement (Saeri) | yes: AI governance, compute and model-access controls, detecting misuse for surveillance | **Passes (1) and (3); borderline on (2).** Much of the harm is "not captured in DALYs" (rights, freedoms). Effects within 2026–2031 are probably small because the measured effects build over ten years. |
+| **AI in armed conflict** (autonomous weapons, AI targeting, AI-driven escalation) *(round 5)* | yes | weak: no casualty attribution; probability inputs from Saeri (weapons subdomain), XPT/LEAP (nuclear); severity from conflict data | yes: military-AI policy, evaluations of escalation behaviour, arms control | **Fails (2) for now, like infrastructure malfunctions.** Revisit when Saeri's subdomain figures are extracted; check overlap with a malicious-use card. |
 | **AI errors in critical infrastructure** (malfunction) | yes | weak: LEAP cites it as a common route to catastrophe | yes | **Fails (2) for now.** Revisit when LEAP wave reports are extracted. |
 
 ## Not accessed
 
-These items looked relevant but could not be read. None is in the catalogue, except the *Lancet* Commission, which is catalogued from press material because it is the closest item found.
+These items looked relevant but could not be read. None is in the catalogue.
 
 | Item | Why not read |
 |---|---|
-| *Lancet* Commission full text and appendix (doi:10.1016/S0140-6736(26)01714-9) and the accompanying comment | HTTP 403. Catalogued from press material only (see the catalogue entry). |
+| *Lancet* Commission appendix (AI method, pp 109–14) and the accompanying comment | HTTP 403. The main text was supplied by the maintainer and read in round 5. |
 | Oxford randomised study of LLM medical advice, *Nature Medicine* (February 2026) | University page returned 403; Europe PMC lookup timed out |
 | Samotsvety, "probabilities for potential precursors of existential risk" (2024) | Host refused connection |
 | Open Philanthropy (now Coefficient Giving), "AI Reference Classes" (Freitas-Groff, 2023) | HTTP 403 after redirect |
@@ -148,3 +163,4 @@ These items looked relevant but could not be read. None is in the catalogue, exc
 - **Grey literature.** Forum posts, prediction markets and wiki pages were included where they give numbers, and their weak evidence basis is recorded. Some forum and forecasting sites rate-limited or refused automated access.
 - **Single searcher, single day.** All screening was done by one agent in one session, with no second screener and no reference-manager deduplication. Forward-citation searches used web search rather than a citation index (e.g. Google Scholar "cited by"), so forward coverage is incomplete.
 - **Recency.** Items published in the weeks before 2026-11-25 may not yet be indexed.
+- **Scope set by the brief's pathway list.** Rounds 1–4 searched the pathways the brief named, so pathways it did not name (autocratisation, organised violence) were missed until the maintainer's review prompted round 5. Other unnamed pathways may still be missing; the MIT AI Risk Repository mapping required by D3 is the systematic check for this.
