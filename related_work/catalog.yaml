@@ -8,7 +8,9 @@
 #
 # Field notes:
 #   tier: A multi-risk quantification | B single-pathway quantification |
-#         C probability forecasts usable as inputs | D methods and frameworks
+#         C probability forecasts usable as inputs | D methods and frameworks |
+#         E health effect of a downstream event, not AI-specific (added in round 5): usable as the
+#           severity half of an AI pathway whose probability half comes from elsewhere
 #   closeness_to_this_repo: 0-3 (3 = near-term, AI-specific, health-denominated, directly usable)
 #   usable_as: precedent | claim source for card X | baseline | method | none
 #   Card ids used in usable_as: bio-misuse and clinical-errors are the only cards named so far in
@@ -26,22 +28,22 @@ items:
     authors: "Murray CJL (IHME, University of Washington), Kanem N (co-chair), et al."
     year: 2026
     url_or_doi: "https://doi.org/10.1016/S0140-6736(26)01714-9"
-    accessed: "Full text and abstract blocked (HTTP 403). Read via official press release (https://www.news-medical.net/news/20261012/Lancet-Commission-identifies-seventeen-catastrophic-threats-to-global-health.aspx), Medical Xpress (https://medicalxpress.com/news/2026-10-ai-misuse-nuclear-famine-threaten.html) and Health Policy Watch (https://healthpolicy-watch.news/is-the-world-ending-a-lancet-commission-says-maybe/)."
+    accessed: "Full main text read (PDF supplied by the maintainer, corrected version of 2026-10-15; registered as source lancet-2026-commission-21-health). Appendix (AI method, pp 109-14) not obtained. Earlier version of this entry relied on press material."
     tier: A
-    what_is_quantified: "Amenable DALYs (gap between plausible best- and worst-case futures) for 17 threats to health to 2100, including malicious use of AI at about 10.4 billion DALYs (range reported as 0 to 15.6 billion)."
+    what_is_quantified: "Expected cumulative amenable DALYs 2025-2100 (gap between plausible best and plausible worst scenarios) for 17 threats. Malicious use of AI: 10.4 billion (95% UI 0.00-15.6), section 5.11. The AI category covers three pathways: AI-designed pathogens; AI in critical infrastructure (including autonomous weapons, autonomous nuclear weapons, mass political deepfakes, AI-enhanced ransomware on health care); and loss of control. Conventional conflict (not AI): 7.71 billion (6.58-9.14), section 5.6."
     units: DALYs
     time_horizon: "2025-2100 (cumulative)"
     geography: "Global, 204 countries and territories"
     harms_benefits_or_both: harms
     method: "other (GBD-based reference forecast plus best/worst scenarios; for malicious AI, impact multiplied by probability from expert and superforecaster judgement)"
     evidence_basis: "modelled (most threats); expert judgement (malicious AI and nuclear conflict)"
-    author_interests: "IHME-led academic commission; no AI-developer authorship reported in the coverage read"
+    author_interests: "IHME-led academic commission (GBD infrastructure). No Commission funding statement in the main text; declaration of interests lists Gates Foundation and NIH grants to several authors."
     closeness_to_this_repo: 2
     closeness_justification: "Only item found that puts an AI risk on the same DALY scale as established health threats, but horizon is 2100, AI is a single lumped 'malicious use' row, and AI benefits are not quantified."
-    usable_as: "precedent; claim source for card bio-misuse (and any malicious-use card) once the full text and appendix are read"
-    candidate_new_card: "none beyond malicious use; the Commission does not split AI misuse by pathway"
+    usable_as: "precedent; claim source for card bio-misuse and any malicious-use or armed-conflict card (pathway list, method) once the appendix is read; conventional-conflict figure as a long-horizon reference, not a 2026-2031 baseline"
+    candidate_new_card: "AI in armed conflict (autonomous weapons, targeting, escalation): named inside the malicious-use category but not quantified separately"
     pre_chatgpt: false
-    short_quote: "action to reduce the risk of malicious AI could avert an estimated 10.4 billion DALYs"
+    short_quote: "the amenable DALYs related to malicious AI are estimated at 10·4 billion (95% UI 0·00–15·6), cumulatively for 2025–2100"
 
   - id: rp-cross-cause-model-2023
     title: "Rethink Priorities' Cross-Cause Cost-Effectiveness Model: Introduction and Overview"
@@ -745,7 +747,7 @@ items:
     closeness_to_this_repo: 3
     closeness_justification: "Same five-year window and risk-by-risk coverage of the MIT taxonomy, with death-thresholded severity bands; the nearest thing to a full set of probability inputs."
     usable_as: "claim source for most risk cards (probability x severity bands); index cross-check for D3"
-    candidate_new_card: "competitive-dynamics and power-centralisation rank high in the study but mostly fall in 'not captured in DALYs'"
+    candidate_new_card: "competitive-dynamics and power-centralisation rank high in the study but mostly fall in 'not captured in DALYs'. Its power-centralisation and weapons subdomains are the only 2025-2030 probability inputs found for AI-enabled autocratisation and AI in armed conflict (round 5); subdomain figures not yet extracted from the full text."
     pre_chatgpt: false
     short_quote: "In a business-as-usual scenario, experts judged 18 of 24 risks as having a more than 10% probability"
 
@@ -1189,3 +1191,72 @@ items:
     candidate_new_card: none
     pre_chatgpt: false
     short_quote: "impacts on income and health are generally expected to be positive"
+
+  # ---------------------------------------------------------------- ROUND 5 (2026-11-27)
+  # Targeted round on AI-enabled autocratisation and AI in organised violence. See search_log.md.
+
+  - id: rivera-llm-escalation-wargames-2024
+    title: "Escalation Risks from Language Models in Military and Diplomatic Decision-Making"
+    authors: "Rivera J-P, Mukobi G, Reuel A, Lamparth M, Smith C, Schneider J"
+    year: 2024
+    url_or_doi: "https://doi.org/10.48550/arXiv.2401.03408 (FAccT 2024, doi:10.1145/3630106.3658942)"
+    accessed: "arXiv abstract read; full text not read."
+    tier: D
+    what_is_quantified: "No health quantities. Simulated multi-agent wargames with five off-the-shelf LLMs; all escalate, with arms-race dynamics and rare nuclear use (numbers in the full text, not read)."
+    units: none
+    time_horizon: "n/a (simulation)"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "other (simulated wargames with LLM agents and an escalation scoring framework)"
+    evidence_basis: modelled
+    author_interests: "Academic (Stanford, Georgia Tech and others); none stated on the abstract page"
+    closeness_to_this_repo: 0
+    closeness_justification: "Mechanism evidence for an AI-escalation pathway; gives neither a probability of real-world escalation nor a health toll."
+    usable_as: "qualitative claim for an armed-conflict card's mechanism section"
+    candidate_new_card: "AI in armed conflict"
+    pre_chatgpt: false
+    short_quote: "We find that all five studied off-the-shelf LLMs show forms of escalation and difficult-to-predict escalation patterns"
+
+  - id: wigley-autocratisation-uhc-2020
+    title: "Autocratisation and universal health coverage: synthetic control study"
+    authors: "Wigley S, Dieleman JL, Templin T, Mumford JE, Bollyky TJ"
+    year: 2020
+    url_or_doi: "https://doi.org/10.1136/bmj.m4040"
+    accessed: "Abstract read via Europe PMC (PMC page returned a bot check)."
+    tier: E
+    what_is_quantified: "In 17 countries that began autocratising in 2000-2010, HIV-free life expectancy at age 5 rose 2.2% over the next 10 years versus 3.5% (95% CI 3.3-3.6%) estimated without autocratisation; UHC effective coverage 11.9% vs 20.2%; out-of-pocket health spending up 10.0% vs 4.4%."
+    units: "life expectancy (years), UHC index, out-of-pocket spending"
+    time_horizon: "10 years after onset (1989-2019 data)"
+    geography: "17 low- and middle-income treatment countries; 119 controls"
+    harms_benefits_or_both: harms
+    method: "other (synthetic control)"
+    evidence_basis: measured
+    author_interests: "Academic (Bilkent, IHME, Council on Foreign Relations); funding not shown in the abstract record"
+    closeness_to_this_repo: 1
+    closeness_justification: "Not about AI. Gives the health effect of autocratisation, which an AI-enabled-autocratisation card would need as its severity term; the probability that AI causes autocratisation must come from elsewhere."
+    usable_as: "claim source (severity) for a candidate AI-enabled-autocratisation card"
+    candidate_new_card: "AI-enabled power concentration / autocratisation"
+    pre_chatgpt: true
+    short_quote: "This study estimated that it would have increased by 3.5% (95% confidence interval 3.3% to 3.6%, P<0.001)"
+
+  - id: bollyky-democracy-mortality-2019
+    title: "The relationships between democratic experience, adult health, and cause-specific mortality in 170 countries between 1980 and 2016: an observational analysis"
+    authors: "Bollyky TJ, Templin T, Cohen M, Schoder D, Dieleman JL, Wigley S"
+    year: 2019
+    url_or_doi: "https://doi.org/10.1016/S0140-6736(19)30235-1"
+    accessed: "Abstract read via Europe PMC (PMC page returned a bot check)."
+    tier: E
+    what_is_quantified: "HIV-free life expectancy at 15 improved on average 3% in the 10 years after transition to democracy; over 20 years, rising democratic experience associated with -9.64% cardiovascular, -9.14% other NCD and -8.93% tuberculosis mortality."
+    units: "life expectancy, cause-specific mortality (%)"
+    time_horizon: "1970-2016 data; 10- and 20-year effects"
+    geography: "170 countries"
+    harms_benefits_or_both: both
+    method: "other (synthetic control, variance decomposition, structural equation models, fixed effects; GBD 2016 and V-Dem)"
+    evidence_basis: measured
+    author_interests: "Academic (Council on Foreign Relations, IHME); funding not shown in the abstract record"
+    closeness_to_this_repo: 1
+    closeness_justification: "Not about AI; the mirror image of Wigley et al. (democratisation rather than autocratisation). Observational."
+    usable_as: "claim source (severity, cross-check) for a candidate AI-enabled-autocratisation card"
+    candidate_new_card: "AI-enabled power concentration / autocratisation"
+    pre_chatgpt: true
+    short_quote: "in countries after they transitioned to democracy, on average by 3% after 10 years"
