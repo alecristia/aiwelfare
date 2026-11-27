@@ -1,0 +1,28 @@
+id: han-2026-health-informed-computing
+mock: false
+title: "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers"
+authors: [Yuelin Han, Zhifeng Wu, Pengfei Li, Adam Wierman, Shaolei Ren]
+publisher: arXiv (cs.CY)
+type: preprint
+evidence_date: "2023"
+published: "2026-06-08"
+version: arXiv v4
+accessed: 2026-11-25
+url: https://arxiv.org/pdf/2412.06288v4
+landing_page: https://arxiv.org/abs/2412.06288v4
+doi: 10.48550/arXiv.2412.06288
+license: arXiv non-exclusive distribution licence 1.0
+redistribution: url-only
+sha256: 99aea4aad88a172f9ac791b439b897063b88c53838653c881093b1c290f46017
+evidence_basis: [modelled]
+author_interests:
+  - kind: none-identified
+    note: Academic authors (UC Riverside, RIT, Caltech). No funding statement found in v4.
+peer_review: "arXiv comments state 'Accepted by Communications of the ACM'; the accepted version was not read."
+notes: >
+  v1 (Dec 2024) was titled "The Unpaid Toll: Quantifying the Public Health Impact of AI"
+  and is the version covered by the UC Riverside news release ("as many as 1,300 premature
+  deaths a year by 2030"). v4 reports 2023 and 2028 only. Uses EPA COBRA Desktop v5.1 with
+  baseline emissions from EPA's 2016v1 platform (regulations as of May 2018). Covers all
+  US data centres (contiguous US), scope 1 (backup generators, at 10% of permitted
+  emissions) and scope 2 (grid electricity, average attribution). Not AI-specific.

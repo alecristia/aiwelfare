@@ -1,0 +1,27 @@
+id: data-centre-air-pollution-025
+mock: false
+risk: data-centre-air-pollution
+claim_type: assumption
+source: null
+quantity: dalys_per_death
+description: DALYs lost per premature death attributable to data-centre air pollution in the US.
+value:
+  interval:
+    low: 8
+    high: 15
+    kind: unqualified
+units: DALYs per death
+geography: contiguous United States
+counterfactual: unspecified
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- conversion/dalys
+rationale: 'PLACEHOLDER: no source read yet. Air-pollution deaths in the US fall mostly on older adults
+  with cardiovascular and respiratory disease, so years of life lost per death are well below the global
+  average; the range is a wide guess spanning that. Morbidity (years lived with disability, e.g. asthma)
+  is assumed small next to years of life lost.'
+replace_with: 'GBD 2023 (IHME): ratio of US DALYs to deaths attributable to ambient PM2.5 and ozone, by
+  year.'
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

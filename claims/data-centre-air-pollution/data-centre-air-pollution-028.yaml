@@ -1,0 +1,24 @@
+id: data-centre-air-pollution-028
+mock: false
+risk: data-centre-air-pollution
+claim_type: assumption
+source: null
+quantity: conventional_growth_rate
+description: Annual growth of non-AI data-centre electricity after 2023.
+value:
+  interval:
+    low: 0.0
+    high: 0.08
+    kind: unqualified
+units: fraction per year
+geography: contiguous United States
+counterfactual: unspecified
+evidence_type: assumption
+evidence_basis: expert-judgement
+tags:
+- attribution/ai-share
+rationale: 'LBNL: conventional server electricity doubled from about 30 to nearly 60 TWh over 2014–2023,
+  about 8% a year. Assumes non-AI demand grows no faster than that, and possibly not at all.'
+replace_with: LBNL's 2028 breakdown by server type (Figure 5.1 data) or a later report.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

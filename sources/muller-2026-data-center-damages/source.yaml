@@ -1,0 +1,26 @@
+id: muller-2026-data-center-damages
+mock: false
+title: "Measuring the Impact of Data Centers in the United States Economy: Monetary Damage from Air Pollution and Greenhouse Gas Emissions"
+authors: [Nicholas Z. Muller]
+publisher: NBER Working Paper 35100
+type: preprint
+evidence_date: "2025"
+published: "2026-04"
+version: NBER WP 35100, April 2026
+accessed: 2026-11-25
+url: https://www.nber.org/system/files/working_papers/w35100/w35100.pdf
+landing_page: https://www.nber.org/papers/w35100
+doi: 10.3386/w35100
+license: "© 2026 Nicholas Z. Muller. All rights reserved (short quotations permitted with credit)."
+redistribution: url-only
+sha256: fc947899eeb8b164ced8c9cc0dc5badd7c5824685f9e65d90f03d230f065d74b
+evidence_basis: [modelled]
+author_interests:
+  - kind: funder
+    note: Tepper School of Business, Carnegie Mellon University.
+peer_review: Not peer-reviewed (NBER working paper).
+notes: >
+  AP4 integrated assessment model with S&P Global facility-level data for ~2,800 operational
+  data centres (Q3 2025). Reports damages in dollars (air pollution + greenhouse gases), not
+  deaths; deaths can only be derived via the VSL. Includes cryptocurrency-mining facilities.
+  The AI share it uses (15%) is taken from IEA (2025), not estimated.

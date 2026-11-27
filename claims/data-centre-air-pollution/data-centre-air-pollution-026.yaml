@@ -1,0 +1,27 @@
+id: data-centre-air-pollution-026
+mock: false
+risk: data-centre-air-pollution
+claim_type: assumption
+source: null
+quantity: deaths_per_twh_trend
+description: Deaths per TWh in 2027–2031 relative to the study year (grid change).
+value:
+  interval:
+    low: 0.7
+    high: 1.0
+    kind: unqualified
+units: ratio
+geography: contiguous United States
+counterfactual: unspecified
+evidence_type: assumption
+evidence_basis: expert-judgement
+tags:
+- projection/grid
+rationale: 'Han et al.''s own 2028 projections imply ~11% fewer deaths per TWh than in 2023 (Table 1:
+  705/325 and 1262/580 vs 433/176.39), and the grid is expected to get cleaner; but data-centre demand
+  is delaying coal retirements in some regions (Han et al., p. 2). Range: up to 30% cleaner by 2031, or
+  no change.'
+replace_with: A projection of US power-sector air-pollution mortality per TWh to 2031 (e.g. EPA or EIA
+  scenarios run through a health model).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

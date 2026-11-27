@@ -1,0 +1,33 @@
+id: data-centre-air-pollution-009
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: chen-2026-data-center-air-quality
+locator:
+  page: 7
+  section: '3.4'
+quote: 'totaling 650 (95% CI: 559–740) attributable premature deaths per year.'
+quantity: us_dc_deaths
+description: Premature deaths from US data-centre grid electricity, 2023 (PM2.5 513 + ozone 137).
+value:
+  interval:
+    low: 559
+    mid: 650
+    high: 740
+    kind: ci95
+units: deaths per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+conditions: 'US-EGO dispatch with and without data-centre load; GEOS-Chem (GCHP 14.4.0); GEMM CRF for
+  PM2.5, log-linear CRF for ozone. Grid electricity only: backup generators not represented (section 2.1).'
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/geos-chem
+notes: CIs reflect CRF uncertainty only, not emissions or air-quality modelling (section 2.4).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

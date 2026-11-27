@@ -1,0 +1,28 @@
+id: data-centre-air-pollution-002
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: han-2026-health-informed-computing
+locator:
+  page: 7
+  table: '1'
+quote: 'Table 1: The public health cost of U.S. data centers in 2023 and projection for 2028.'
+quantity: us_dc_electricity
+description: US data-centre electricity use assumed for 2023 in Han et al.
+value:
+  point: 176.39
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+evidence_type: energy-model
+evidence_basis: modelled
+derived_from: Shehabi et al. 2024 (LBNL), ref. [1]
+tags:
+- study/cobra
+notes: Table 1 row 2023, Electricity (TWh).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

@@ -1,0 +1,27 @@
+id: data-centre-air-pollution-010
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: chen-2026-data-center-air-quality
+locator:
+  page: 4
+  section: '3.2'
+quote: Grid-supplied electricity demand from US data centers in 2023 drives 171.0 TWh of generation
+quantity: us_dc_electricity
+description: Generation driven by US data-centre demand in 2023, in Chen et al.
+value:
+  point: 171.0
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+evidence_type: energy-model
+evidence_basis: modelled
+tags:
+- study/geos-chem
+notes: 3.81% of total US grid output. Demand shares from EPRI (ref. 34).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

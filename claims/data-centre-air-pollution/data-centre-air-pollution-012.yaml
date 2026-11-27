@@ -1,0 +1,28 @@
+id: data-centre-air-pollution-012
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: chen-2026-data-center-air-quality
+locator:
+  page: 9
+  section: '4'
+quote: these deaths represent 5.3% of total power-sector air pollution mortality.
+quantity: us_dc_share_power_sector_mortality
+description: Data-centre share of US power-sector air-pollution deaths, 2023.
+value:
+  point: 0.053
+units: fraction
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/geos-chem
+- context
+notes: Against a 3.8% share of US generation.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

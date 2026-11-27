@@ -1,0 +1,29 @@
+id: data-centre-air-pollution-015
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: muller-2026-data-center-damages
+locator:
+  page: 29
+  table: A2
+quote: 'Table A2: Sensitivity Analysis.'
+quantity: us_dc_air_pollution_damages
+description: Local-air-pollution damages, 2025, with the higher PM2.5 dose-response function.
+value:
+  point: 10700.0
+units: million USD (2025) per year
+geography: contiguous United States
+time_window:
+  start: 2025
+  end: 2025
+  per: year
+counterfactual: unspecified
+conditions: AP4, high dose-response scenario; otherwise as default.
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/ap4
+- sensitivity/crf
+notes: Table A2, row High Dose Response, GED LAP 10,700 ($ millions).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

@@ -1,0 +1,20 @@
+id: data-centre-air-pollution-008
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: han-2026-health-informed-computing
+locator:
+  page: 5
+  section: 2.3.2
+quote: The relationship between the health impact and emission reduction in COBRA is approximately linear.
+quantity: dose_linearity
+description: In COBRA, health impacts scale approximately linearly with emissions.
+units: none
+counterfactual: unspecified
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/cobra
+- method/linearity
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

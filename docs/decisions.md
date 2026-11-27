@@ -50,8 +50,8 @@ Cards are organised around the reader's decision, not the model's internals. The
 1. **Header box:**
    - one-line description
    - expected harm with range
-   - size class relative to baselines
-   - confidence, with a tail-dominated flag where it applies
+   - magnitude relative to baselines: the order of magnitude and the ratio to each baseline (e.g. "~3×10⁵ DALYs · 0.004× malaria"). Size bands are deferred until real estimates exist.
+   - confidence (computed, D12), with a tail-dominated flag where it applies (D11)
    - share by access mode (open-weight / API / locally-run frontier)
    - selected counterfactual
 2. **Is this big?** In plain language, with a quantile dotplot (D5).
@@ -143,3 +143,49 @@ Readers bring their own agents.
 - **Every command supports `--json`** for agents and scripts. Human-readable output is the default.
 - Every output that contains a number states the counterfactual and the parameter settings used.
 - DataLad operations that contributors need are exposed as subcommands, so they don't have to learn git-annex.
+
+## D11. Tail-dominated flag
+
+**Status:** Decided
+
+- A result is **tail-dominated** if the top 5% of simulated outcomes contribute more than 50% of the expected value, under the selected counterfactual.
+- The flag is computed, never set by hand. Cards and the overview chart show it (D4, D6), together with the share of the expected value coming from the top 5%.
+
+## D12. Confidence rating
+
+**Status:** Decided (first approach; revisit once several cards exist)
+
+Confidence is computed from the model, never set by hand:
+- **Low** if the result is tail-dominated (D11), **or** if more than 50% of the crux swing comes from parameters whose claims are all expert judgement or speculation.
+- **High** if the result is not tail-dominated **and** more than 50% of the crux swing comes from parameters backed by at least one measured claim.
+- **Medium** otherwise.
+
+Definitions:
+- **Crux swing** of a parameter: the factor by which the expected value changes when that parameter alone moves from its 5th to its 95th percentile, others held at their full distributions. Shares are computed on the log of the swing.
+- `assumption` claims count as speculation unless their evidence basis says otherwise.
+- The card prints the inputs behind the rating (tail share, swing shares by evidence basis), not just the label.
+
+## D13. Mock data
+
+**Status:** Decided
+
+- Invented data lives only under `mock/`, which mirrors the real layout (`mock/sources`, `mock/claims`, `mock/models`, `mock/cards`). Every mock file also carries `mock: true`; the validator rejects `mock: true` outside `mock/` and `mock: false` inside it.
+- The CLI reads the real tree by default. `--include-mock` overlays `mock/` on top of it. Any output that touches a mock file carries the "invented numbers" banner (D4), whatever the template says.
+- Mock runs do **not** go through `datalad run` (they produce no published numbers). Their outputs are committed and pushed under `mock/build/`, so the git history keeps a log of them.
+
+## D14. Combining evidence
+
+**Status:** Decided for v1 (see the limitation in `VISION.md`, Modelling decisions, point 5)
+
+- Where several sources estimate the same quantity, the model keeps one variant per source. Variants are **mixed** (each simulated future draws from one variant), not averaged, so disagreement stays visible as spread.
+- The card shows the result separately for each evidence type and, within a type, for each source when there are few of them.
+- The default combined figure gives **equal weight to each evidence type**, and equal weight to each source within a type. Readers can change the weights (`whatif --weights`); any combined figure states the weights it used.
+
+## D15. How sources enter the repo
+
+**Status:** Decided. Procedure: `docs/sources.md`
+
+- A source enters through one path: `sources/<source-id>/source.yaml` plus the file, added with `datalad download-url` (D1), then atomic claims in `claims/<risk-id>/`, then model parameters that cite claim IDs.
+- **The primary source is cited, not its press coverage.** News articles may be used to find a source, never as one.
+- **Versions are pinned:** for preprints, the arXiv (or equivalent) version that was read; for living documents, the access date.
+- Values a model derives from claims (unit conversions, ratios, extrapolations) are computed in the model, not stored as claims. A value another source derives from a third source is recorded as a claim of the citing source, with the original source noted.

@@ -1,0 +1,34 @@
+id: data-centre-air-pollution-011
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: chen-2026-data-center-air-quality
+locator:
+  page: 7
+  section: '3.4'
+quote: 'Sensitivity analyses using more recent US-specific CRFs yielded 565 (95% CI: 551–579) PM2.5-attributable
+  deaths'
+quantity: us_dc_deaths_pm25
+description: PM2.5 deaths, 2023, with US-specific CRFs (sensitivity analysis).
+value:
+  interval:
+    low: 551
+    mid: 565
+    high: 579
+    kind: ci95
+units: deaths per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+conditions: 'Sensitivity: PM2.5 all-cause mortality CRF from a Medicare cohort.'
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/geos-chem
+- sensitivity/crf
+notes: Same analysis gave 51 (95% CI 1–107) ozone deaths; total with alternative CRFs ~616.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

@@ -1,0 +1,29 @@
+id: data-centre-air-pollution-013
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: muller-2026-data-center-damages
+locator:
+  page: 16
+  table: '1'
+quote: 'Table 1: Power Consumption and Damages from Operational Data Centers in 2025.'
+quantity: us_dc_electricity
+description: Electricity use of operational US data centres, Q3 2025 fleet, annualised.
+value:
+  point: 251.0
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2025
+  end: 2025
+  per: year
+counterfactual: unspecified
+conditions: S&P Global facility data, default run rate 55%. Includes cryptocurrency mining (50.6 TWh,
+  Table A1).
+evidence_type: energy-model
+evidence_basis: modelled
+tags:
+- study/ap4
+notes: Table 1, All States, Elec. Load 251,000 GWh.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

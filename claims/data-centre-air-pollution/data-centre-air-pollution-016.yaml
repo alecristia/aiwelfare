@@ -1,0 +1,23 @@
+id: data-centre-air-pollution-016
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: muller-2026-data-center-damages
+locator:
+  page: 8
+  section: II
+quote: This analysis uses what had been the USEPA’s preferred VSL of $10 million (USEPA, 2025)
+quantity: vsl
+description: Value of a statistical life used to monetise mortality in AP4.
+value:
+  point: 10.0
+units: million USD (2025) per death
+geography: contiguous United States
+counterfactual: unspecified
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/ap4
+- method/vsl
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

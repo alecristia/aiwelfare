@@ -220,7 +220,7 @@ This is the simplest approach that still represents uncertainty honestly. It als
 
 **Decision:** there is no hidden weighting. Where evidence types disagree (e.g. measured incidents versus expert forecasts versus a lab's own evaluations), the result is shown separately for each (*"from incident data: X; from expert forecasts: Y"*). Readers may set their own weights; any combined figure states the weights it used.
 
-**Limitation:** this leaves more synthesis to the reader and makes for less tidy headlines. It is the price of not baking in our own judgement.
+**Limitation:** this leaves more synthesis to the reader and makes for less tidy headlines. It is the price of not baking in our own judgement. Headlines still need one number, so the default combined figure weights every evidence type equally. Equal weighting is itself a judgement, not a neutral choice: it gives a developer's evaluation of its own model, an expert forecast and an independent measurement the same pull, and it lets the number of evidence types a risk happens to have shape its estimate.
 
 ### 6. Units beyond DALYs
 

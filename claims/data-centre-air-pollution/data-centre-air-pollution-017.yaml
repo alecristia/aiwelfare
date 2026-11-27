@@ -1,0 +1,20 @@
+id: data-centre-air-pollution-017
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: muller-2026-data-center-damages
+locator:
+  page: 7
+  section: II
+quote: AP4 focuses on premature mortalities for two reasons.
+quantity: ap4_endpoints
+description: AP4 local-air-pollution damages count premature mortality only, so deaths = damages / VSL.
+units: none
+counterfactual: unspecified
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/ap4
+- method/vsl
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

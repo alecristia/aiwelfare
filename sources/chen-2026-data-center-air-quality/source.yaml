@@ -1,0 +1,31 @@
+id: chen-2026-data-center-air-quality
+mock: false
+title: "Spatially distributed air quality and health impacts of data center electricity demand in the United States"
+authors: [Yuang Chen, Shen Wang, Juan Ramon L Senga, Andrew Scott White, Anthony YH Wong,
+          Lyssa M Freese, Michelle L Bell, Noelle E Selin]
+publisher: Environmental Research Letters 21, 214046
+type: peer-reviewed
+evidence_date: "2023"
+published: "2026-11-19"
+version: published version of record
+accessed: 2026-11-25
+url: https://iopscience.iop.org/article/10.1088/1748-9326/aebbd4/pdf
+landing_page: https://iopscience.iop.org/article/10.1088/1748-9326/aebbd4
+doi: 10.1088/1748-9326/aebbd4
+license: CC BY 4.0
+redistribution: url-only
+sha256: 8ac411c65cac3e6e8799226dbb20b2502931933f53b264a3323be8c188245dee
+evidence_basis: [modelled]
+author_interests:
+  - kind: funder
+    note: >
+      Acknowledgments: MIT Energy Initiative (Society of Energy Scholars; Future Energy
+      Systems Center), MIT Martin Family Society of Fellows for Sustainability, an MIT SERC
+      seed grant, and an NSF Graduate Research Fellowship.
+notes: >
+  US-EGO dispatch model + GEOS-Chem High Performance (v14.4.0) + GEMM concentration-response
+  function. 2023 only, contiguous US, all data centres (not AI-specific). Grid electricity
+  only: on-site backup generation is not represented. Confidence intervals reflect CRF
+  uncertainty only. The downloaded PDF carries a per-download IP/date stamp, so its checksum
+  may differ between downloads of the same version. Kept url-only despite the CC BY licence because each
+  IOP download embeds the downloader's IP address; mirror an unstamped copy (EarthArXiv or Zenodo) instead. Preprint on EarthArXiv (not read).

@@ -1,0 +1,29 @@
+id: data-centre-air-pollution-018
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: muller-2026-data-center-damages
+locator:
+  page: 15
+  section: III
+quote: IEA (2025) reports that roughly 15% of all energy use at data centers is due to AI activities.
+quantity: ai_share_dc_electricity
+description: Share of data-centre energy use due to AI.
+value:
+  point: 0.15
+units: fraction
+geography: global (as reported by IEA; applied by Muller to the US)
+time_window:
+  start: 2025
+  end: 2025
+  per: year
+counterfactual: unspecified
+evidence_type: energy-model
+evidence_basis: modelled
+derived_from: IEA (2025), Energy and AI
+tags:
+- study/ap4
+- attribution/ai-share
+notes: 'Second-hand: the IEA report itself has not been read yet. Text extraction reads ''report s''.'
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

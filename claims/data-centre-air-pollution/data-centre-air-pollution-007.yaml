@@ -1,0 +1,36 @@
+id: data-centre-air-pollution-007
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: han-2026-health-informed-computing
+locator:
+  page: 7
+  table: '1'
+quote: 'Table 1: The public health cost of U.S. data centers in 2023 and projection for 2028.'
+quantity: us_dc_deaths_backup_generators
+description: Premature deaths from data-centre backup generators (scope 1 only), 2023.
+value:
+  interval:
+    low: 26
+    mid: 32
+    high: 37
+    kind: crf-range
+units: deaths per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+conditions: Backup generators emit 10% of permitted levels (reference case, section 2.3.1); scales roughly
+  linearly with that percentage.
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/cobra
+- pathway/backup-generators
+notes: Table 1 row 2023, Scope-1, Mortality. Included in the 2023 total above. Format 'mid (low, high)'.
+  Low and high use two PM2.5 mortality concentration-response functions (beta = 0.006390 and 0.011330,
+  section 2.2); the range is not a confidence interval.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

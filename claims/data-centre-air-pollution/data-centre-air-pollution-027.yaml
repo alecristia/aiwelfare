@@ -1,0 +1,26 @@
+id: data-centre-air-pollution-027
+mock: false
+risk: data-centre-air-pollution
+claim_type: assumption
+source: null
+quantity: post_2028_growth_ratio
+description: Growth of US data-centre electricity after 2028, as a fraction of the 2023–2028 scenario
+  growth rate.
+value:
+  interval:
+    low: 0.5
+    high: 1.0
+    kind: unqualified
+units: ratio
+geography: contiguous United States
+counterfactual: unspecified
+evidence_type: assumption
+evidence_basis: expert-judgement
+tags:
+- projection/electricity
+rationale: No source read projects US data-centre electricity beyond 2028. Assumes growth continues but
+  does not accelerate; grid-connection and chip-supply constraints make slower growth plausible.
+replace_with: A US data-centre electricity projection to 2030 or later (e.g. EPRI, IEA, or a later LBNL
+  report).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

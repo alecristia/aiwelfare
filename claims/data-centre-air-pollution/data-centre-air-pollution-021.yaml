@@ -1,0 +1,31 @@
+id: data-centre-air-pollution-021
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: shehabi-2024-us-data-center-energy
+locator:
+  page: 48
+  section: Server Electricity Use
+  figure: '5.1'
+quote: GPU-accelerated AI servers, which grew in energy usage from less than 2 TWh in 2017 to more than
+  40 TWh in 2023.
+quantity: us_ai_server_electricity
+description: Electricity use of GPU-accelerated AI servers in US data centres, 2023.
+value:
+  point: 40.0
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+conditions: Server electricity only, excluding cooling and other infrastructure.
+evidence_type: energy-model
+evidence_basis: modelled
+tags:
+- electricity
+- attribution/ai-share
+notes: Reported as 'more than 40 TWh'.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

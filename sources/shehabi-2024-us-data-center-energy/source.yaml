@@ -1,0 +1,28 @@
+id: shehabi-2024-us-data-center-energy
+mock: false
+title: "2024 United States Data Center Energy Usage Report"
+authors: [Arman Shehabi, Sarah J. Smith, Alex Hubbard, Alex Newkirk, Nuoa Lei,
+          Md Abu Bakar Siddik, Billie Holecek, Jonathan Koomey, Eric Masanet, Dale Sartor]
+publisher: Lawrence Berkeley National Laboratory (LBNL-2001637)
+type: government-report
+evidence_date: "2023"
+published: "2024-12"
+version: LBNL-2001637, December 2024
+accessed: 2026-11-25
+url: https://eta-publications.lbl.gov/sites/default/files/2024-12/us_data_center_energy_usage_report_lbnl-2001637.pdf
+landing_page: https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report
+doi: 10.71468/P1WC7Q
+license: U.S. Government-sponsored work (DOE contract DE-AC02-05CH11231); licence for reuse not stated.
+redistribution: url-only
+sha256: 0f49a9f9523a04e93822e6a28486da8f634d9a79b5ae767370ff6c6b383d9e43
+evidence_basis: [measured, modelled]
+author_interests:
+  - kind: government
+    note: Prepared for the U.S. Department of Energy (EERE, Industrial Efficiency and Decarbonization Office) in response to the Energy Act of 2020.
+  - kind: industry-affiliation
+    note: Input data from Omdia, Dell'Oro Group and IDC; draft reviewed by ~50 organisations including equipment manufacturers and data-centre operators.
+notes: >
+  The copy at the official LBNL URL carries a leftover "EMBARGOED REPORT: DO NOT DISTRIBUTE"
+  page header; it is the copy LBNL links from its publications page. Historical values
+  2014–2023 are estimates from shipment data; 2024–2028 are scenario ranges. Cryptocurrency
+  mining is analysed separately (section 6).

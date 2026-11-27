@@ -1,0 +1,33 @@
+id: data-centre-air-pollution-020
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: shehabi-2024-us-data-center-energy
+locator:
+  page: 7
+  section: Executive summary
+  figure: ES-1
+quote: with the low and high end of roughly 325 and 580 TWh in 2028
+quantity: us_dc_electricity
+description: Total US data-centre electricity use, 2028, scenario range.
+value:
+  interval:
+    low: 325
+    high: 580
+    kind: scenario-range
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2028
+  end: 2028
+  per: year
+counterfactual: unspecified
+conditions: Scenarios vary GPU shipments, AI-server operational power (60–80% of rated) and time (75–85%),
+  and cooling.
+evidence_type: energy-model
+evidence_basis: modelled
+tags:
+- electricity
+- scenario
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

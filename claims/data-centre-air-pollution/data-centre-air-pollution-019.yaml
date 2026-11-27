@@ -1,0 +1,27 @@
+id: data-centre-air-pollution-019
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: shehabi-2024-us-data-center-energy
+locator:
+  page: 7
+  section: Executive summary
+quote: reaching 176 TWh by 2023, representing 4.4% of total U.S. electricity consumption.
+quantity: us_dc_electricity
+description: Total US data-centre electricity use, 2023.
+value:
+  point: 176.0
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+evidence_type: energy-model
+evidence_basis: modelled
+tags:
+- electricity
+notes: Estimated from shipment data and operating assumptions, not metered.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

@@ -1,0 +1,29 @@
+id: data-centre-air-pollution-014
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: muller-2026-data-center-damages
+locator:
+  page: 16
+  table: '1'
+quote: 'Table 1: Power Consumption and Damages from Operational Data Centers in 2025.'
+quantity: us_dc_air_pollution_damages
+description: Local-air-pollution damages from US data-centre electricity, 2025.
+value:
+  point: 4590.0
+units: million USD (2025) per year
+geography: contiguous United States
+time_window:
+  start: 2025
+  end: 2025
+  per: year
+counterfactual: unspecified
+conditions: AP4 with default PM2.5 mortality dose-response; damages are premature mortality only (section
+  II), valued at a $10 million VSL.
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/ap4
+notes: Table 1, All States, GED LAP 4,590 ($ millions).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

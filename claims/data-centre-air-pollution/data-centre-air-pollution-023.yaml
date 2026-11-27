@@ -1,0 +1,29 @@
+id: data-centre-air-pollution-023
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: shehabi-2024-us-data-center-energy
+locator:
+  page: 48
+  section: Server Electricity Use
+quote: Conventional servers, primarily dual processor servers, increased significantly during the same
+  period as well, doubling from about 30 TWh to nearly 60 TWh.
+quantity: us_conventional_server_electricity
+description: 'Electricity of conventional servers, 2014 → 2023: about 30 → nearly 60 TWh.'
+value:
+  point: 60.0
+units: TWh per year
+geography: contiguous United States
+time_window:
+  start: 2023
+  end: 2023
+  per: year
+counterfactual: unspecified
+evidence_type: energy-model
+evidence_basis: modelled
+tags:
+- electricity
+- attribution/ai-share
+notes: 2014 value about 30 TWh (same sentence).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'

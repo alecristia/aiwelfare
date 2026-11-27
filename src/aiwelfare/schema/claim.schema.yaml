@@ -1,0 +1,116 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/alecristia/aiwelfare/schema/claim.schema.yaml
+title: Claim
+description: >
+  One atomic claim: what one passage of one source says (claims/<risk>/<id>.yaml).
+  Records extraction only; how claims are combined lives in models. See
+  docs/sources.md. The validator additionally checks: quote under 25 words,
+  source exists, mock flag matches location.
+type: object
+additionalProperties: false
+required: [id, mock, risk, claim_type, quantity, units, evidence_type,
+           evidence_basis, extracted_on]
+properties:
+  id:
+    type: string
+    pattern: "^[a-z0-9]+(-[a-z0-9]+)*-[0-9]{3}$"
+    description: <risk-id>-<nnn>. Never reused.
+  mock: {type: boolean}
+  risk:
+    type: string
+    pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+  claim_type:
+    enum: [estimate, assumption, qualitative]
+  source:
+    type: [string, "null"]
+    description: Source ID. Null only for assumptions.
+  locator:
+    type: object
+    additionalProperties: false
+    minProperties: 1
+    properties:
+      page: {type: [integer, string]}
+      section: {type: string}
+      table: {type: string}
+      figure: {type: string}
+  quote:
+    type: string
+    description: Verbatim, under 25 words.
+  quantity:
+    type: string
+    pattern: "^[a-z0-9_]+$"
+    description: What is estimated, as a slug shared by claims about the same quantity.
+  description:
+    type: string
+    description: Plain-language statement of the claim.
+  value:
+    type: object
+    additionalProperties: false
+    minProperties: 1
+    maxProperties: 1
+    properties:
+      point: {type: number}
+      interval:
+        type: object
+        additionalProperties: false
+        required: [low, high, kind]
+        properties:
+          low: {type: number}
+          mid: {type: number}
+          high: {type: number}
+          kind:
+            enum: [ci95, ci90, scenario-range, model-range, crf-range, unqualified]
+            description: What the range represents. crf-range = alternative
+              concentration-response functions.
+      quantiles:
+        type: object
+        propertyNames: {pattern: "^0?\\.[0-9]+$"}
+        additionalProperties: {type: number}
+  units: {type: string}
+  geography: {type: string}
+  time_window:
+    type: object
+    additionalProperties: false
+    properties:
+      start: {type: integer}
+      end: {type: integer}
+      per: {enum: [year, period]}
+  counterfactual:
+    enum: [no-ai, frozen-2026, open-only, unspecified, not-applicable]
+    description: The repo counterfactual this claim matches, if any.
+  conditions:
+    type: string
+    description: Scenario or conditions the value holds under, in the source's terms.
+  evidence_type:
+    enum: [epidemiological-model, energy-model, measured-data, expert-forecast,
+           lab-evaluation, independent-evaluation, consensus-synthesis,
+           incident-data, assumption]
+  evidence_basis:
+    enum: [measured, modelled, expert-judgement, speculation]
+  derived_from:
+    type: string
+    description: For second-hand values, the original source as cited.
+  tags:
+    type: array
+    items:
+      type: string
+      pattern: "^[a-z0-9-]+(/[a-z0-9-]+)*$"
+  rationale:
+    type: string
+    description: Required for assumptions. Why this value, and what would replace it.
+  replace_with:
+    type: string
+    description: For assumptions, the kind of source that would replace it.
+  notes: {type: string}
+  extracted_by: {type: string}
+  extracted_on: {type: string, format: date}
+allOf:
+  - if: {properties: {claim_type: {const: assumption}}}
+    then:
+      required: [rationale, value]
+      properties: {source: {type: "null"}}
+    else:
+      required: [source, locator, quote]
+      properties: {source: {type: string}}
+  - if: {properties: {claim_type: {const: estimate}}}
+    then: {required: [value]}

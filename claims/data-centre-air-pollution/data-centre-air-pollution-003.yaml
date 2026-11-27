@@ -1,0 +1,37 @@
+id: data-centre-air-pollution-003
+mock: false
+risk: data-centre-air-pollution
+claim_type: estimate
+source: han-2026-health-informed-computing
+locator:
+  page: 7
+  table: '1'
+  section: '3.3'
+quote: 'Table 1: The public health cost of U.S. data centers in 2023 and projection for 2028.'
+quantity: us_dc_deaths
+description: Premature deaths from US data-centre emissions, 2028, low-growth scenario.
+value:
+  interval:
+    low: 529
+    mid: 705
+    high: 880
+    kind: crf-range
+units: deaths per year
+geography: contiguous United States
+time_window:
+  start: 2028
+  end: 2028
+  per: year
+counterfactual: unspecified
+conditions: COBRA Desktop v5.1; scope 1 (backup generators at 10% of permitted emissions) + scope 2 (grid
+  electricity, average attribution); baseline emissions from EPA's 2016v1 platform (regulations as of
+  May 2018). LBNL low-growth scenario (325 TWh).
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- study/cobra
+notes: Table 1 row 2028 (Low), Total, Mortality. Format 'mid (low, high)'. Low and high use two PM2.5
+  mortality concentration-response functions (beta = 0.006390 and 0.011330, section 2.2); the range is
+  not a confidence interval.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-25'
