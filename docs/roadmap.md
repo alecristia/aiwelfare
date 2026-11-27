@@ -1,79 +1,95 @@
 # Roadmap
 
-What we are working on **now**, and what we will **circle back to**. Update this file when a strand starts, finishes or changes status. Each item says where its details live. Decisions themselves stay in `docs/decisions.md`; this file only tracks work.
+What we are working on **now**, and what we will **circle back to**. Update this file when a strand starts, finishes or changes status. Decisions themselves stay in `docs/decisions.md`; this file only tracks work.
 
 Last updated: 2026-11-27.
 
+**Audience and geography.** The current readers are outside the United States, so every card and baseline is **global**. A US-only estimate is evidence towards a global card, not a result to show.
+
 ---
 
-## Risk and benefit register
+## The cards
 
-The single list of risks and benefits being considered, with their status. A card is added only with the maintainer's approval, after checking D2. Evidence for each candidate: `docs/related-work.md` ("Candidate new risk cards") and `related_work/catalog.yaml`. D2 expects 15–30 cards in total, so this list is incomplete. The D3 mapping (below) is the systematic way to complete it.
+Nine cards, defined from the top down (D2, amended 2026-11-27). The pathways listed under each card are **components of its model**, not separate cards. Harms and benefits of the same technology share a card and are shown as a net effect.
 
-| Risk or benefit | Kind | Status | Notes |
+| Group (D7) | Card | Components | Status |
 |---|---|---|---|
-| Data-centre air pollution | risk | **Built** (real data, US only) | `results/data-centre-air-pollution/card.md` |
-| AI-assisted biological misuse | risk | **Built with mock data** | `mock/build/bio-misuse/card.md`. Real version planned: Righetti (GovAI 2025) is a ready-made model |
-| AI errors in clinical care (`clinical-errors`) | risk | Planned | Named in the example card. Consumer chatbot medical-advice errors probably merge into it |
-| Autonomous vehicles | benefit (and harm) | Approved 2026-11-27 | |
-| AI-enabled cyberattacks on health and critical infrastructure | risk | Approved 2026-11-27 | |
-| Clinical-AI diagnostics and monitoring | benefit | Approved 2026-11-27 | |
-| Chatbot mental-health harm | risk | Approved 2026-11-27 | |
-| Labour displacement → mortality | risk | Approved 2026-11-27 | Most harm likely "not captured in DALYs"; far from ML engineering |
-| Chatbot mental-health benefit | benefit | Candidate, awaiting decision | Borderline on D2 (2): one RCT. Could be the benefit side of the harm card |
-| AI-enabled power concentration / autocratisation | risk | Candidate, awaiting decision | Borderline on D2 (2). Found in prior-work round 5 |
-| AI in armed conflict | risk | Candidate, fails D2 (2) for now | Revisit once Saeri et al.'s weapons subdomain is extracted |
-| AI errors in critical infrastructure (malfunction) | risk | Candidate, fails D2 (2) for now | Revisit once LEAP wave reports are extracted |
-| AI-accelerated biomedical research | benefit | Candidate, fails D2 (2) within 2026–2031 | Register entry only, for now |
+| Malicious use | **Biological misuse** | AI-assisted design or synthesis of pathogens | Mock card built; real card next |
+| | **Cyberattacks on health and critical infrastructure** | AI-enabled cyberattacks, ransomware on hospitals; AI malfunctions in critical infrastructure | Not started |
+| | **Conflict and power concentration** | Autonomous weapons and AI targeting; AI-driven escalation, incl. nuclear; AI-enabled autocratisation and repression; mass political deepfakes | Not started. The card must say that the measured health effects of autocratisation build up over about ten years (Wigley et al. 2020), so most of them fall after 2031 |
+| Malfunctions and everyday use | **Clinical AI (net)** | Benefit: diagnostics and monitoring. Harm: errors in clinical care, hallucinations entering clinical guidelines, consumer chatbot medical-advice errors, biased clinical algorithms | Not started; first in line |
+| | **Chatbots and mental health (net)** | Harm: worse mental health from heavy use. Benefit: therapy chatbots | Not started |
+| | **Autonomous vehicles (net)** | Road injuries averted and caused | Not started |
+| Systemic | **Environmental footprint** | Air pollution from data-centre electricity (more components possible, e.g. water) | US-only version built; needs a global estimate before it can be shown |
+| | **Labour displacement** | Job loss → mortality | Not started |
+| Benefits | **Faster biomedical research** | AI-accelerated drug discovery and research | Not started; evidence within 2026–2031 is thin (prior-work review) |
+
+### Not covered: scope cuts
+
+The repo does not estimate these for now. Every output that lists the cards should list them too, so readers see what is and is not covered.
+
+| Not covered | Why |
+|---|---|
+| **Loss of control** (misaligned autonomous AI) | Within 2026–2031 it is almost entirely a tail risk. The *Lancet* Commission treats it as one of three AI pathways, so it is the most important cut for readers deciding whether to work in AI safety |
+| **Health misinformation** (e.g. vaccine misinformation at scale) | Cut to keep the number of cards manageable; evidence not yet searched |
+| **Disruption of financial institutions** | Reaches health only indirectly, through recessions |
+
+Harms that fall inside a card but outside DALYs (e.g. loss of rights under autocracy) are listed on each card under "What this number leaves out".
 
 ---
 
 ## Now
 
-### 1. Health baselines (GBD / WHO)
-**Why now:** every card's magnitude line needs baselines (D4, D6), and the air-pollution card currently says "no sourced baselines yet". The same data would replace that card's placeholder DALYs-per-death assumption.
-**Work:** GBD as a DataLad subdataset (approved 2026-11-27), tracked by URL and checksum only under IHME's terms (D1). Six baselines, two per GBD level-1 cause group, as causes rather than risk factors, global and US values, latest GBD year held constant over the window:
-- non-communicable: neoplasms, diabetes mellitus
-- communicable, maternal, neonatal and nutritional: malaria, nutritional deficiencies
-- injuries: road injuries, interpersonal violence
+### 1. Health baselines (GBD)
+**What:** six global reference lines, two per GBD level-1 cause group, all at **GBD level 3** so they are comparable:
 
-**Needs the maintainer:** confirm the adjustments proposed on 2026-11-27 (causes not risk factors; interpersonal violence rather than conflict; US values alongside global). GBD exports need an IHME login, so the maintainer may need to download the files.
+| GBD level-1 group | Level-3 causes |
+|---|---|
+| Non-communicable diseases | Tracheal, bronchus and lung cancer; diabetes mellitus |
+| Communicable, maternal, neonatal and nutritional diseases | Malaria; protein-energy malnutrition |
+| Injuries | Road injuries; interpersonal violence |
 
-### 2. First cards, through the milestone-1 pipeline
-Each card: register sources → extract claims → model → prose → `aiwelfare rerun`. Order confirmed 2026-11-27:
-1. **Clinical-AI diagnostics and monitoring benefit**: puts a benefit on the chart, so harms are not shown alone.
-2. **Bio-misuse, real**: replaces the mock card, starting from Righetti's model.
+DALYs, all ages, both sexes, latest GBD year, held constant over the 2026–2031 window (flagged on cards; IHME forecasts can replace this later).
+**How:** GBD as a DataLad subdataset (approved), with the downloaded files tracked by checksum only. IHME's user agreement forbids redistributing its data; published analyses must carry "Source: Institute for Health Metrics and Evaluation".
+**Needs the maintainer:** the download (it needs an IHME account login).
 
-### 3. Website and explorer (D6, D8), after bio misuse
-**Why here:** with three real cards (air pollution, clinical-AI benefit, bio misuse), the overview has a benefit, a tail-dominated risk and a steady harm to show, enough to test the forest plot, sliders and counterfactual switch on real data. Later cards then appear on the site as they are built.
-**Work:** static site generated from `results/` (D8, D10: nothing computed that the CLI cannot reproduce); forest-plot overview with baselines as reference lines (D6); in-browser explorer (Shinylive or Observable Framework, D8).
+### 2. Clinical AI (net)
+The first real benefit, so the overview does not show harms alone.
 
-### 4. Remaining cards, continuing the order above
-3. **Chatbot mental-health harm**
-4. **AI-enabled cyberattacks on health and critical infrastructure**
-5. **Autonomous vehicles**
-6. **Labour displacement → mortality**
-7. **`clinical-errors`**
+### 3. Biological misuse, real
+Replaces the mock card, starting from Righetti's model (GovAI 2025).
 
-The criterion for this order is a mix of how much evidence is ready and having both harms and benefits early. It is not a judgement of importance.
+### 4. Website and explorer (D6, D8)
+With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10).
+
+### 5. Remaining cards, in this order
+1. Chatbots and mental health (net)
+2. Cyberattacks on health and critical infrastructure
+3. Autonomous vehicles (net)
+4. Labour displacement
+5. Conflict and power concentration
+6. Environmental footprint, global
+7. Faster biomedical research
+
+The order mixes how much evidence is ready with having harms and benefits early. It is not a judgement of importance.
 
 ---
 
 ## Circle back to
 
 ### Literature review (prior-work search)
-Status: rounds 1–5 done and merged (PRs #1, #2). Open items:
-- Read the *Lancet* Commission appendix (AI method, pp 109–14); the main text is read.
-- Extract Saeri et al.'s subdomain figures (power centralisation, weapons) from the full text.
-- Decide on the round-5 candidate cards (register above).
+Rounds 1–5 are done and merged (PRs #1, #2). Open items:
+- Read the *Lancet* Commission appendix (AI method, pp 109–14). The maintainer supplied it on 2026-11-27; not yet registered or read.
+- Extract Saeri et al.'s subdomain figures (power centralisation, weapons).
 - Retry the items under "Not accessed" in `docs/related-work.md`.
-- Known blind spots: non-English literature; pathways the brief did not name (the D3 mapping below is the check).
+- Targeted searches each card will need: therapy chatbots, global data-centre electricity and health.
+- Known blind spots: non-English literature.
 
-### D3: map the MIT AI Risk Repository to cards
-Every entry goes to a card or to the "not captured in DALYs" register; unmapped entries are coverage gaps. This is how the register above gets completed. Cards currently say "mapping not done yet".
+### D3: map the MIT AI Risk Repository to the cards
+Every entry goes to a card, a card's "leaves out" list, or the scope cuts above. Unmapped entries are coverage gaps.
 
-### Air-pollution card: known gaps
-Listed under the card's "Known limitations": global extension beyond the US, the DALYs-per-death source (see baselines, above), the `open-only` counterfactual, the access-mode breakdown, and a source for energy-efficient ML.
+### Environmental footprint: from US to global
+The built card covers the contiguous US only, and is not shown until a global estimate exists. Its other known gaps (the `open-only` counterfactual, the access-mode breakdown, a source for energy-efficient ML) are listed on the card. GBD deaths and DALYs for ambient particulate matter pollution would replace its DALYs-per-death assumption.
 
 ### Overview chart details (D7)
 Row counts, colours and layout: deferred by D7 until real estimates exist.
