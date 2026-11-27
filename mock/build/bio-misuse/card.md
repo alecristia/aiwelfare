@@ -9,7 +9,7 @@
 | | |
 |---|---|
 | **Expected harm, 2027–2031** | **~160k DALYs** (90% range: 0 → 0) |
-| **Magnitude** | order of 10^5 DALYs · 0.00058× malaria (MOCK value) · 0.00046× road injuries (MOCK value) |
+| **Magnitude** | order of 10⁵ DALYs; against each baseline's burden over the same years: about 1/8,600 of child and maternal malnutrition · about 1/7,300 of high systolic blood pressure · about 1/7,300 of air pollution · about 1/6,400 of tobacco · about 1/5,100 of high fasting plasma glucose · about 1/2,200 of road injuries (MOCK value) · about 1/1,900 of unsafe water, sanitation and handwashing · about 1/1,700 of malaria (MOCK value) |
 | **Confidence** | 🔺 **Low**. Tail-dominated: the top 5% of futures give 100% of the expected value |
 | **Mainly comes from** | Open-weight models (54%) · API-served frontier models (37%) · Frontier models run locally / on-premises (9%) |
 | **Compared with** | AI frozen at 2026 levels |
@@ -31,8 +31,8 @@ In the model, the median future has **0 DALYs** over 2027–2031, and 90% of sim
 ![Quantile dotplot](dotplot.svg)
 
 ```
-aiwelfare dist risk/bio-misuse --include-mock                      # quantile dotplot + percentiles in the terminal
-aiwelfare compare risk/bio-misuse baseline/malaria --include-mock  # side by side, same window and units
+aiwelfare dist risk/bio-misuse --include-mock                            # quantile dotplot + percentiles in the terminal
+aiwelfare compare risk/bio-misuse baseline/air-pollution --include-mock  # side by side, same window and units
 ```
 
 ## Why it might be much bigger, or much smaller
@@ -48,7 +48,7 @@ The parameters below move the estimate most when each moves alone from its 5th t
 | P(outbreak), expert-forecast variant is at the **high** end (0.040) | ⬆ ×1.4 |
 | P(outbreak), expert-forecast variant is at the **low** end (0.0040) | ⬇ ×0.44 |
 
-**Ranking against** *data-centre-air-pollution*: currently bio-misuse is ×3.8 larger. A single parameter at its extreme can flip this: `severity` (bio-misuse) at 900.
+**Ranking against** *data-centre-air-pollution*: currently bio-misuse is 3.8× larger. A single parameter at its extreme can flip this: `severity` (bio-misuse) at 900.
 
 ```
 aiwelfare cruxes risk/bio-misuse --include-mock                               # full sensitivity analysis (all parameters)
@@ -161,7 +161,7 @@ Low. Top 5% of futures give 100% of the expected value (tail-dominated above 50%
 
 ### Index and provenance
 
-MIT AI Risk Repository mapping not done yet (D3) · model `mock/models/bio_misuse.py` · prose `mock/cards/bio-misuse.md` · inputs as of commit `e7b7a0a` · seed 20261125, 100,000 draws
+MIT AI Risk Repository mapping not done yet (D3) · model `mock/models/bio_misuse.py` · prose `mock/cards/bio-misuse.md` · inputs as of commit `cfb2f0d` · seed 20261125, 100,000 draws
 
 ### Changelog
 

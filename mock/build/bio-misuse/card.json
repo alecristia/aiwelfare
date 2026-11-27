@@ -419,6 +419,60 @@
  "breakdown_not_modelled": "",
  "baselines": [
   {
+   "id": "air-pollution",
+   "label": "air pollution",
+   "geography": "global",
+   "dalys_window": 1161541885,
+   "ratio": 0.0001377378387548474,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "child-maternal-malnutrition",
+   "label": "child and maternal malnutrition",
+   "geography": "global",
+   "dalys_window": 1379280170,
+   "ratio": 0.00011599403249822079,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "high-fasting-plasma-glucose",
+   "label": "high fasting plasma glucose",
+   "geography": "global",
+   "dalys_window": 808901880,
+   "ratio": 0.0001977845185167965,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "high-systolic-blood-pressure",
+   "label": "high systolic blood pressure",
+   "geography": "global",
+   "dalys_window": 1167556255,
+   "ratio": 0.00013702831720355222,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "tobacco",
+   "label": "tobacco",
+   "geography": "global",
+   "dalys_window": 1018669645,
+   "ratio": 0.0001570560874650697,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
+   "id": "unsafe-wash",
+   "label": "unsafe water, sanitation and handwashing",
+   "geography": "global",
+   "dalys_window": 307502895,
+   "ratio": 0.0005202821549472941,
+   "source": "ihme-gbd-2023-risk-factors",
+   "mock": false
+  },
+  {
    "id": "malaria",
    "label": "malaria (MOCK value)",
    "geography": "global",
@@ -760,7 +814,7 @@
  "provenance": {
   "model": "mock/models/bio_misuse.py",
   "card_source": "mock/cards/bio-misuse.md",
-  "commit": "e7b7a0a",
+  "commit": "cfb2f0d",
   "uncommitted_input_changes": false,
   "seed": 20261125,
   "draws": 100000
