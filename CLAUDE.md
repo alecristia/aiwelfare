@@ -10,7 +10,8 @@ This repo estimates the health impact of AI over the next five years (2026–203
 
 1. **`VISION.md`.** The question, scope, sources, modelling approach, and the limitations of each choice. Read it before any change that touches scope, sources or method.
 2. **`docs/decisions.md`.** Binding implementation decisions (D1, D2, …). Follow them. If a task conflicts with a decision, **stop and say so**: propose an edit to `docs/decisions.md` instead of working around it.
-3. **`docs/examples/risk-card-bio-misuse.md`.** The reference format for risk cards and the proposed `aiwelfare` CLI commands.
+3. **`docs/roadmap.md`.** What is being worked on now, what is parked, and the register of risks and benefits under consideration.
+4. **`docs/examples/risk-card-bio-misuse.md`.** The reference format for risk cards and the proposed `aiwelfare` CLI commands.
 
 Do not copy content from these files into this one; point to them.
 
