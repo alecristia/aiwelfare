@@ -1,0 +1,4 @@
+[submodule "baselines/gbd"]
+	path = baselines/gbd
+	url = ./baselines/gbd
+	datalad-id = 74cb51bb-8f43-4165-88fa-b45aa7505e2b
