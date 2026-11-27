@@ -40,18 +40,18 @@ Harms that fall inside a card but outside DALYs (e.g. loss of rights under autoc
 
 ## Now
 
-### 1. Health baselines (GBD)
-**What:** six global reference lines, two per GBD level-1 cause group, all at **GBD level 3** so they are comparable:
+### 1. Health baselines (GBD risk factors, D16)
+**What:** six global reference lines, GBD **risk factors** (D16), two per GBD level-1 risk group, all at **level 2** of the risk hierarchy. Proposed, to confirm:
 
-| GBD level-1 group | Level-3 causes |
+| GBD level-1 risk group | Level-2 risk factors |
 |---|---|
-| Non-communicable diseases | Tracheal, bronchus and lung cancer; diabetes mellitus |
-| Communicable, maternal, neonatal and nutritional diseases | Malaria; protein-energy malnutrition |
-| Injuries | Road injuries; interpersonal violence |
+| Environmental and occupational | Air pollution; unsafe water, sanitation and handwashing |
+| Behavioural | Tobacco; child and maternal malnutrition |
+| Metabolic | High systolic blood pressure; high fasting plasma glucose |
 
-DALYs, all ages, both sexes, latest GBD year, held constant over the 2026–2031 window (flagged on cards; IHME forecasts can replace this later).
-**How:** GBD as a DataLad subdataset (approved), with the downloaded files tracked by checksum only. IHME's user agreement forbids redistributing its data; published analyses must carry "Source: Institute for Health Metrics and Evaluation".
-**Needs the maintainer:** the download (it needs an IHME account login).
+Attributable DALYs, all ages, both sexes, global, latest GBD year, held constant over the 2026–2031 window. Also needed, for the environmental-footprint card (not a baseline): deaths and DALYs attributable to ambient particulate matter pollution (level 3).
+**How:** GBD as a DataLad subdataset, files tracked by checksum only (D16, D1).
+**Needs the maintainer:** confirm the six; the download needs an IHME account login.
 
 ### 2. Clinical AI (net)
 The first real benefit, so the overview does not show harms alone.

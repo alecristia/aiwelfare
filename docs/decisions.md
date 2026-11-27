@@ -195,3 +195,14 @@ Definitions:
 - **The primary source is cited, not its press coverage.** News articles may be used to find a source, never as one.
 - **Versions are pinned:** for preprints, the arXiv (or equivalent) version that was read; for living documents, the access date.
 - Values a model derives from claims (unit conversions, ratios, extrapolations) are computed in the model, not stored as claims. A value another source derives from a third source is recorded as a claim of the citing source, with the original source noted.
+
+## D16. Baselines: GBD risk factors, global
+
+**Status:** Decided 2026-11-27 (the six risk factors are proposed in `docs/roadmap.md`, pending confirmation)
+
+- **Baselines are GBD risk factors, not causes.** A card describes an exposure (an AI pathway) that causes DALYs across many diseases, like a GBD risk factor does, so risk factors are the like-for-like comparison. Causes (malaria, road injuries) are more familiar but describe outcomes, not exposures.
+- **Six baselines, two per GBD level-1 risk group** (environmental and occupational, behavioural, metabolic), all at the **same level of the GBD risk hierarchy**, so the lines are comparable with each other.
+- **Global only.** The current readers are outside the United States.
+- **Attributable DALYs, all ages, both sexes, latest GBD year**, held constant over the 2026–2031 window and flagged as such on cards, until IHME forecasts replace them.
+- **Overlap is expected.** GBD attributes a death to several risk factors at once, so baselines are not additive. Each is read one line at a time, as a sense of scale.
+- **Provenance:** GBD is a DataLad subdataset; downloaded files are tracked by checksum only. IHME's user agreement forbids redistributing its data; outputs carry "Source: Institute for Health Metrics and Evaluation" (D1).
