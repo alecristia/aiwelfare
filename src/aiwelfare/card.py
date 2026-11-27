@@ -16,7 +16,7 @@ import numpy as np
 import yaml
 
 from . import dotplot, engine
-from .dotplot import fmt
+from .dotplot import fmt, fmt_ratio, power_of_ten, ratio_phrase
 
 DEFAULT_COUNTERFACTUAL = "frozen-2026"
 ALL_COUNTERFACTUALS = {
@@ -421,16 +421,19 @@ def render(a: dict, cs: CardSource) -> str:
 
     # 1. Header box
     harm = "Expected harm" if a["kind"] == "risk" else "Expected benefit"
-    oom = int(np.floor(np.log10(s["expected_value"]))) if s["expected_value"] > 0 else 0
     if a["baselines"]:
-        ratios = " · ".join(
-            f"{b['ratio']:.2g}× {b['label']}"
+        ratios = "against each baseline's burden over the same years: " + " · ".join(
+            ratio_phrase(b["ratio"], b["label"])
             + (f" ({b['geography']})" if b["geography"] != a["geography"] else "")
-            for b in a["baselines"]
+            for b in sorted(a["baselines"], key=lambda b: -b["dalys_window"])
         )
     else:
         ratios = "no sourced baselines yet"
-    mag = f"order of 10^{oom} DALYs · {ratios}" if s["expected_value"] > 0 else "zero"
+    mag = (
+        f"order of {power_of_ten(s['expected_value'])} DALYs; {ratios}"
+        if s["expected_value"] > 0
+        else "zero"
+    )
     conf = a["confidence"]
     conf_txt = CONFIDENCE_ICON[conf["level"]]
     conf_txt += (
@@ -512,13 +515,13 @@ def render(a: dict, cs: CardSource) -> str:
             )
             L += [
                 f"**Ranking against** *{f['lower'] if f['higher'] == rid else f['higher']}*: "
-                f"currently {f['higher']} is ×{f['ratio']:.2g} larger. A single parameter at its "
+                f"currently {f['higher']} is {fmt_ratio(f['ratio'])} larger. A single parameter at its "
                 f"extreme can flip this: {items}.",
                 "",
             ]
         else:
             L += [
-                f"**Ranking against** *{a['neighbour']}*: {f['higher']} is ×{f['ratio']:.2g} "
+                f"**Ranking against** *{a['neighbour']}*: {f['higher']} is {fmt_ratio(f['ratio'])} "
                 "larger, and no single parameter at its 5th or 95th percentile flips the order.",
                 "",
             ]

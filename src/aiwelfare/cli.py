@@ -18,7 +18,7 @@ import typer
 
 from . import card as cardmod
 from . import data, dotplot, engine
-from .dotplot import fmt
+from .dotplot import fmt, fmt_ratio
 
 app = typer.Typer(
     no_args_is_help=True,
@@ -463,7 +463,12 @@ def compare(
             f"{iv:>16s}  {r['geography']}"
         )
     if ratio:
-        lines += ["", f"ratio of expected values: ×{ratio:.2g}"]
+        lines += [
+            "",
+            f"{rows[0]['label']} is {fmt_ratio(ratio)}"
+            + ("" if ratio >= 1 else " of")
+            + f" {rows[1]['label']} (expected values)",
+        ]
     if rows[0]["geography"] != rows[1]["geography"]:
         lines.append("note: the two rows cover different geographies.")
     _emit({"rows": rows, "ratio": ratio, "settings": st, "mock": mock}, as_json, "\n".join(lines))
@@ -487,7 +492,7 @@ def flip(
     lines = [
         _settings_line(st),
         "",
-        f"{f['higher']} is ×{f['ratio']:.2g} larger than {f['lower']} in expected value.",
+        f"{f['higher']} is {fmt_ratio(f['ratio'])} larger than {f['lower']} in expected value.",
     ]
     if f["single_parameter_flips"]:
         lines.append("Any one of these, at its 5th/95th-percentile value, flips the order:")

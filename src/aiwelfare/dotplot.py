@@ -26,6 +26,28 @@ def fmt(v: float) -> str:
     return f"{x:.{digits}f}{suf}"
 
 
+def fmt_ratio(r: float) -> str:
+    """A ratio people can read: '2.3×', '45%', or '1/36,000' (two significant figures)."""
+    if r <= 0:
+        return "0"
+    if r >= 1:
+        return f"{fmt(r)}×"
+    if r >= 0.01:
+        return f"{float(f'{r * 100:.2g}'):g}%"
+    return f"1/{float(f'{1 / r:.2g}'):,.0f}"
+
+
+def ratio_phrase(r: float, label: str) -> str:
+    """'about 1/36,000 of air pollution', '45% of tobacco', '2.3× air pollution'."""
+    return f"{fmt_ratio(r)} {label}" if r >= 1 else f"about {fmt_ratio(r)} of {label}"
+
+
+def power_of_ten(v: float) -> str:
+    """'10⁴' for 33,000."""
+    sup = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
+    return "10" + str(int(math.floor(math.log10(v)))).translate(sup)
+
+
 def _layout(quantiles: list[float], bins_per_decade: int = 8):
     zeros = sum(1 for q in quantiles if q <= 0)
     pos = [q for q in quantiles if q > 0]
