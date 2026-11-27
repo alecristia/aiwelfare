@@ -161,7 +161,7 @@ Low. Top 5% of futures give 100% of the expected value (tail-dominated above 50%
 
 ### Index and provenance
 
-MIT AI Risk Repository mapping not done yet (D3) · model `mock/models/bio_misuse.py` · prose `mock/cards/bio-misuse.md` · built from commit `8c7e21d` · seed 20261125, 100,000 draws
+MIT AI Risk Repository mapping not done yet (D3) · model `mock/models/bio_misuse.py` · prose `mock/cards/bio-misuse.md` · inputs as of commit `e7b7a0a` · seed 20261125, 100,000 draws
 
 ### Changelog
 

@@ -760,7 +760,7 @@
  "provenance": {
   "model": "mock/models/bio_misuse.py",
   "card_source": "mock/cards/bio-misuse.md",
-  "commit": "8c7e21d",
+  "commit": "e7b7a0a",
   "uncommitted_input_changes": false,
   "seed": 20261125,
   "draws": 100000
