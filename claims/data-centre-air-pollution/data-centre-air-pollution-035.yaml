@@ -1,0 +1,20 @@
+id: data-centre-air-pollution-035
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: muller-2026-data-center-damages
+locator:
+  section: Abstract
+quote: focusing on damages from local air pollution and greenhouse gas (GHG) emissions
+quantity: not_captured_climate
+description: Data-centre electricity also causes greenhouse-gas damages, which Muller values separately and this
+  card does not count.
+units: none
+geography: contiguous United States
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- not-captured/climate
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

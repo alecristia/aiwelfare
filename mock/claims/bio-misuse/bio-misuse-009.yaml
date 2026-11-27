@@ -1,0 +1,22 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-009
+mock: true
+risk: bio-misuse
+claim_type: assumption
+source: null
+quantity: share_local_frontier
+value:
+  interval:
+    low: 0.05
+    high: 0.15
+    kind: unqualified
+units: fraction
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- access-mode/local-frontier
+rationale: 'MOCK: invented placeholder to show how assumptions are flagged.'
+replace_with: 'MOCK: a survey of on-premises frontier deployments.'
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

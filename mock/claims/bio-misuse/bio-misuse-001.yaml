@@ -1,0 +1,27 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-001
+mock: true
+risk: bio-misuse
+claim_type: estimate
+source: mock-expert-survey-2026
+locator:
+  table: MOCK 2
+quote: 'MOCK: median expert puts an AI-assisted outbreak at about one in a hundred.'
+quantity: p_outbreak
+value:
+  interval:
+    low: 0.004
+    high: 0.04
+    kind: ci90
+units: probability over window
+time_window:
+  start: 2026
+  end: 2031
+  per: period
+counterfactual: no-ai
+evidence_type: expert-forecast
+evidence_basis: expert-judgement
+tags:
+- evidence/expert-forecast
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

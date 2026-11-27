@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: mock-aisi-evaluation-2026
+mock: true
+title: MOCK government AI-security-institute evaluation
+authors:
+- MOCK author
+type: technical-evaluation
+evidence_date: '2026'
+published: '2026'
+version: MOCK v1
+url: https://example.invalid/mock/mock-aisi-evaluation-2026
+redistribution: open
+evidence_basis:
+- measured
+author_interests:
+- kind: government
+  note: Invented.
+notes: Invented for the format demonstration. No file.

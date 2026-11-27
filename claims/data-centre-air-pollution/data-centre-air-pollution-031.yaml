@@ -1,0 +1,22 @@
+id: data-centre-air-pollution-031
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: han-2026-health-informed-computing
+locator:
+  page: 10
+  section: '5'
+quote: We therefore recommend extending existing energy reporting practices to include criteria air pollutants and
+  associated public health impacts across regions.
+quantity: work_health_impact_reporting
+description: 'Recommendation 1: technology companies'' energy reporting should include air pollutants and their
+  health impacts.'
+units: none
+geography: contiguous United States
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- work/health-impact-reporting
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

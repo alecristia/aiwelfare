@@ -1,0 +1,11 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: road-injuries
+mock: true
+label: road injuries (MOCK value)
+dalys_per_year: 70000000.0
+geography: global
+year: 2025
+source: mock-burden-tables-2025
+locator:
+  table: MOCK 1
+notes: Invented value for the format demonstration.

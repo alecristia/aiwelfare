@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-011
+mock: true
+risk: bio-misuse
+claim_type: qualitative
+source: mock-lab-system-card-2026
+locator:
+  section: MOCK 5
+quote: 'MOCK: classifiers screen biology queries on the API.'
+quantity: work_classifiers
+units: none
+evidence_type: lab-evaluation
+evidence_basis: measured
+tags:
+- work/misuse-classifiers
+- access-mode/api
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

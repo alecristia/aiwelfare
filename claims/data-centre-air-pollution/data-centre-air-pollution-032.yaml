@@ -1,0 +1,23 @@
+id: data-centre-air-pollution-032
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: han-2026-health-informed-computing
+locator:
+  page: 10
+  section: '5'
+quote: actionable strategies for siting, energy procurement, workload scheduling, and backup-generation management
+quantity: work_levers
+description: 'Recommendation 3 lists the levers: siting, energy procurement, workload scheduling and backup generation.'
+units: none
+geography: contiguous United States
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- work/health-informed-siting-and-load-shifting
+- work/clean-energy-procurement
+- work/workload-scheduling
+- work/cleaner-backup-generation
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

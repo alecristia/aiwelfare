@@ -1,0 +1,22 @@
+id: data-centre-air-pollution-033
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: han-2026-health-informed-computing
+locator:
+  page: 8
+  section: '3.3'
+quote: approximately 600,000 asthma symptom cases and 1,300 premature deaths, along with other morbidity outcomes
+quantity: not_captured_morbidity
+description: Beyond deaths, data-centre emissions cause asthma symptoms and other morbidity, which this card's DALY
+  conversion treats as small.
+units: none
+geography: contiguous United States
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- not-captured/morbidity
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'
+conditions: High-growth scenario, 2028.

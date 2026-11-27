@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: mock-consensus-report-2026
+mock: true
+title: MOCK international consensus report
+authors:
+- MOCK author
+type: intergovernmental-report
+evidence_date: '2026'
+published: '2026'
+version: MOCK v1
+url: https://example.invalid/mock/mock-consensus-report-2026
+redistribution: open
+evidence_basis:
+- expert-judgement
+author_interests:
+- kind: none-identified
+  note: Invented.
+notes: Invented for the format demonstration. No file.

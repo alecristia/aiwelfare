@@ -36,6 +36,7 @@ class Dataset:
     include_mock: bool = False
     sources: dict[str, dict] = field(default_factory=dict)
     claims: dict[str, dict] = field(default_factory=dict)
+    baselines: dict[str, dict] = field(default_factory=dict)
     paths: dict[str, Path] = field(default_factory=dict)
 
     @property
@@ -62,6 +63,10 @@ def load(root: Path | None = None, include_mock: bool = False) -> Dataset:
             d = _read(f)
             ds.claims[d["id"]] = d
             ds.paths[d["id"]] = f
+        for f in sorted((base / "baselines").glob("*.yaml")):
+            d = _read(f)
+            ds.baselines[d["id"]] = d
+            ds.paths["baseline/" + d["id"]] = f
     return ds
 
 
@@ -91,9 +96,14 @@ def validate(root: Path | None = None, include_mock: bool = True) -> list[str]:
     seen: dict[str, Path] = {}
     source_ids: set[str] = set()
     claims: list[tuple[Path, dict]] = []
+    baselines: list[tuple[Path, dict]] = []
 
     for base, is_mock_tree in _trees(root, include_mock):
-        for kind, pattern in (("source", "sources/*/source.yaml"), ("claim", "claims/*/*.yaml")):
+        for kind, pattern in (
+            ("source", "sources/*/source.yaml"),
+            ("claim", "claims/*/*.yaml"),
+            ("baseline", "baselines/*.yaml"),
+        ):
             for f in sorted(base.glob(pattern)):
                 rel = f.relative_to(root)
                 try:
@@ -106,9 +116,10 @@ def validate(root: Path | None = None, include_mock: bool = True) -> list[str]:
                     problems.append(f"{rel}: {loc}: {err.message}")
                 if not isinstance(d, dict) or "id" not in d:
                     continue
-                if d["id"] in seen:
-                    problems.append(f"{rel}: duplicate id {d['id']} (also {seen[d['id']]})")
-                seen[d["id"]] = rel
+                key = ("baseline/" if kind == "baseline" else "") + d["id"]
+                if key in seen:
+                    problems.append(f"{rel}: duplicate id {d['id']} (also {seen[key]})")
+                seen[key] = rel
                 if d.get("mock") is not is_mock_tree:
                     where = "inside mock/" if is_mock_tree else "outside mock/"
                     problems.append(f"{rel}: mock: {d.get('mock')} not allowed {where} (D13)")
@@ -116,6 +127,8 @@ def validate(root: Path | None = None, include_mock: bool = True) -> list[str]:
                     if f.parent.name != d["id"]:
                         problems.append(f"{rel}: folder name must equal id {d['id']}")
                     source_ids.add(d["id"])
+                elif kind == "baseline":
+                    baselines.append((f, d))
                 else:
                     claims.append((f, d))
 
@@ -131,4 +144,13 @@ def validate(root: Path | None = None, include_mock: bool = True) -> list[str]:
         src = d.get("source")
         if src and src not in source_ids:
             problems.append(f"{rel}: unknown source {src}")
+    for f, d in baselines:
+        rel = f.relative_to(root)
+        if f.stem != d.get("id"):
+            problems.append(f"{rel}: file name must equal id {d.get('id')}")
+        if d.get("source") not in source_ids:
+            problems.append(f"{rel}: unknown source {d.get('source')}")
+        q = d.get("quote")
+        if q and _words(q) > MAX_QUOTE_WORDS:
+            problems.append(f"{rel}: quote has {_words(q)} words; must be under 25")
     return problems

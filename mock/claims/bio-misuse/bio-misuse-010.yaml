@@ -1,0 +1,17 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-010
+mock: true
+risk: bio-misuse
+claim_type: qualitative
+source: mock-aisi-evaluation-2026
+locator:
+  section: MOCK 6
+quote: 'MOCK: evaluations should cover end-to-end protocols, not single sub-tasks.'
+quantity: work_evals
+units: none
+evidence_type: independent-evaluation
+evidence_basis: measured
+tags:
+- work/dangerous-capability-evals
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

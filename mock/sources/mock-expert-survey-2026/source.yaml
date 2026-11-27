@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: mock-expert-survey-2026
+mock: true
+title: MOCK expert survey on AI-enabled biological risk
+authors:
+- MOCK author
+type: expert-survey
+evidence_date: '2026'
+published: '2026'
+version: MOCK v1
+url: https://example.invalid/mock/mock-expert-survey-2026
+redistribution: open
+evidence_basis:
+- expert-judgement
+author_interests:
+- kind: none-identified
+  note: Invented.
+notes: Invented for the format demonstration. No file.

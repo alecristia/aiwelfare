@@ -1,0 +1,28 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-002
+mock: true
+risk: bio-misuse
+claim_type: estimate
+source: mock-lab-system-card-2026
+locator:
+  section: MOCK 4.2
+quote: 'MOCK: the model provided limited uplift on some sub-tasks.'
+quantity: p_outbreak
+value:
+  interval:
+    low: 0.001
+    high: 0.01
+    kind: ci90
+units: probability over window
+time_window:
+  start: 2026
+  end: 2031
+  per: period
+counterfactual: no-ai
+evidence_type: lab-evaluation
+evidence_basis: measured
+tags:
+- evidence/lab-evaluation
+notes: 'MOCK: an invented translation of uplift results into a probability.'
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

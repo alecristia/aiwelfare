@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: mock-burden-tables-2025
+mock: true
+title: MOCK global burden-of-disease tables
+authors:
+- MOCK author
+type: dataset
+evidence_date: '2026'
+published: '2026'
+version: MOCK v1
+url: https://example.invalid/mock/mock-burden-tables-2025
+redistribution: open
+evidence_basis:
+- modelled
+author_interests:
+- kind: none-identified
+  note: Invented.
+notes: Invented for the format demonstration. No file.

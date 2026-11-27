@@ -1,0 +1,17 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-004
+mock: true
+risk: bio-misuse
+claim_type: qualitative
+source: mock-consensus-report-2026
+locator:
+  section: MOCK 2.1
+quote: 'MOCK: AI-enabled biological misuse is a recognised but unquantified risk.'
+quantity: recognition
+units: none
+evidence_type: consensus-synthesis
+evidence_basis: expert-judgement
+tags:
+- evidence/consensus
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

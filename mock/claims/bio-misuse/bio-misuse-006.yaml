@@ -1,0 +1,23 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-006
+mock: true
+risk: bio-misuse
+claim_type: estimate
+source: mock-expert-survey-2026
+locator:
+  table: MOCK 5
+quote: 'MOCK: most of the risk comes from capabilities after 2026.'
+quantity: share_from_post_2026_capability
+value:
+  interval:
+    low: 0.5
+    high: 0.85
+    kind: ci90
+units: fraction
+counterfactual: frozen-2026
+evidence_type: expert-forecast
+evidence_basis: expert-judgement
+tags:
+- counterfactual/frozen-2026
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

@@ -32,5 +32,10 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 
+[tool.ruff.lint.per-file-ignores]
+# Card and terminal rendering: long f-string templates read better unbroken.
+"src/aiwelfare/card.py" = ["E501"]
+"src/aiwelfare/cli.py" = ["E501"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

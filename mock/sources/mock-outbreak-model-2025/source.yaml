@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: mock-outbreak-model-2025
+mock: true
+title: MOCK epidemiological model of engineered outbreaks
+authors:
+- MOCK author
+type: peer-reviewed
+evidence_date: '2026'
+published: '2026'
+version: MOCK v1
+url: https://example.invalid/mock/mock-outbreak-model-2025
+redistribution: open
+evidence_basis:
+- modelled
+author_interests:
+- kind: none-identified
+  note: Invented.
+notes: Invented for the format demonstration. No file.

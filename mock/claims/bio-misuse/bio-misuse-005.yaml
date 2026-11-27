@@ -1,0 +1,23 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-005
+mock: true
+risk: bio-misuse
+claim_type: estimate
+source: mock-outbreak-model-2025
+locator:
+  figure: MOCK 3
+quote: 'MOCK: severity spans local clusters to pandemic-scale events.'
+quantity: dalys_if_outbreak
+value:
+  interval:
+    low: 1000
+    high: 80000000.0
+    kind: ci90
+units: DALYs per outbreak
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- severity
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'

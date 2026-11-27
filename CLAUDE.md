@@ -16,19 +16,22 @@ Do not copy content from these files into this one; point to them.
 
 ## Current status
 
-**Design phase. No code exists yet.** The proposed layout below is a starting point. Confirm it with the maintainer before scaffolding, and update this file once it exists.
+**Milestone 1 done (2026-11-27).** The package, schemas and CLI exist. One real card (data-centre air pollution, US only) and one mock card (bio misuse, `mock/`) are built end to end. Run `uv run aiwelfare --help`; run `uv run pytest` and `uv run aiwelfare validate` before committing.
 
-## Proposed layout
+## Layout
 
 ```
-sources/            One folder per source: source.yaml (metadata) + the file, tracked by DataLad (D1)
+sources/<id>/       source.yaml + the file, tracked by DataLad (D1, D15; procedure: docs/sources.md)
 claims/<risk-id>/   Atomic claims as YAML, one file per claim
-baselines/          Health baselines (GBD, WHO GHE, IHME forecasts) as DataLad subdatasets
-models/<risk-id>.py One model per risk card, with declared parameters
-cards/<risk-id>.md  Hand-written prose for each card (one-liner, plain-language text)
-src/aiwelfare/      Python package and CLI
-site/               Generated static website. Never hand-edited; built in CI
-docs/               VISION-level docs, decisions, examples
+baselines/          Health baselines as <id>.yaml (none real yet; GBD/WHO to come as DataLad subdatasets)
+models/<risk_id>.py One model per card (snake_case module, kebab-case risk ID), declared parameters
+cards/<risk-id>.md  Hand-written prose for each card (frontmatter + plain-language sections)
+results/<risk-id>/  Generated card.md, dotplot.svg, card.json. Only via `aiwelfare rerun` (datalad run)
+mock/               Invented data mirroring the tree above (D13); mock/build/ holds generated mock cards
+src/aiwelfare/      Python package and CLI (schema/, data.py, engine.py, card.py, dotplot.py, cli.py)
+site/               Generated static website (not started). Never hand-edited; built in CI
+docs/               VISION-level docs, decisions, examples, related work
+related_work/       Prior-work catalogue and search log
 tests/
 ```
 
@@ -70,8 +73,8 @@ tests/
 - adding a heavy dependency or a new external service
 - modifying a source file or claim that has already been published
 
-## Conventions (proposed; confirm when scaffolding)
+## Conventions
 
 - Python ≥ 3.11, managed with `uv`. Lint and format with `ruff`. Test with `pytest`.
-- Claim and source files are YAML, validated against a schema in `src/aiwelfare/schema/`.
-- Commit messages say *why* an estimate changed, not just what. The changelog digest is generated from them.
+- Claim, source and baseline files are YAML, validated against the schemas in `src/aiwelfare/schema/`.
+- Commit messages say *why* an estimate changed, not just what. Cards' changelogs and `aiwelfare log` are generated from them.

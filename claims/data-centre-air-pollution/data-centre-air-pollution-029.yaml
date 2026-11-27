@@ -1,0 +1,21 @@
+id: data-centre-air-pollution-029
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: han-2026-health-informed-computing
+locator:
+  page: 2
+  section: '1'
+quote: explicitly incorporates public health costs into siting and resource management decisions
+quantity: work_health_informed_siting
+description: 'Han et al. propose Health-Informed Computing: data-centre siting and resource management that count
+  public-health costs.'
+units: none
+geography: contiguous United States
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- work/health-informed-siting-and-load-shifting
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

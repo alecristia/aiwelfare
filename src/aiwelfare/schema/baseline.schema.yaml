@@ -1,0 +1,29 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/alecristia/aiwelfare/schema/baseline.schema.yaml
+title: Baseline
+description: >
+  An established health burden that risks are read against (D6 reference lines),
+  stored as baselines/<id>.yaml. The value is DALYs per year as the source states it;
+  the CLI scales it to the risk's window. The validator also checks that the source exists.
+type: object
+additionalProperties: false
+required: [id, mock, label, dalys_per_year, geography, year, source, locator]
+properties:
+  id: {type: string, pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"}
+  mock: {type: boolean}
+  label: {type: string}
+  dalys_per_year: {type: number, exclusiveMinimum: 0}
+  geography: {type: string}
+  year: {type: integer}
+  source: {type: string}
+  locator:
+    type: object
+    minProperties: 1
+    additionalProperties: false
+    properties:
+      page: {type: [integer, string]}
+      section: {type: string}
+      table: {type: string}
+      figure: {type: string}
+  quote: {type: string}
+  notes: {type: string}

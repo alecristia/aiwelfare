@@ -1,0 +1,18 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: mock-lab-system-card-2026
+mock: true
+title: MOCK frontier-model system card
+authors:
+- MOCK author
+type: lab-disclosure
+evidence_date: '2026'
+published: '2026'
+version: MOCK v1
+url: https://example.invalid/mock/mock-lab-system-card-2026
+redistribution: open
+evidence_basis:
+- measured
+author_interests:
+- kind: developer-self-report
+  note: 'Invented: a developer evaluating its own model.'
+notes: Invented for the format demonstration. No file.

@@ -19,7 +19,7 @@ claims/data-centre-air-pollution/; fitting choices are stated in each Param.fit.
 
 import numpy as np
 
-from aiwelfare.engine import Param, choice, claim_value, lognormal_ci, uniform
+from aiwelfare.engine import Param, choice, claim_value, fixed, lognormal_ci, uniform
 
 RISK = "data-centre-air-pollution"
 TITLE = "Air pollution from electricity for AI data centres"
@@ -31,9 +31,15 @@ COUNTERFACTUALS = {
     "frozen-2026": "AI frozen at 2026 levels",
 }
 NOT_MODELLED = {
-    "open-only": ("Needs the share of AI electricity driven by frontier versus open-weight or older "
-                  "models; no source read yet."),
+    "open-only": (
+        "Needs the share of AI electricity driven by frontier versus open-weight or older "
+        "models; no source read yet."
+    ),
 }
+BREAKDOWN_NOT_MODELLED = (
+    "No source read yet splits AI data-centre electricity by access mode "
+    "(open-weight, API frontier, locally-run frontier)."
+)
 C = "data-centre-air-pollution-{:03d}".format
 
 STUDIES = ["COBRA (Han et al.)", "GEOS-Chem (Chen et al.)", "AP4 (Muller)"]
@@ -60,45 +66,115 @@ def params(ds):
     ai23_iea = v(18)["point"]
 
     return [
-        Param("study", "Which study's deaths-per-TWh estimate this future uses",
-              [C(1), C(9), C(14)], choice(3),
-              "Equal-weight mixture of the three independent models (D14).",
-              categories=STUDIES),
-        Param("rate_cobra", "Deaths per TWh, COBRA (Han et al.), incl. backup generators",
-              [C(1), C(2), C(8)], uniform(han["low"] / han_twh, han["high"] / han_twh),
-              "Uniform between the low and high CRF results for 2023 divided by 2023 TWh; "
-              "the two CRFs are alternatives, not interval bounds."),
-        Param("rate_geoschem", "Deaths per TWh, GEOS-Chem (Chen et al.), grid only",
-              [C(9), C(10)], lognormal_ci(chen["low"] / chen_twh, chen["high"] / chen_twh),
-              "Lognormal through the 95% CI for 2023 divided by 2023 generation; the CI covers "
-              "CRF uncertainty only, so this understates the spread."),
-        Param("rate_ap4", "Deaths per TWh, AP4 (Muller), grid only",
-              [C(13), C(14), C(15), C(16), C(17)],
-              uniform(mul_lo / vsl / mul_twh, mul_hi / vsl / mul_twh),
-              "Local-air-pollution damages ÷ VSL ÷ TWh (AP4 counts mortality only); uniform "
-              "between the default and high dose-response runs. Study year 2025, treated as 2023."),
-        Param("rate_backup", "Deaths per TWh from backup generators (added to grid-only studies)",
-              [C(7)], uniform(backup["low"] / han_twh, backup["high"] / han_twh),
-              "Han et al.'s scope-1 deaths (10% of permitted emissions) per 2023 TWh, uniform "
-              "between CRF results. Added to GEOS-Chem and AP4, which exclude backup generators."),
-        Param("e2028", "Total US data-centre electricity in 2028 (TWh)",
-              [C(20)], uniform(e28["low"], e28["high"]),
-              "Uniform across LBNL's 2028 scenario range (no likelihood is given for the scenarios). "
-              f"2023 is fixed at {e23} TWh (claim {C(19)})."),
-        Param("post_2028_growth_ratio", "Growth after 2028 as a fraction of 2023–28 growth",
-              [C(27)], uniform(*_lh(v(27))), "Uniform over the assumption's range."),
-        Param("ai_share_source", "Which estimate of AI's share of 2023 electricity this future uses",
-              [C(18), C(21), C(22)], choice(2),
-              f"Equal-weight mixture: LBNL AI servers / all servers = {ai23_lbnl:.2f}; "
-              f"IEA (via Muller) = {ai23_iea:.2f}.", categories=AI_SHARE_SOURCES),
-        Param("conventional_growth", "Annual growth of non-AI data-centre electricity",
-              [C(28), C(23)], uniform(*_lh(v(28))), "Uniform over the assumption's range."),
-        Param("grid_trend_2031", "Deaths per TWh in 2031 relative to the study year",
-              [C(26)], uniform(*_lh(v(26))),
-              "Uniform over the assumption's range; linear in time from 1.0 in 2023."),
-        Param("dalys_per_death", "DALYs per premature death", [C(25)], uniform(*_lh(v(25))),
-              "Uniform over the placeholder assumption's range."),
-    ] , {"e2023": e23, "ai_share_2023": [ai23_lbnl, ai23_iea]}
+        Param(
+            "study",
+            "Which study's deaths-per-TWh estimate this future uses",
+            [C(1), C(9), C(14)],
+            choice(3),
+            "Equal-weight mixture of the three independent models (D14).",
+            categories=STUDIES,
+        ),
+        Param(
+            "rate_cobra",
+            "Deaths per TWh, COBRA (Han et al.), incl. backup generators",
+            [C(1), C(2), C(8)],
+            uniform(han["low"] / han_twh, han["high"] / han_twh),
+            "Uniform between the low and high CRF results for 2023 divided by 2023 TWh; "
+            "the two CRFs are alternatives, not interval bounds.",
+        ),
+        Param(
+            "rate_geoschem",
+            "Deaths per TWh, GEOS-Chem (Chen et al.), grid only",
+            [C(9), C(10)],
+            lognormal_ci(chen["low"] / chen_twh, chen["high"] / chen_twh),
+            "Lognormal through the 95% CI for 2023 divided by 2023 generation; the CI covers "
+            "CRF uncertainty only, so this understates the spread.",
+        ),
+        Param(
+            "rate_ap4",
+            "Deaths per TWh, AP4 (Muller), grid only",
+            [C(13), C(14), C(15), C(16), C(17)],
+            uniform(mul_lo / vsl / mul_twh, mul_hi / vsl / mul_twh),
+            "Local-air-pollution damages ÷ VSL ÷ TWh (AP4 counts mortality only); uniform "
+            "between the default and high dose-response runs. Study year 2025, treated as 2023.",
+        ),
+        Param(
+            "rate_backup",
+            "Deaths per TWh from backup generators (added to grid-only studies)",
+            [C(7)],
+            uniform(backup["low"] / han_twh, backup["high"] / han_twh),
+            "Han et al.'s scope-1 deaths (10% of permitted emissions) per 2023 TWh, uniform "
+            "between CRF results. Added to GEOS-Chem and AP4, which exclude backup generators.",
+        ),
+        Param(
+            "e2028",
+            "Total US data-centre electricity in 2028 (TWh)",
+            [C(20)],
+            uniform(e28["low"], e28["high"]),
+            "Uniform across LBNL's 2028 scenario range (no likelihood is given for the scenarios).",
+        ),
+        Param(
+            "post_2028_growth_ratio",
+            "Growth after 2028 as a fraction of 2023–28 growth",
+            [C(27)],
+            uniform(*_lh(v(27))),
+            "Uniform over the assumption's range.",
+        ),
+        Param(
+            "ai_share_source",
+            "Which estimate of AI's share of 2023 electricity this future uses",
+            [C(18), C(21), C(22)],
+            choice(2),
+            "Equal-weight mixture of the two estimates (D14).",
+            categories=AI_SHARE_SOURCES,
+        ),
+        Param(
+            "conventional_growth",
+            "Annual growth of non-AI data-centre electricity",
+            [C(28), C(23)],
+            uniform(*_lh(v(28))),
+            "Uniform over the assumption's range.",
+        ),
+        Param(
+            "grid_trend_2031",
+            "Deaths per TWh in 2031 relative to the study year",
+            [C(26)],
+            uniform(*_lh(v(26))),
+            "Uniform over the assumption's range; linear in time from 1.0 in 2023.",
+        ),
+        Param(
+            "dalys_per_death",
+            "DALYs per premature death",
+            [C(25)],
+            uniform(*_lh(v(25))),
+            "Uniform over the placeholder assumption's range.",
+        ),
+        Param(
+            "e2023",
+            "Total US data-centre electricity in 2023 (TWh)",
+            [C(19)],
+            fixed(e23),
+            "Taken as stated.",
+            fixed=True,
+        ),
+        Param(
+            "ai_share_lbnl",
+            "AI share of 2023 data-centre electricity, LBNL variant",
+            [C(21), C(22)],
+            fixed(ai23_lbnl),
+            "AI-server ÷ all-server electricity; assumes cooling and other overheads scale "
+            "with server load.",
+            fixed=True,
+        ),
+        Param(
+            "ai_share_iea",
+            "AI share of 2023 data-centre electricity, IEA variant",
+            [C(18)],
+            fixed(ai23_iea),
+            "Taken as stated (global share, applied to the US).",
+            fixed=True,
+        ),
+    ]
 
 
 def _lh(value):
@@ -106,37 +182,25 @@ def _lh(value):
     return i["low"], i["high"]
 
 
-# The engine expects params(ds) -> list[Param]; constants travel alongside.
-_params_with_constants = params
-
-
-def params(ds):  # noqa: F811
-    plist, consts = _params_with_constants(ds)
-    _CONST.update(consts)
-    return plist
-
-
-_CONST: dict = {}
-
-
 def electricity(x, years):
     """Total and AI electricity (TWh), arrays of shape (draws, years)."""
-    e23 = _CONST["e2023"]
+    e23 = x["e2023"]
     r = (x["e2028"] / e23) ** (1 / 5) - 1  # 2023–2028 annual growth
     r_post = r * x["post_2028_growth_ratio"]
     t = np.asarray(years)[None, :]
-    pre = e23 * (1 + r[:, None]) ** np.minimum(t - 2023, 5)
+    pre = e23[:, None] * (1 + r[:, None]) ** np.minimum(t - 2023, 5)
     total = pre * (1 + r_post[:, None]) ** np.maximum(t - 2028, 0)
-    share = np.asarray(_CONST["ai_share_2023"])[x["ai_share_source"].astype(int)]
-    non_ai = e23 * (1 - share)[:, None] * (1 + x["conventional_growth"][:, None]) ** (t - 2023)
+    share = np.where(x["ai_share_source"].astype(int) == 0, x["ai_share_lbnl"], x["ai_share_iea"])
+    non_ai = (e23 * (1 - share))[:, None] * (1 + x["conventional_growth"][:, None]) ** (t - 2023)
     ai = np.maximum(total - non_ai, 0.0)
     return total, ai
 
 
 def deaths_per_twh(x):
-    rates = np.stack([x["rate_cobra"],
-                      x["rate_geoschem"] + x["rate_backup"],
-                      x["rate_ap4"] + x["rate_backup"]], axis=1)
+    rates = np.stack(
+        [x["rate_cobra"], x["rate_geoschem"] + x["rate_backup"], x["rate_ap4"] + x["rate_backup"]],
+        axis=1,
+    )
     return rates[np.arange(len(rates)), x["study"].astype(int)]
 
 

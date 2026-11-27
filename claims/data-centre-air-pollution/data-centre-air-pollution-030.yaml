@@ -1,0 +1,22 @@
+id: data-centre-air-pollution-030
+mock: false
+risk: data-centre-air-pollution
+claim_type: qualitative
+source: han-2026-health-informed-computing
+locator:
+  page: 4
+  section: 2.3.1
+quote: Tier 4 generators use more advanced exhaust aftertreatment and therefore have lower emission rates than Tier
+  2 units
+quantity: work_cleaner_backup_generation
+description: Cleaner (Tier 4) backup generators emit less than the Tier 2 units most Northern Virginia data centres
+  use.
+units: none
+geography: contiguous United States
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- work/cleaner-backup-generation
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

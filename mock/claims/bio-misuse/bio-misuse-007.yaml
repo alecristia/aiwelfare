@@ -1,0 +1,24 @@
+# INVENTED (MOCK) DATA for demonstrating the card format (D13). Not a real source.
+id: bio-misuse-007
+mock: true
+risk: bio-misuse
+claim_type: estimate
+source: mock-expert-survey-2026
+locator:
+  table: MOCK 6
+quote: 'MOCK: open-weight models drive a third of the risk if frontier models stall.'
+quantity: share_if_only_open_advance
+value:
+  interval:
+    low: 0.2
+    high: 0.45
+    kind: ci90
+units: fraction
+counterfactual: open-only
+evidence_type: expert-forecast
+evidence_basis: expert-judgement
+tags:
+- counterfactual/open-only
+- access-mode/open-weight
+extracted_by: MOCK (invented)
+extracted_on: '2026-11-27'
