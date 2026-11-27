@@ -760,17 +760,19 @@ def rerun(risk: RiskArg, include_mock: MockOpt = False, as_json: JsonOpt = False
         return
     if not shutil.which("datalad"):
         _fail("datalad is not installed", as_json)
-    inputs = cardmod.input_paths(ds, m, cs, rid)
+    # Inputs: the risk's model, prose and claims, plus the engine that turns them into numbers.
+    inputs = [*cardmod.input_paths(ds, m, cs, rid), "src/aiwelfare"]
     outdir = f"results/{rid}"
     cmd = [
         "datalad",
         "run",
+        "--explicit",  # save only the declared outputs; unrelated work in progress is left alone
         "-m",
         f"Rebuild card {rid}",
         *[a for p in inputs for a in ("--input", p)],
         "--output",
         outdir,
-        f"aiwelfare build card {rid}",
+        f"uv run aiwelfare build card {rid}",  # uv: the recorded command works on any clone
     ]
     proc = subprocess.run(cmd, cwd=ds.root, capture_output=True, text=True)
     ok = proc.returncode == 0
