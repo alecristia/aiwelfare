@@ -268,8 +268,9 @@ def analyse(
         except (FileNotFoundError, ValueError) as e:
             flip_result = {"error": str(e)}
 
-    commit = _git(ds, "rev-parse", "--short", "HEAD")
     paths = input_paths(ds, model, cs, risk)
+    # The last commit that changed any input (not HEAD), so `datalad rerun` reproduces the card.
+    commit = _git(ds, "log", "-1", "--format=%h", "--", *paths, "src/aiwelfare")
     dirty = bool(_git(ds, "status", "--porcelain", "--", *paths))
 
     return {
@@ -696,7 +697,7 @@ def render(a: dict, cs: CardSource) -> str:
         "",
         "### Index and provenance",
         "",
-        f"{idx} · model `{pv['model']}` · prose `{pv['card_source']}` · built from commit "
+        f"{idx} · model `{pv['model']}` · prose `{pv['card_source']}` · inputs as of commit "
         f"`{pv['commit']}`"
         + (" **with uncommitted input changes**" if pv["uncommitted_input_changes"] else "")
         + f" · seed {pv['seed']}, {pv['draws']:,} draws",
