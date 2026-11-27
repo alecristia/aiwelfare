@@ -12,7 +12,8 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from aiwelfare import explorer, site
+from aiwelfare import card as cardmod
+from aiwelfare import data, explorer, site
 from aiwelfare.cli import app
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,8 +29,9 @@ def built(tmp_path_factory) -> Path:
 
 @pytest.fixture(scope="module")
 def global_fixture(tmp_path_factory) -> Path:
-    """A copy of the repo in which the US-only air-pollution card claims to be global, so the
-    canonical build has a real row to show (no real global card exists yet)."""
+    """A copy of the repo in which the US-only air-pollution card claims to be global, and the
+    clinical-AI net card (D17, work in progress) is generated, so the canonical build has real
+    rows to show. Neither change touches the real repo."""
     root = tmp_path_factory.mktemp("repo")
     yaml_only = shutil.ignore_patterns("*.pdf", "*.csv", "*.zip", "gbd", "__pycache__")
     for d in ("sources", "claims", "models", "cards", "results", "baselines", "mock"):
@@ -42,6 +44,7 @@ def global_fixture(tmp_path_factory) -> Path:
     c = json.loads(cj.read_text())
     c["geography"] = "global"
     cj.write_text(json.dumps(c))
+    cardmod.build(data.load(root), "clinical-ai")
     out = root / "site"
     site.build(root, out)
     return out
@@ -56,12 +59,30 @@ def _spec(out: Path) -> dict:
 
 def test_every_real_global_card_appears(global_fixture):
     spec = _spec(global_fixture)
-    assert [c["risk"] for c in spec["cards"]] == ["data-centre-air-pollution"]
+    risks = ["clinical-ai", "data-centre-air-pollution"]
+    assert sorted(c["risk"] for c in spec["cards"]) == risks
     index = (global_fixture / "index.html").read_text()
-    assert 'href="cards/data-centre-air-pollution.html"' in index  # a row on the chart
-    assert (global_fixture / "cards/data-centre-air-pollution.html").exists()
-    for cf in explorer.COUNTERFACTUALS:
-        assert "data-centre-air-pollution" in (global_fixture / f"overview-{cf}.svg").read_text()
+    for r in risks:
+        assert f'href="cards/{r}.html"' in index  # a row on the chart
+        assert (global_fixture / f"cards/{r}.html").exists()
+        for cf in explorer.COUNTERFACTUALS:
+            assert r in (global_fixture / f"overview-{cf}.svg").read_text()
+
+
+def test_net_card_gets_a_mirrored_axis(global_fixture):
+    spec = _spec(global_fixture)
+    assert explorer.signed_axis(spec)
+    svg = (global_fixture / "overview-frozen-2026.svg").read_text()
+    assert "net benefit (DALYs averted)" in svg and "net harm in" in svg
+    net = next(c for c in spec["cards"] if c["risk"] == "clinical-ai")
+    ev = net["results"]["frozen-2026"]["expected_value"]
+    x = explorer.scale(3, 9, True)
+    assert (x(ev) < explorer.MID) == (ev < 0)  # net benefit left of zero, net harm right
+    assert x(-1e5) < x(0) < x(1e5) and x(1e5) - x(0) == x(0) - x(-1e5)  # mirrored
+
+
+def test_one_sided_axis_without_net_cards(built):
+    assert not explorer.signed_axis(_spec(built / "demo"))
 
 
 def test_every_real_card_in_results_is_shown_or_explained(built):
@@ -195,6 +216,32 @@ def test_explorer_defaults_equal_cli(built):
         mine = res["views"][q]["bio-misuse"]
         for k in ("expected_value", "median", "p05", "p95", "tail_dominated"):
             assert mine[k] == cli[k], (q, k)
+
+
+def test_explorer_equals_cli_on_a_net_card(global_fixture):
+    spec = _spec(global_fixture)
+    p = next(c for c in spec["cards"] if c["risk"] == "clinical-ai")["params"][0]
+    value = p["categories"][0] if p["categorical"] else explorer.canonical_number(p["max"])
+    q = explorer.encode(explorer.State("no-ai", {"clinical-ai": {p["name"]: value}}))
+    res = _browser(global_fixture, "", q)
+    assert res["diffs"] == []
+    cli = json.loads(
+        runner.invoke(
+            app,
+            [
+                "whatif",
+                "risk/clinical-ai",
+                "--set",
+                f"{p['name']}={value}",
+                "-c",
+                "no-ai",
+                "--json",
+            ],
+        ).output
+    )["yours"]
+    mine = res["views"][q]["clinical-ai"]
+    for k in ("expected_value", "median", "p05", "p95", "share_net_harm"):
+        assert mine[k] == cli[k], k
 
 
 def test_explorer_settings_equal_whatif(built):

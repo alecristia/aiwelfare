@@ -78,11 +78,14 @@ The first real benefit, so the overview does not show harms alone. Resume with `
 Replaces the mock card, starting from Righetti's model (GovAI 2025). The mock files stay in `mock/` as the format demonstration.
 
 ### 3. Website and explorer (D6, D8)
-With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Brief: `docs/tasks/website-and-explorer.md`. **Built (branch `website-explorer`, not yet merged or published):** `aiwelfare build site` writes `site/` (real, global cards only) and `site/demo/` (adds the mock card, with D13 banners); explorer on Pyodide (D8, amended). The canonical chart has no rows yet because no real card is global; it shows the six baselines. Still open:
-- **Net cards (D17):** the forest plot's axis is log-only. Once net cards land, it needs signed values, and `explorer.summarise_run` should use the engine's net summary.
-- **Maintainer to settle (D7, deferred):** colours, layout, row counts, from the screenshots.
-- **Not built:** D7's group summary rows and expand/collapse (no group has more than one card yet), and the access-mode filter (its meaning on the overview needs a decision). The tail-dominated and close-to-ML filters are built.
-- **Publishing:** GitHub Pages and a CI build need the maintainer's go-ahead (new external services).
+With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Brief: `docs/tasks/website-and-explorer.md`. **Built (branch `website-explorer`, pushed, not yet merged into `main` or published).** `main` (net cards, D17) has been merged into the branch and all tests pass. `aiwelfare build site` writes `site/` (real, global cards only) and `site/demo/` (adds the mock card, with D13 banners); explorer on Pyodide (D8, amended). The canonical chart has no rows yet because no real card is global (clinical AI is not generated yet); it shows the six baselines.
+
+**Pick up here (2026-11-27):**
+1. **Look at the mirrored axis.** The overview now switches to a mirrored log axis (net benefit left, harm right, as on the cards, D17) whenever a net card is on the chart, and the explorer uses the engine's net summary. Tests cover it with clinical AI generated in a temporary copy. Not yet seen as a picture: render it (generate the clinical-AI card in a scratch copy of the repo, then `aiwelfare build site --allow-regional --out <scratch>`) and check the legend line fits.
+2. **Maintainer to settle (D7, deferred):** colours (harm red and benefit green, as on the cards; net rows coloured by the sign of their expected value), layout, row counts; baseline lines mirrored, unlabelled, on the benefit side.
+3. **Not built:** D7's group summary rows and expand/collapse (no group has more than one card yet), and the access-mode filter (its meaning on the overview needs a decision). The tail-dominated and close-to-ML filters are built.
+4. **Merge `website-explorer` into `main`** once the above is agreed.
+5. **Publishing:** GitHub Pages and a CI build need the maintainer's go-ahead (new external services).
 
 ### 4. Remaining cards, in this order (one session each)
 1. Chatbots and mental health (net)

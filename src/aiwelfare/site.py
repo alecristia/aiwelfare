@@ -129,7 +129,7 @@ def build_spec(ds, cards: list[dict], demo: bool, allow_regional: bool) -> dict:
                     k: v["reason"] for k, v in c["by_counterfactual"].items() if not v["modelled"]
                 },
                 "results": {
-                    k: {kk: v[kk] for kk in _SUMMARY_KEYS}
+                    k: {kk: v[kk] for kk in _SUMMARY_KEYS if kk in v}
                     for k, v in c["by_counterfactual"].items()
                     if v["modelled"]
                 },
@@ -171,6 +171,7 @@ _SUMMARY_KEYS = (
     "share_zero",
     "top5_share_of_ev",
     "tail_dominated",
+    "share_net_harm",  # net cards only (D17)
 )
 
 

@@ -22,7 +22,7 @@ from urllib.parse import parse_qsl, quote
 import numpy as np
 
 from . import engine
-from .dotplot import fmt
+from .dotplot import fmt, fmt_net
 
 DEFAULT_COUNTERFACTUAL = "frozen-2026"  # same as card.DEFAULT_COUNTERFACTUAL (card imports yaml)
 COUNTERFACTUALS = {
@@ -40,7 +40,7 @@ FILTERS = {
     "tail": "Tail-dominated only (D11)",
     "ml": "Has kinds of work close to ML engineering",
 }
-COLOURS = {"risk": "#b8432f", "benefit": "#2f6db8", "net": "#6b4fa0"}
+COLOURS = {"harm": "#c0504d", "benefit": "#2e7d32"}  # as on the cards' dotplots (D5, D17)
 BASELINE_COLOUR = "#7a7a7a"
 NOT_SUMMED = (
     "Estimates overlap and are not summed: there is no total row "
@@ -211,9 +211,10 @@ def fixed_values(card: dict, sets: dict[str, str]) -> dict:
 
 
 def summarise_run(model, counterfactual: str, n: int, seed: int, fixed: dict) -> dict:
-    """Exactly what `aiwelfare whatif` reports as "yours" (and `dist` with no settings)."""
-    y, _ = model.run(counterfactual, n, seed, fixed or None)
-    return engine.summarise(y)
+    """Exactly what `aiwelfare whatif` reports as "yours" (and `dist` with no settings):
+    the net for net cards (D17), signed; the single quantity otherwise."""
+    comps, _ = model.run_components(counterfactual, n, seed, fixed or None)
+    return engine.summarise_model(model, comps)
 
 
 def compute(models: dict, spec: dict, state: State) -> list[dict]:
@@ -249,7 +250,9 @@ def _row(card: dict, summary: dict | None) -> dict:
         "href": card["href"],
         "close_to_ml": card["close_to_ml"],
         "modelled": summary is not None,
-        "summary": {k: summary[k] for k in keep} | {"tail_dominated": summary["tail_dominated"]}
+        "summary": {k: summary[k] for k in keep}
+        | {"tail_dominated": summary["tail_dominated"]}
+        | ({"share_net_harm": summary["share_net_harm"]} if "share_net_harm" in summary else {})
         if summary
         else None,
     }
@@ -263,8 +266,10 @@ def not_modelled_reason(card: dict, counterfactual: str) -> str:
 
 W = 940
 LABEL_W = 300
-ZERO_X = LABEL_W + 22
+ZERO_X = LABEL_W + 22  # one-sided axis: the "nothing happens" column, left of the log axis
 X0, X1 = LABEL_W + 56, W - 24
+MID = (LABEL_W + 20 + X1) / 2  # mirrored axis (net cards, D17): the zero column's centre
+COL = 16  # half-width of the mirrored axis's zero column
 ROW_H = 36
 GROUP_H = 26
 HALO = ' paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round"'
@@ -291,7 +296,7 @@ def _axis_range(rows: list[dict], baselines: list[dict]) -> tuple[int, int]:
         if r["modelled"]:
             s = r["summary"]
             vals += [s[k] for k in ("expected_value", "median", "p05", "p95")]
-    pos = [v for v in vals if v > 0]
+    pos = [abs(v) for v in vals if v != 0]  # magnitudes: a mirrored axis shares its decades
     if not pos:
         return 3, 9
     lo, hi = math.floor(math.log10(min(pos))), math.ceil(math.log10(max(pos)))
@@ -309,8 +314,32 @@ def visible_rows(rows: list[dict], filters: list[str]) -> list[dict]:
     return out
 
 
+def signed_axis(spec: dict) -> bool:
+    """A mirrored log axis whenever a net card is on the chart (D17), so the axis does not
+    change shape when a setting moves a net across zero."""
+    return any(c["kind"] == "net" for c in spec["cards"])
+
+
+def scale(lo: int, hi: int, signed: bool):
+    """x position of a value. One-sided: 0 in its own column left of the log axis (D5).
+    Mirrored: net benefit (negative) left of a central zero column, net harm right (D17)."""
+
+    def x(v: float) -> float:
+        if not signed:
+            if v <= 0:
+                return ZERO_X
+            return X0 + (math.log10(max(v, 10.0**lo)) - lo) / (hi - lo) * (X1 - X0)
+        if v == 0:
+            return MID
+        t = (math.log10(max(abs(v), 10.0**lo)) - lo) / (hi - lo)
+        return MID + math.copysign(COL + t * (X1 - MID - COL), v)
+
+    return x
+
+
 def ordered(rows: list[dict]) -> list[tuple[str, list[dict]]]:
-    """Grouped (D7), groups in a fixed order; within each, by expected value, largest first."""
+    """Grouped (D7), groups in a fixed order; within each, by the size of the expected value
+    (its magnitude, for net cards), largest first."""
     out = []
     groups = list(GROUPS) + sorted({r["group"] for r in rows} - set(GROUPS))
     for g in groups:
@@ -320,7 +349,7 @@ def ordered(rows: list[dict]) -> list[tuple[str, list[dict]]]:
         members.sort(
             key=lambda r: (
                 not r["modelled"],
-                -(r["summary"]["expected_value"] if r["modelled"] else 0),
+                -(abs(r["summary"]["expected_value"]) if r["modelled"] else 0),
                 r["title"],
             )
         )
@@ -340,11 +369,9 @@ def forest_svg(
     groups = ordered(shown)
     lo, hi = _axis_range([r for r in shown if r["modelled"]], baselines)
     w0, w1 = spec["window"]
-
-    def x(v: float) -> float:
-        if v <= 0:
-            return ZERO_X
-        return X0 + (math.log10(v) - lo) / (hi - lo) * (X1 - X0)
+    signed = signed_axis(spec)
+    x = scale(lo, hi, signed)
+    zero_x = MID if signed else ZERO_X
 
     banners: list[tuple[str, str]] = []
     if spec["mock"]:
@@ -384,27 +411,43 @@ def forest_svg(
     y += 18
     o.append(
         f'<text x="12" y="{y}" fill="#555">Dot: median · bar: 90% of simulated futures · '
-        f"◇: expected value · dashed bar: tail-dominated (D11) · log scale</text>"
+        f"◇: expected value · dashed bar: tail-dominated (D11) · "
+        + ("log scale on each side of zero" if signed else "log scale")
+        + "</text>"
     )
 
     # baselines: labelled vertical reference lines (D6, D16), labels stacked so none overlap
+    # On a mirrored axis they are burdens, so they sit on the harm side, mirrored (unlabelled)
+    # on the benefit side so DALYs averted can be read against them too.
     for i, b in enumerate(bl_sorted):
         bx = x(b["dalys_window"])
         ly = lines_top + 12 + 14 * i
-        anchor = "end" if bx > (X0 + X1) / 2 else "start"
+        anchor = "end" if bx > ((MID + X1) / 2 if signed else (X0 + X1) / 2) else "start"
         dx = -4 if anchor == "end" else 4
         o.append(
             f'<line x1="{bx:.1f}" y1="{ly + 3}" x2="{bx:.1f}" y2="{axis_y}" '
             f'stroke="{BASELINE_COLOUR}" stroke-width="1" stroke-dasharray="1,2"/>'
         )
+        if signed:
+            mx = x(-b["dalys_window"])
+            o.append(
+                f'<line x1="{mx:.1f}" y1="{plot_top}" x2="{mx:.1f}" y2="{axis_y}" '
+                f'stroke="{BASELINE_COLOUR}" stroke-opacity="0.5" stroke-width="1" '
+                f'stroke-dasharray="1,2"/>'
+            )
         o.append(
             f'<text x="{bx + dx:.1f}" y="{ly}" text-anchor="{anchor}" fill="#444" '
             f'font-size="11"{HALO}>{_esc(b["label"])} · {fmt(b["dalys_window"])}</text>'
         )
 
-    # zero column (nothing happens), as on the cards' dotplots (D5)
+    # zero column (nothing happens / no net effect), as on the cards' dotplots (D5, D17)
+    if signed:
+        o.append(
+            f'<rect x="{MID - COL}" y="{plot_top}" width="{2 * COL}" height="{axis_y - plot_top}" '
+            f'fill="#f2f2f2"/>'
+        )
     o.append(
-        f'<line x1="{ZERO_X}" y1="{plot_top}" x2="{ZERO_X}" y2="{axis_y}" stroke="#ccc" '
+        f'<line x1="{zero_x}" y1="{plot_top}" x2="{zero_x}" y2="{axis_y}" stroke="#ccc" '
         f'stroke-dasharray="3,3"/>'
     )
 
@@ -428,7 +471,11 @@ def forest_svg(
         y += GROUP_H
         for r in members:
             card = cards[r["risk"]]
-            colour = COLOURS.get(r["kind"], COLOURS["risk"])
+            net = r["kind"] == "net"
+            if net and r["modelled"]:  # net cards: coloured by the sign of the expected value
+                colour = COLOURS["benefit" if r["summary"]["expected_value"] < 0 else "harm"]
+            else:
+                colour = COLOURS["benefit" if r["kind"] == "benefit" else "harm"]
             cy = y + ROW_H / 2
             o.append(f'<a href="{_esc(r["href"])}" target="_top">')
             o.append(
@@ -437,7 +484,13 @@ def forest_svg(
             )
             if r["modelled"]:
                 s = r["summary"]
-                sub = f"EV {fmt(s['expected_value'])} · 90%: {fmt(s['p05'])} – {fmt(s['p95'])}"
+                if net:
+                    sub = (
+                        f"net EV {fmt_net(s['expected_value'])} · 90%: {fmt_net(s['p05'])} – "
+                        f"{fmt_net(s['p95'])} · net harm in {s['share_net_harm']:.0%}"
+                    )
+                else:
+                    sub = f"EV {fmt(s['expected_value'])} · 90%: {fmt(s['p05'])} – {fmt(s['p95'])}"
                 if s["tail_dominated"]:
                     sub += " · tail-dominated"
                 o.append(f'<text x="12" y="{cy + 12}" fill="#666" font-size="11">{sub}</text>')
@@ -456,7 +509,7 @@ def forest_svg(
                 )
                 if s["share_zero"] >= 0.5:
                     o.append(
-                        f'<text x="{ZERO_X + 8}" y="{cy - 9}" fill="#666" font-size="10">'
+                        f'<text x="{zero_x + 8}" y="{cy - 9}" fill="#666" font-size="10">'
                         f"nothing happens in {s['share_zero']:.0%} of futures</text>"
                     )
                 y += ROW_H
@@ -468,32 +521,47 @@ def forest_svg(
                     lines[-1] += " …"
                 for i, line in enumerate(lines):
                     o.append(
-                        f'<text x="{ZERO_X}" y="{cy - 4 + 14 * i}" fill="#666" font-size="11" '
+                        f'<text x="{LABEL_W + 20}" y="{cy - 4 + 14 * i}" fill="#666" '
+                        f'font-size="11" '
                         f'font-style="italic"{HALO}>{_esc(line)}</text>'
                     )
                 y += 2 * ROW_H
 
     # axis
-    o.append(f'<line x1="{X0}" y1="{axis_y}" x2="{X1}" y2="{axis_y}" stroke="#333"/>')
-    o.append(f'<text x="{ZERO_X}" y="{axis_y + 16}" text-anchor="middle" fill="#333">0</text>')
-    for e in range(lo, hi + 1):
-        ex = X0 + (e - lo) / (hi - lo) * (X1 - X0)
+    sides = (-1, 1) if signed else (1,)
+    for sign in sides:
+        a, b = x(sign * 10.0**lo), x(sign * 10.0**hi)
+        o.append(f'<line x1="{a:.1f}" y1="{axis_y}" x2="{b:.1f}" y2="{axis_y}" stroke="#333"/>')
+        for e in range(lo, hi + 1):
+            ex = x(sign * 10.0**e)
+            o.append(
+                f'<line x1="{ex:.1f}" y1="{axis_y}" x2="{ex:.1f}" y2="{axis_y + 5}" '
+                f'stroke="#333"/><text x="{ex:.1f}" y="{axis_y + 18}" text-anchor="middle" '
+                f'fill="#333" font-size="{10 if signed else 12}">{fmt(10.0**e)}</text>'
+            )
+    o.append(f'<text x="{zero_x}" y="{axis_y + 16}" text-anchor="middle" fill="#333">0</text>')
+    if signed:
         o.append(
-            f'<line x1="{ex:.1f}" y1="{axis_y}" x2="{ex:.1f}" y2="{axis_y + 5}" stroke="#333"/>'
-            f'<text x="{ex:.1f}" y="{axis_y + 18}" text-anchor="middle" fill="#333">'
-            f"{fmt(10.0**e)}</text>"
+            f'<text x="{(LABEL_W + 20 + MID) / 2}" y="{axis_y + 36}" text-anchor="middle" '
+            f'fill="{COLOURS["benefit"]}">◀ net benefit (DALYs averted)</text>'
+            f'<text x="{(MID + X1) / 2}" y="{axis_y + 36}" text-anchor="middle" '
+            f'fill="{COLOURS["harm"]}">harm (DALYs lost) ▶</text>'
         )
-    o.append(
-        f'<text x="{(X0 + X1) / 2}" y="{axis_y + 36}" text-anchor="middle" fill="#333">'
-        f"DALYs over {w0}–{w1}, global (log scale)</text>"
-    )
+    else:
+        o.append(
+            f'<text x="{(X0 + X1) / 2}" y="{axis_y + 36}" text-anchor="middle" fill="#333">'
+            f"DALYs over {w0}–{w1}, global (log scale)</text>"
+        )
     legend_y = axis_y + 56
     o.append(
-        f'<circle cx="18" cy="{legend_y - 4}" r="5" fill="{COLOURS["risk"]}"/>'
-        f'<text x="28" y="{legend_y}">risk</text>'
-        f'<circle cx="74" cy="{legend_y - 4}" r="5" fill="{COLOURS["benefit"]}"/>'
-        f'<text x="84" y="{legend_y}">benefit</text>'
-        f'<text x="150" y="{legend_y}" fill="#555">{_esc(NOT_SUMMED)}</text>'
+        f'<circle cx="18" cy="{legend_y - 4}" r="5" fill="{COLOURS["harm"]}"/>'
+        f'<text x="28" y="{legend_y}">harm</text>'
+        f'<circle cx="78" cy="{legend_y - 4}" r="5" fill="{COLOURS["benefit"]}"/>'
+        f'<text x="88" y="{legend_y}">benefit'
+        + (" (net cards: by the sign of the expected value)" if signed else "")
+        + "</text>"
+        f'<text x="{440 if signed else 154}" y="{legend_y}" fill="#555">'
+        f"{_esc(NOT_SUMMED)}</text>"
     )
     o.append(
         f'<text x="12" y="{legend_y + 18}" fill="#555" font-size="11">Baselines: GBD 2023 '
