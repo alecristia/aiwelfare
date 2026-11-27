@@ -1,6 +1,6 @@
 # Search log: prior-work search
 
-Task brief: `docs/prior-work-search.md`. Outputs: `related_work/catalog.yaml` and `docs/related-work.md`.
+Task brief: `docs/tasks/prior-work-search.md`. Outputs: `related_work/catalog.yaml` and `docs/related-work.md`.
 
 - **Date of all searches:** 2026-11-25 (single session).
 - **Searcher:** Claude Code (Claude Opus 5.5), on the `prior-work-search` branch.

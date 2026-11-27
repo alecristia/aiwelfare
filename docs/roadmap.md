@@ -4,8 +4,6 @@ What we are working on **now**, and what we will **circle back to**. Update this
 
 Last updated: 2026-11-27.
 
-**Audience and geography.** The current readers are outside the United States, so every card and baseline is **global**. A US-only estimate is evidence towards a global card, not a result to show.
-
 ---
 
 ## The cards
