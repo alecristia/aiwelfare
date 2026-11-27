@@ -805,11 +805,14 @@
     "data-centre-air-pollution-012",
     "data-centre-air-pollution-014",
     "data-centre-air-pollution-015",
-    "data-centre-air-pollution-016"
+    "data-centre-air-pollution-016",
+    "data-centre-air-pollution-036",
+    "data-centre-air-pollution-037"
    ],
    "sources": [
     "chen-2026-data-center-air-quality",
     "han-2026-health-informed-computing",
+    "ihme-gbd-2023-ambient-pm",
     "muller-2026-data-center-damages"
    ],
    "basis": [
@@ -1051,18 +1054,25 @@
  "sources": [
   "chen-2026-data-center-air-quality",
   "han-2026-health-informed-computing",
+  "ihme-gbd-2023-ambient-pm",
   "muller-2026-data-center-damages",
   "shehabi-2024-us-data-center-energy"
  ],
  "provenance": {
   "model": "models/data_centre_air_pollution.py",
   "card_source": "cards/data-centre-air-pollution.md",
-  "commit": "42c7d56",
+  "commit": "cfb2f0d",
   "uncommitted_input_changes": false,
   "seed": 20261125,
   "draws": 100000
  },
  "changelog": [
+  {
+   "commit": "2baa65b",
+   "date": "2026-11-27",
+   "change": "Add GBD 2023 ambient particulate matter deaths and DALYs (global)",
+   "why": "Gives the global environmental-footprint card a sourced deaths-to-DALYs ratio (about 25 DALYs per death globally), replacing an assumption. The US-only model keeps its 8-15 assumption: a global ratio does not fit the older US population that data-centre pollution deaths fall on."
+  },
   {
    "commit": "8c7e21d",
    "date": "2026-11-27",

@@ -9,7 +9,7 @@
 | | |
 |---|---|
 | **Expected harm, 2027–2031** | **~33k DALYs** (90% range: 12k → 66k) |
-| **Magnitude** | order of 10^4 DALYs · 2.8e-05× air pollution (global) · 2.4e-05× child and maternal malnutrition (global) · 4.1e-05× high fasting plasma glucose (global) · 2.8e-05× high systolic blood pressure (global) · 3.2e-05× tobacco (global) · 0.00011× unsafe water, sanitation and handwashing (global) |
+| **Magnitude** | order of 10⁴ DALYs; against each baseline's burden over the same years: about 1/42,000 of child and maternal malnutrition (global) · about 1/35,000 of high systolic blood pressure (global) · about 1/35,000 of air pollution (global) · about 1/31,000 of tobacco (global) · about 1/25,000 of high fasting plasma glucose (global) · about 1/9,300 of unsafe water, sanitation and handwashing (global) |
 | **Confidence** | 🔸 **Medium**. Not tail-dominated (top 5% of futures give 11% of the expected value) |
 | **Mainly comes from** | not modelled yet |
 | **Compared with** | AI frozen at 2026 levels |
@@ -135,7 +135,7 @@ aiwelfare not-captured risk/data-centre-air-pollution --refs  # each excluded ha
 |---|---|---|---|
 | assumption | expert-judgement, speculation | — | 4 |
 | energy-model | modelled | `chen-2026-data-center-air-quality`, `han-2026-health-informed-computing`, `muller-2026-data-center-damages`, `shehabi-2024-us-data-center-energy` | 12 |
-| epidemiological-model | modelled | `chen-2026-data-center-air-quality`, `han-2026-health-informed-computing`, `muller-2026-data-center-damages` | 10 |
+| epidemiological-model | modelled | `chen-2026-data-center-air-quality`, `han-2026-health-informed-computing`, `ihme-gbd-2023-ambient-pm`, `muller-2026-data-center-damages` | 12 |
 
 Results by source, where several estimate the same quantity (D14):
 
@@ -170,12 +170,13 @@ Medium. Top 5% of futures give 11% of the expected value (tail-dominated above 5
 
 ### Index and provenance
 
-MIT AI Risk Repository mapping not done yet (D3) · model `models/data_centre_air_pollution.py` · prose `cards/data-centre-air-pollution.md` · inputs as of commit `42c7d56` · seed 20261125, 100,000 draws
+MIT AI Risk Repository mapping not done yet (D3) · model `models/data_centre_air_pollution.py` · prose `cards/data-centre-air-pollution.md` · inputs as of commit `cfb2f0d` · seed 20261125, 100,000 draws
 
 ### Changelog
 
 | Date | Change | Why |
 |---|---|---|
+| 2026-11-27 | Add GBD 2023 ambient particulate matter deaths and DALYs (global) | Gives the global environmental-footprint card a sourced deaths-to-DALYs ratio (about 25 DALYs per death globally), replacing an assumption. The US-only model ke |
 | 2026-11-27 | Milestone 1 (part 2): air-pollution model, card builder, full CLI, mock bio-misuse | Finishes the work interrupted on 2026-11-25. The air-pollution model now declares its fixed inputs (2023 electricity, AI-share estimates) as parameters instead  |
 | 2026-11-27 | Milestone 1 (part 1): schemas, CLI scaffold, data-centre air-pollution sources and claims | Records decisions D11-D15 (approved by the maintainer) and the source-integration procedure. Air pollution is the first card built from real evidence: three ind |
 
