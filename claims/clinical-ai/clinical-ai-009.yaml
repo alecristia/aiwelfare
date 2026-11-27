@@ -1,0 +1,19 @@
+id: clinical-ai-009
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: verma-2024-chartwatch
+locator:
+  section: Introduction
+quote: Evidence about the effectiveness of using prediction tools as early warning systems to detect and reduce
+  patient deterioration in hospitals is mixed
+quantity: early_warning_evidence_mixed
+description: Before CHARTwatch, evidence that early-warning tools reduce deaths was mixed, with few robust studies.
+units: none
+counterfactual: not-applicable
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

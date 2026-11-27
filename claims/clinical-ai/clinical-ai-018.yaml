@@ -1,0 +1,25 @@
+id: clinical-ai-018
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: bean-2025-llm-medical-assistants-rct
+locator:
+  page: 7
+  section: Experimental performance
+quote: Participants using LLMs did not have statistically significant differences in disposition accuracy from the
+  control group
+quantity: chatbot_vs_usual_sources_disposition
+description: Members of the public helped by an LLM chose the right course of action no more and no less often than
+  those using their usual sources.
+units: none
+geography: United Kingdom
+counterfactual: not-applicable
+conditions: Randomised; 1,298 participants; ten scenarios; GPT-4o, Llama 3, Command R+; control used any source,
+  mostly internet search or own knowledge.
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/chatbot-advice
+- comparator
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

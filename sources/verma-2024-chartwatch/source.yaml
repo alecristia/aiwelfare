@@ -1,0 +1,26 @@
+id: verma-2024-chartwatch
+mock: false
+title: "Clinical evaluation of a machine learning-based early warning system for patient deterioration"
+authors: ["Amol A. Verma", "Therese A. Stukel", "Michael Colacci", "Shirley Bell", "Jonathan Ailon", "Jan O. Friedrich", "Joshua Murray", "Sebnem Kuzulugil", "Zhen Yang", "Yuna Lee", "Chloe Pou-Prom", "Muhammad Mamdani"]
+publisher: "CMAJ 196(30):E1027-E1037"
+type: peer-reviewed
+evidence_date: "2016"
+published: "2024-09-16"
+version: "published version of record (Europe PMC full-text XML, PMC11412734)"
+accessed: 2026-11-27
+url: https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11412734/fullTextXML
+landing_page: https://doi.org/10.1503/cmaj.240132
+doi: 10.1503/cmaj.240132
+license: "CC BY-NC-ND 4.0"
+redistribution: url-only
+sha256: 32533d6221f77a7cd5646367422d79d1d7cfcc80ef23d2cbcf65d98a9c4a9a6b
+evidence_basis: [measured]
+author_interests:
+  - kind: industry-affiliation
+    note: "Four authors co-invented CHARTwatch, which was acquired by the start-up Signal1; they and one other author may acquire minority interests. Evaluated at the developing hospital."
+notes: >
+  Nonrandomised controlled study (propensity overlap weighting; difference-in-differences against
+  subspecialty units), general internal medicine unit, St. Michael's Hospital, Toronto. Primary
+  outcome: non-palliative in-hospital death. Read as Europe PMC XML because the PDF links sit
+  behind a bot check. Evidence covers 2016-11/2022-06. Kept url-only, like the other sources, so
+  nothing is mirrored without checking.

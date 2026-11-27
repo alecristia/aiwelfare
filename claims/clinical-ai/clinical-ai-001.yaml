@@ -1,0 +1,36 @@
+id: clinical-ai-001
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: boussina-2024-composer-sepsis
+locator:
+  page: 1
+  section: Abstract
+quote: a 1.9% absolute reduction (17% relative decrease) in in-hospital sepsis mortality (95% CI, 0.3%–3.5%)
+quantity: composer_sepsis_mortality_absolute_reduction
+description: Deploying the COMPOSER sepsis alert was associated with a 1.9 percentage-point fall in in-hospital
+  sepsis mortality.
+value:
+  interval:
+    low: 0.3
+    mid: 1.9
+    high: 3.5
+    kind: ci95
+units: percentage points of in-hospital mortality among septic patients
+geography: San Diego, United States (two emergency departments)
+time_window:
+  start: 2021
+  end: 2023
+  per: period
+counterfactual: not-applicable
+conditions: Before-and-after quasi-experiment; Bayesian structural time-series causal impact; 6,217 adult septic
+  patients; post-intervention period 145 days.
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+- study/composer
+- work/early-warning-deployment
+notes: The 17% relative decrease is 1.9 / 11.4 (expected post-intervention mortality, claim 002).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

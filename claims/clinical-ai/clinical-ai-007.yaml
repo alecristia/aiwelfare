@@ -1,0 +1,32 @@
+id: clinical-ai-007
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: rudd-2020-global-sepsis
+locator:
+  section: Summary, Findings
+quote: 11·0 million (10·1–12·0) sepsis-related deaths were reported, representing 19·7% (18·2–21·4) of all global
+  deaths.
+quantity: global_sepsis_deaths
+description: Global sepsis-related deaths in 2017, all ages, in and out of hospital.
+value:
+  interval:
+    low: 10100000.0
+    mid: 11000000.0
+    high: 12000000.0
+    kind: ci95
+units: deaths per year
+geography: global
+time_window:
+  start: 2017
+  end: 2017
+  per: year
+counterfactual: not-applicable
+conditions: GBD 2017 multiple-cause-of-death analysis; the interval is a 95% uncertainty interval.
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- pathway/monitoring
+- baseline/sepsis
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

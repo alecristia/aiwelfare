@@ -117,3 +117,7 @@ Plus:
 ## Timing
 
 The roadmap schedules this after the clinical-AI and real bio-misuse cards, so that the overview has real rows. You can build the generator, templates and explorer now against the existing outputs (air pollution as a fixture; mock bio misuse and mock baselines in the demo build), and switch to real rows as they land.
+
+## Net cards (D17), added 2026-11-27
+
+Net cards (clinical AI first) report a signed net: harms − benefits, negative = net benefit. The forest plot (D6) needs a signed axis for them; cards use a mirrored log axis (D5 as amended), and the overview should probably do the same. `card.json` carries `summary.components` (each component's summary and role) and `summary.share_net_harm`.

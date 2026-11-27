@@ -1,0 +1,20 @@
+id: clinical-ai-041
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: openai-2026-healthcare-ally
+locator:
+  page: 2
+  section: Introduction
+quote: Nearly 2 million messages per week focus on health insurance
+quantity: health_navigation_use
+description: Much chatbot health use is about navigating insurance and the health system, which DALYs do not capture.
+units: none
+geography: United States
+counterfactual: not-applicable
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- not-captured/navigation-and-access
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

@@ -1,0 +1,22 @@
+id: clinical-ai-008
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: rudd-2020-global-sepsis
+locator:
+  section: Methods
+quote: much of the sepsis burden could be incurred outside of the hospital, particularly in low-income or middle-income
+  countries.
+quantity: sepsis_deaths_outside_hospital
+description: Much of the global sepsis burden may occur outside hospitals, especially in low- and middle-income
+  countries, where hospital AI cannot reach it.
+units: none
+geography: global
+counterfactual: not-applicable
+evidence_type: epidemiological-model
+evidence_basis: modelled
+tags:
+- pathway/monitoring
+- uptake
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

@@ -1,0 +1,26 @@
+id: clinical-ai-025
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: chatbot_unsafe_answer_harm_probability
+description: Probability that an unsafe chatbot answer is acted on and causes a health harm.
+value:
+  interval:
+    low: 0.001
+    high: 0.03
+    kind: unqualified
+units: probability per unsafe answer
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/chatbot-advice
+rationale: Draelos et al.'s 'unsafe' means harm is possible if acted upon; many answers are not acted on, other
+  safeguards intervene, and many unsafe elements are minor. No study measures realised harm. Treated as a 90% range
+  of a lognormal.
+replace_with: A study linking chatbot advice to health outcomes (e.g. emergency visits or adverse events after chatbot
+  use).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

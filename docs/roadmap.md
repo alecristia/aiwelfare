@@ -58,9 +58,21 @@ Harms that fall inside a card but outside DALYs (e.g. loss of rights under autoc
 
 ## Now
 
-### 1. Clinical AI (net)
-The first real benefit, so the overview does not show harms alone. Launch with `docs/tasks/build-a-card.md`.
-**Prerequisite:** it is the first net card, and the engine and card format cannot yet show harm and benefit components or a net that may be negative (D5 dotplots use a log axis). The session first proposes a design, the maintainer agrees it, and it is recorded as a decision before the card is built (see the brief).
+### 1. Clinical AI (net): in progress, paused 2026-11-27 on branch `clinical-ai-card`
+The first real benefit, so the overview does not show harms alone. Resume with `docs/tasks/build-a-card.md`, section "In progress: Clinical AI", which lists exactly what is done and what is next.
+- **Done:**
+  - the net-card prerequisite (D17, agreed with the maintainer; D5 amended for a mirrored log axis)
+  - nine sources registered and read
+  - 41 claims, all quotes checked mechanically
+  - the model `models/clinical_ai.py`
+  - the prose `cards/clinical-ai.md`
+- **Not done:**
+  - the generated card (`aiwelfare rerun`) and its `datalad rerun` check
+  - tests for the card
+  - the search-log section
+  - `CLAUDE.md` status
+  - the pull request
+- **Waiting on the maintainer:** papers behind bot checks or paywalls, listed below under "Items for the maintainer to fetch".
 
 ### 2. Biological misuse, real
 Replaces the mock card, starting from Righetti's model (GovAI 2025). The mock files stay in `mock/` as the format demonstration.
@@ -86,6 +98,17 @@ The order mixes how much evidence is ready with having harms and benefits early.
 ---
 
 ## Circle back to
+
+### Items for the maintainer to fetch (bot checks, paywalls)
+Agents cannot pass bot checks or paywalls, so these wait for the maintainer to download them; save each into its `sources/<id>/` with `datalad save` and record its URL with `git annex registerurl` (pattern: the *Lancet* sources).
+- **Rossetti et al. 2025, *Nature Medicine* 31:1895, CONCERN cluster-randomised trial** (doi:10.1038/s41591-025-03609-7; PMC12818231; medRxiv 10.1101/2024.06.04.24308436). PMC and medRxiv both blocked. The only randomised trial for the clinical-AI monitoring benefit; would add a fourth effect variant and replace part of the `early_warning_effect_transfer` assumption.
+- **Bean et al. 2026, *Nature Medicine*, "Reliability of LLMs as medical assistants for the general public"**: the published version of arXiv:2504.18919v1, which the clinical-AI card cites for now.
+- **Escobar et al. 2020, *NEJM*, Kaiser Permanente automated early warning (19 hospitals)**: a large independent estimate; today it enters only through the Yuan meta-analysis.
+- **Wong et al. 2021, *JAMA Internal Medicine*, external validation of the Epic Sepsis Model**: evidence for how much of the effect transfers beyond developer sites.
+- Not tried yet, likely paywalled: **Nong et al. 2025, *Health Affairs***, on US hospitals' use of predictive models (an uptake anchor for the coverage assumptions).
+
+### Clinical AI: components not modelled in v1
+Agreed with the maintainer on 2026-11-27: diagnostics and screening (AI mammography, TB chest X-ray CAD), hallucinations entering clinical guidelines, and biased clinical algorithms are listed on the card as not modelled. Diagnostics is the one to add next: it needs global screening volumes and a detection-to-death chain.
 
 ### Literature review (prior-work search)
 Rounds 1–5 are done and merged (PRs #1, #2). Open items:

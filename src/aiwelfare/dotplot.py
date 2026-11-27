@@ -147,3 +147,136 @@ def text(quantiles: list[float], bins_per_decade: int = 4) -> str:
         "     DALYs, log scale; each ● = 5% of simulated futures; '0' column = nothing happens"
     )
     return "\n".join(lines)
+
+
+# ---- signed dotplots for net cards (D17, D5 as amended) ----------------------------
+#
+# A mirrored log axis: net benefit (negative values) on the left, log scale of |value|
+# growing leftwards; a central column for zero; net harm (positive values) on the right.
+# Both sides share the same decades, so equal distances mean equal ratios on either side.
+
+
+def fmt_net(v: float) -> str:
+    """'33k averted', '1.2k lost', '0'."""
+    if v == 0:
+        return "0"
+    return f"{fmt(abs(v))} {'averted' if v < 0 else 'lost'}"
+
+
+def _signed_layout(quantiles: list[float], bins_per_decade: int):
+    zeros = sum(1 for q in quantiles if q == 0)
+    mags = [abs(q) for q in quantiles if q != 0]
+    if not mags:
+        return zeros, {}, {}, (0, 1)
+    lo = math.floor(math.log10(min(mags)))
+    hi = math.ceil(math.log10(max(mags)))
+    if hi == lo:
+        hi += 1
+    neg: dict[int, int] = {}
+    pos: dict[int, int] = {}
+    for q in quantiles:
+        if q == 0:
+            continue
+        b = min(int((math.log10(abs(q)) - lo) * bins_per_decade), (hi - lo) * bins_per_decade - 1)
+        side = pos if q > 0 else neg
+        side[b] = side.get(b, 0) + 1
+    return zeros, neg, pos, (lo, hi)
+
+
+def svg_signed(quantiles: list[float], title: str, mock: bool = False, width: int = 640) -> str:
+    bpd = 4
+    zeros, neg, pos, (lo, hi) = _signed_layout(quantiles, bpd)
+    r = 6
+    d = 2 * r + 2
+    mid = width / 2
+    half = mid - 50  # each side's axis length
+    col = 22  # half-width of the zero column
+    top_n = max([zeros, *neg.values(), *pos.values(), 1])
+    base_y = 44 + top_n * d
+    height = base_y + 56
+    nbins = (hi - lo) * bpd
+
+    def side_x(b: float, sign: int) -> float:
+        return mid + sign * (col + (b + 0.5) / nbins * (half - col))
+
+    def tick_x(e: int, sign: int) -> float:
+        return mid + sign * (col + (e - lo) / (hi - lo) * (half - col))
+
+    out = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'font-family="sans-serif" font-size="11" role="img" aria-label="{title}">',
+        f'<text x="{mid}" y="16" text-anchor="middle" font-size="12">{title}</text>',
+    ]
+    if mock:
+        out.append(
+            f'<text x="{mid}" y="30" text-anchor="middle" fill="#b00" '
+            f'font-weight="bold">INVENTED (MOCK) DATA</text>'
+        )
+    out.append(
+        f'<rect x="{mid - col}" y="36" width="{2 * col}" height="{base_y - 34}" fill="#f2f2f2"/>'
+    )
+    for sign in (-1, 1):
+        a, b = tick_x(lo, sign), tick_x(hi, sign)
+        out.append(f'<line x1="{a}" y1="{base_y + 2}" x2="{b}" y2="{base_y + 2}" stroke="#333"/>')
+        for e in range(lo, hi + 1):
+            x = tick_x(e, sign)
+            out.append(
+                f'<line x1="{x}" y1="{base_y + 2}" x2="{x}" y2="{base_y + 7}" stroke="#333"/>'
+            )
+            out.append(
+                f'<text x="{x}" y="{base_y + 20}" text-anchor="middle">{fmt(10.0**e)}</text>'
+            )
+    out += [
+        f'<text x="{mid}" y="{base_y + 20}" text-anchor="middle">0</text>',
+        f'<text x="{mid - half / 2}" y="{base_y + 36}" text-anchor="middle" fill="#2e7d32">'
+        "◀ net benefit (DALYs averted)</text>",
+        f'<text x="{mid + half / 2}" y="{base_y + 36}" text-anchor="middle" fill="#c0504d">'
+        "net harm (DALYs lost) ▶</text>",
+        f'<text x="{mid}" y="{base_y + 50}" text-anchor="middle">'
+        "log scale on each side of zero · each dot = 5% of simulated futures</text>",
+    ]
+    for i in range(zeros):
+        out.append(f'<circle cx="{mid}" cy="{base_y - r - i * d}" r="{r}" fill="#888"/>')
+    for stacks, sign, colour in ((neg, -1, "#2e7d32"), (pos, 1, "#c0504d")):
+        for b, k in sorted(stacks.items()):
+            for i in range(k):
+                out.append(
+                    f'<circle cx="{side_x(b, sign):.1f}" cy="{base_y - r - i * d}" r="{r}" '
+                    f'fill="{colour}"/>'
+                )
+    out.append("</svg>")
+    return "\n".join(out) + "\n"
+
+
+def text_signed(quantiles: list[float], bins_per_decade: int = 2) -> str:
+    """Terminal version of the mirrored log axis: ◀ benefit | 0 | harm ▶."""
+    zeros, neg, pos, (lo, hi) = _signed_layout(quantiles, bins_per_decade)
+    nbins = (hi - lo) * bins_per_decade
+    rows = max([zeros, *neg.values(), *pos.values(), 1])
+    cell = 3
+    lines = []
+    for level in range(rows, 0, -1):
+        left = "".join(" ● " if neg.get(b, 0) >= level else "   " for b in range(nbins - 1, -1, -1))
+        z = " ● " if zeros >= level else "   "
+        right = "".join(" ● " if pos.get(b, 0) >= level else "   " for b in range(nbins))
+        lines.append(f"{left}│{z}│{right}")
+    lines.append("─" * (nbins * cell) + "┼───┼" + "─" * (nbins * cell))
+
+    def labels(reverse: bool) -> str:
+        cells = [" "] * (nbins * cell)
+        for e in range(lo, hi + 1):
+            s = fmt(10.0**e)
+            p = (e - lo) * bins_per_decade * cell
+            if reverse:
+                p = nbins * cell - p - len(s)
+            for i, ch in enumerate(s):
+                if 0 <= p + i < len(cells):
+                    cells[p + i] = ch
+        return "".join(cells)
+
+    lines.append(labels(True) + "  0  " + labels(False))
+    lines.append(
+        "◀ net benefit (DALYs averted) · net harm (DALYs lost) ▶ · log scale each side; "
+        "each ● = 5% of simulated futures"
+    )
+    return "\n".join(lines)

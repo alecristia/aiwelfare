@@ -1,0 +1,32 @@
+id: clinical-ai-010
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: ai_monitoring_coverage_2026
+description: Share of the world's sepsis-related deaths that occur among patients monitored by an AI early-warning
+  system, 2026.
+value:
+  interval:
+    low: 0.002
+    high: 0.02
+    kind: unqualified
+units: share of global sepsis-related deaths
+geography: global
+time_window:
+  start: 2026
+  end: 2026
+  per: year
+counterfactual: no-ai
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/monitoring
+- uptake
+rationale: No source gives global uptake. The deployments read (COMPOSER, CHARTwatch, the Kaiser study) are single
+  academic centres or health systems in high-income countries; Rudd et al. place most sepsis deaths in low-SDI regions
+  and much of it outside hospital. A wide range below a few percent reflects that; treated as a 90% range.
+replace_with: A survey of hospital use of AI early-warning or sepsis-prediction tools, by country (e.g. the AHA
+  IT supplement for the US), combined with each country's share of global sepsis deaths.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

@@ -1,0 +1,33 @@
+id: clinical-ai-005
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: yuan-2025-ai-early-warning-meta-analysis
+locator:
+  section: Results, Mortality
+quote: significantly decrease (Odds Ratio [OR], 0.69; 95% confidence interval [CI], 0.60–0.79).
+quantity: early_warning_mortality_odds_ratio_pooled
+description: Pooled odds ratio of in-hospital death with an ML early-warning system, five prospective non-randomised
+  studies.
+value:
+  interval:
+    low: 0.6
+    mid: 0.69
+    high: 0.79
+    kind: ci95
+units: odds ratio (ML model vs no ML model)
+geography: mixed (single- and multi-centre studies; includes the United States and Canada)
+time_window:
+  start: 2013
+  end: 2024
+  per: period
+counterfactual: not-applicable
+conditions: Random-effects meta-analysis; non-ICU adult inpatients; includes Escobar et al. (Kaiser Permanente,
+  19 hospitals) and CHARTwatch.
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+- study/yuan-meta-analysis
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

@@ -1,0 +1,29 @@
+id: clinical-ai-022
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: chatbot_health_users_other_providers
+description: Weekly users asking any chatbot about health, as a multiple of ChatGPT's weekly health users.
+value:
+  interval:
+    low: 1.2
+    high: 2.5
+    kind: unqualified
+units: ratio
+geography: global
+time_window:
+  start: 2026
+  end: 2026
+  per: year
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/chatbot-advice
+- exposure
+rationale: ChatGPT is the largest consumer chatbot, but Gemini, Meta AI, Copilot, Claude, DeepSeek and others also
+  answer health questions; no source gives cross-provider health usage. Uniform over the range.
+replace_with: Cross-provider usage data (e.g. a representative global survey of chatbot use for health).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

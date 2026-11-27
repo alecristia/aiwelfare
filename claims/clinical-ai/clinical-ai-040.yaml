@@ -1,0 +1,19 @@
+id: clinical-ai-040
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: boussina-2024-composer-sepsis
+locator:
+  page: 1
+  section: Introduction
+quote: false positive alerts from such models often lead to alarm fatigue and provider burnout/mistrust.
+quantity: alarm_fatigue
+description: False alerts cause alarm fatigue and burnout among clinicians.
+units: none
+counterfactual: not-applicable
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- not-captured/clinician-burden
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

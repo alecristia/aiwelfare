@@ -1,0 +1,19 @@
+id: clinical-ai-021
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: draelos-2025-llm-unsafe-medical-answers
+locator:
+  page: 1
+  section: Abstract
+quote: This physician-led red-teaming study compares the safety of four publicly available chatbots
+quantity: work_medical_red_teaming
+description: Physician-led red-teaming measures how often chatbots give unsafe medical advice.
+units: none
+counterfactual: not-applicable
+evidence_type: independent-evaluation
+evidence_basis: measured
+tags:
+- work/medical-red-teaming
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

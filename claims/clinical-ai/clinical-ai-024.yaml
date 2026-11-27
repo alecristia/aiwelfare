@@ -1,0 +1,25 @@
+id: clinical-ai-024
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: chatbot_advice_conversations_per_user
+description: Clinical-advice conversations per year per weekly chatbot health user (excludes insurance and admin).
+value:
+  interval:
+    low: 10
+    high: 60
+    kind: unqualified
+units: conversations per user per year
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/chatbot-advice
+- exposure
+rationale: OpenAI counts users who prompt about healthcare at least weekly, but 'healthcare' includes insurance
+  and admin, and a weekly prompt is not a weekly advice-seeking conversation. Treated as a 90% range of a lognormal.
+replace_with: A breakdown of health conversations by type and frequency per user (e.g. from a provider's usage study).
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

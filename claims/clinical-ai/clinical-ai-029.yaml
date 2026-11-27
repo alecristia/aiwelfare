@@ -1,0 +1,27 @@
+id: clinical-ai-029
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: lin-2025-fda-ai-device-reporting
+locator:
+  section: Results, Reporting of Safety, Risks, and Adverse Events
+quote: In total, 489 adverse events were reported to the FDA for 36 devices (5.2%) , including 458 malfunctions,
+  30 injuries, and 1 death.
+quantity: ai_device_reported_deaths
+description: Deaths reported to the FDA for AI/ML-enabled devices cleared to July 2023.
+value:
+  point: 1
+units: reported deaths (cumulative)
+geography: United States
+time_window:
+  start: 1995
+  end: 2024
+  per: period
+counterfactual: not-applicable
+conditions: As for the injuries claim.
+evidence_type: incident-data
+evidence_basis: measured
+tags:
+- pathway/device-errors
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

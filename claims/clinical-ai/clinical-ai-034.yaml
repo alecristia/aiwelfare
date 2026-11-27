@@ -1,0 +1,24 @@
+id: clinical-ai-034
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: ai_device_reporting_window_years
+description: Number of years over which Lin et al.'s cumulative AI-device injury and death reports accrued, in effect.
+value:
+  interval:
+    low: 5
+    high: 10
+    kind: unqualified
+units: years
+geography: United States
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/device-errors
+rationale: Clearances date from 1995, but most AI/ML devices were cleared after 2016 (over a third in or after 2021,
+  per Lin et al.), so reports accrued over roughly the last decade. Uniform.
+replace_with: Adverse-event reports for AI/ML devices by year.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

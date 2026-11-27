@@ -16,7 +16,7 @@ import numpy as np
 import yaml
 
 from . import dotplot, engine
-from .dotplot import fmt, fmt_ratio, power_of_ten, ratio_phrase
+from .dotplot import fmt, fmt_net, fmt_ratio, power_of_ten, ratio_phrase
 
 DEFAULT_COUNTERFACTUAL = "frozen-2026"
 ALL_COUNTERFACTUALS = {
@@ -190,16 +190,16 @@ def analyse(
     by_cf = {}
     for cf, label in ALL_COUNTERFACTUALS.items():
         if cf in model.counterfactuals:
-            y, _ = model.run(cf, n, seed)
-            by_cf[cf] = {"label": label, "modelled": True, **engine.summarise(y)}
+            comps, _ = model.run_components(cf, n, seed)
+            by_cf[cf] = {"label": label, "modelled": True, **engine.summarise_model(model, comps)}
         else:
             by_cf[cf] = {
                 "label": label,
                 "modelled": False,
                 "reason": getattr(mod, "NOT_MODELLED", {}).get(cf, ""),
             }
-    y, x = model.run(counterfactual, n, seed)
-    summary = engine.summarise(y)
+    comps, x = model.run_components(counterfactual, n, seed)
+    summary = engine.summarise_model(model, comps)
     crux_rows = engine.cruxes(model, counterfactual, seed=seed)
     conf = engine.confidence(summary, crux_rows)
     years = mod.WINDOW[1] - mod.WINDOW[0] + 1
@@ -213,7 +213,7 @@ def analyse(
                 "label": b["label"],
                 "geography": b["geography"],
                 "dalys_window": total,
-                "ratio": summary["expected_value"] / total,
+                "ratio": abs(summary["expected_value"]) / total,  # |net| for net cards (D17)
                 "source": b["source"],
                 "mock": bool(b.get("mock")),
             }
@@ -276,7 +276,7 @@ def analyse(
     return {
         "risk": risk,
         "title": cs.meta.get("title", mod.TITLE),
-        "kind": cs.meta.get("kind", "risk"),
+        "kind": "net" if model.is_net else cs.meta.get("kind", "risk"),
         "one_line": cs.meta.get("one_line", ""),
         "scope_note": cs.meta.get("scope_note", ""),
         "geography": getattr(mod, "GEOGRAPHY", "global"),
@@ -387,6 +387,7 @@ def _crux_rows(a: dict, cs: CardSource) -> list[str]:
     rows = []
     for c in a["cruxes"][:3]:
         t = texts.get(c["param"], {})
+        net = c.get("swing_kind") == "absolute"
         if params[c["param"]]["categorical"]:
             hi_txt = f"the **{c['settings']['high']}** estimate is the right one"
             lo_txt = f"the **{c['settings']['low']}** estimate is the right one"
@@ -397,10 +398,54 @@ def _crux_rows(a: dict, cs: CardSource) -> list[str]:
             lo_txt = t.get(
                 "low", f"{c['description']} is at the **low** end ({fmt(c['settings']['low'])})"
             )
+        # which end of the parameter gives which end of the estimate
+        hi_first = c["ev_high"] >= c["ev_low"]
+        if net and not params[c["param"]]["categorical"] and not hi_first:
+            hi_txt, lo_txt = lo_txt, hi_txt
         hi_ev, lo_ev = max(c["ev_low"], c["ev_high"]), min(c["ev_low"], c["ev_high"])
-        rows.append(f"| {hi_txt[0].upper() + hi_txt[1:]} | ⬆ ×{hi_ev / ev:.2g} |")
-        rows.append(f"| {lo_txt[0].upper() + lo_txt[1:]} | ⬇ ×{lo_ev / ev:.2g} |")
+        if net:
+            rows.append(f"| {hi_txt[0].upper() + hi_txt[1:]} | {_net_move(hi_ev - ev)} |")
+            rows.append(f"| {lo_txt[0].upper() + lo_txt[1:]} | {_net_move(lo_ev - ev)} |")
+        else:
+            rows.append(f"| {hi_txt[0].upper() + hi_txt[1:]} | ⬆ ×{hi_ev / ev:.2g} |")
+            rows.append(f"| {lo_txt[0].upper() + lo_txt[1:]} | ⬇ ×{lo_ev / ev:.2g} |")
     return rows
+
+
+def _net_move(delta: float) -> str:
+    """How far a crux moves a net estimate (D17): towards harm or towards benefit."""
+    if delta >= 0:
+        return f"⬆ {fmt(delta)} DALYs towards harm"
+    return f"⬇ {fmt(-delta)} DALYs towards benefit"
+
+
+def _net_dalys(v: float) -> str:
+    """'260k DALYs averted' / '1.2k DALYs lost' (D17)."""
+    return "0 DALYs" if v == 0 else f"{fmt(abs(v))} DALYs {'averted' if v < 0 else 'lost'}"
+
+
+def _v(a: dict, v: float) -> str:
+    """A value as the card shows it: signed words for net cards, plain otherwise."""
+    return fmt_net(v) if a["kind"] == "net" else fmt(v)
+
+
+def _net_header(a: dict) -> list[str]:
+    s, (w0, w1) = a["summary"], a["window"]
+    ev = s["expected_value"]
+    head = "net benefit" if ev < 0 else "net harm"
+    parts = " · ".join(
+        f"{'benefit' if c['role'] == 'benefit' else 'harm'}, {c['label']}: "
+        f"~{fmt(c['expected_value'])} DALYs {'averted' if c['role'] == 'benefit' else 'lost'}"
+        + (" (tail-dominated)" if c["tail_dominated"] else "")
+        for c in s["components"].values()
+    )
+    return [
+        f"| **Expected net effect, {w0}–{w1}** | **~{fmt(abs(ev))} DALYs "
+        f"{'averted' if ev < 0 else 'lost'}** ({head}; 90% range: {fmt_net(s['p05'])} → "
+        f"{fmt_net(s['p95'])}) |",
+        f"| **Chance the net is harmful** | {s['share_net_harm']:.0%} of simulated futures |",
+        f"| **Components** | {parts} |",
+    ]
 
 
 def render(a: dict, cs: CardSource) -> str:
@@ -430,28 +475,45 @@ def render(a: dict, cs: CardSource) -> str:
     else:
         ratios = "no sourced baselines yet"
     mag = (
-        f"order of {power_of_ten(s['expected_value'])} DALYs; {ratios}"
-        if s["expected_value"] > 0
+        f"order of {power_of_ten(abs(s['expected_value']))} DALYs"
+        + (" (size of the net, either sign)" if a["kind"] == "net" else "")
+        + f"; {ratios}"
+        if s["expected_value"] != 0
         else "zero"
     )
     conf = a["confidence"]
     conf_txt = CONFIDENCE_ICON[conf["level"]]
-    conf_txt += (
-        f". Tail-dominated: the top 5% of futures give {conf['top5_share_of_ev']:.0%} "
-        "of the expected value"
-        if conf["tail_dominated"]
-        else f". Not tail-dominated (top 5% of futures give {conf['top5_share_of_ev']:.0%} "
-        "of the expected value)"
-    )
+    if a["kind"] == "net":
+        tails = s["tail_dominated_components"]
+        conf_txt += (
+            ". Tail-dominated: " + ", ".join(tails) + " (D11, per component)"
+            if tails
+            else ". No component is tail-dominated (largest top-5% share: "
+            f"{conf['top5_share_of_ev']:.0%} of a component's expected value)"
+        )
+    else:
+        conf_txt += (
+            f". Tail-dominated: the top 5% of futures give {conf['top5_share_of_ev']:.0%} "
+            "of the expected value"
+            if conf["tail_dominated"]
+            else f". Not tail-dominated (top 5% of futures give {conf['top5_share_of_ev']:.0%} "
+            "of the expected value)"
+        )
     if a["breakdown"]:
         comes = " · ".join(f"{r['label']} ({r['share_of_ev']:.0%})" for r in a["breakdown"]["rows"])
     else:
         comes = "not modelled yet"
+    if a["kind"] == "net":
+        first = _net_header(a)
+    else:
+        first = [
+            f"| **{harm}, {w0}–{w1}** | **~{fmt(s['expected_value'])} DALYs** "
+            f"(90% range: {fmt(s['p05'])} → {fmt(s['p95'])}) |"
+        ]
     L += [
         "| | |",
         "|---|---|",
-        f"| **{harm}, {w0}–{w1}** | **~{fmt(s['expected_value'])} DALYs** "
-        f"(90% range: {fmt(s['p05'])} → {fmt(s['p95'])}) |",
+        *first,
         f"| **Magnitude** | {mag} |",
         f"| **Confidence** | {conf_txt} |",
         f"| **Mainly comes from** | {comes} |",
@@ -475,11 +537,18 @@ def render(a: dict, cs: CardSource) -> str:
     L += ["## Is this big?", ""]
     if cs.sections.get("Is this big?"):
         L += [cs.sections["Is this big?"], ""]
-    gen = (
-        f"In the model, the median future has **{fmt(s['median'])} DALYs** over {w0}–{w1}, "
-        f"and 90% of simulated futures fall between {fmt(s['p05'])} and {fmt(s['p95'])}."
-    )
-    if s["share_zero"] > 0:
+    if a["kind"] == "net":
+        gen = (
+            f"In the model, the median future has a net of **{_net_dalys(s['median'])}** over "
+            f"{w0}–{w1}, and 90% of simulated futures fall between {fmt_net(s['p05'])} and "
+            f"{fmt_net(s['p95'])}. The net is harmful in {s['share_net_harm']:.0%} of futures."
+        )
+    else:
+        gen = (
+            f"In the model, the median future has **{fmt(s['median'])} DALYs** over {w0}–{w1}, "
+            f"and 90% of simulated futures fall between {fmt(s['p05'])} and {fmt(s['p95'])}."
+        )
+    if s["share_zero"] > 0 and a["kind"] != "net":
         gen += f" In {s['share_zero']:.0%} of futures nothing happens."
     if "deaths" in a["extras"]:
         d = a["extras"]["deaths"]
@@ -488,7 +557,25 @@ def render(a: dict, cs: CardSource) -> str:
             f"({fmt(d['p05'])} → {fmt(d['p95'])})."
         )
     L += [gen, "", "![Quantile dotplot](dotplot.svg)", ""]
+    if a["kind"] == "net":
+        L += [
+            "Each component on its own, as DALYs lost (harms) or averted (benefits):",
+            "",
+            "| Component | Role | Median | 90% interval | Expected value | Tail-dominated (D11) |",
+            "|---|---|---|---|---|---|",
+        ]
+        for k, c in s["components"].items():
+            L.append(
+                f"| {c['label']} (`{k}`) | {c['role']} | {fmt(c['median'])} | {fmt(c['p05'])} – "
+                f"{fmt(c['p95'])} | {fmt(c['expected_value'])} | "
+                f"{'yes' if c['tail_dominated'] else 'no'} ({c['top5_share_of_ev']:.0%} from top 5%) |"
+            )
+        L += [""]
+        L += [f"![{c['label']}](dotplot-{k}.svg)" for k, c in s["components"].items()] + [""]
     cmds = [(f"aiwelfare dist {ref}", "quantile dotplot + percentiles in the terminal")]
+    if a["kind"] == "net":
+        k0 = next(iter(s["components"]))
+        cmds.append((f"aiwelfare dist {ref} --component {k0}", "one component on its own"))
     cmds += [
         (f"aiwelfare compare {ref} baseline/{b['id']}", "side by side, same window and units")
         for b in a["baselines"][:1]
@@ -500,7 +587,12 @@ def render(a: dict, cs: CardSource) -> str:
         "## Why it might be much bigger, or much smaller",
         "",
         "The parameters below move the estimate most when each moves alone from its 5th to its "
-        "95th percentile.",
+        "95th percentile."
+        + (
+            " For a net estimate the move is in DALYs, since the net can change sign."
+            if a["kind"] == "net"
+            else ""
+        ),
         "",
         "| If you believe… | …the estimate moves |",
         "|---|---|",
@@ -572,9 +664,10 @@ def render(a: dict, cs: CardSource) -> str:
 
     # 5. Kinds of work
     L += [
-        "## What kinds of work target this risk?"
-        if a["kind"] == "risk"
-        else "## What kinds of work drive this benefit?",
+        {
+            "risk": "## What kinds of work target this risk?",
+            "net": "## What kinds of work act on these harms and benefits?",
+        }.get(a["kind"], "## What kinds of work drive this benefit?"),
         "",
         "*This section describes the work; it does not rate how much each kind helps "
         "(tractability is out of scope, see VISION.md).*",
@@ -632,8 +725,8 @@ def render(a: dict, cs: CardSource) -> str:
     for v in a["by_counterfactual"].values():
         if v["modelled"]:
             L.append(
-                f"| {v['label']} | {fmt(v['median'])} | {fmt(v['p05'])} – {fmt(v['p95'])} | "
-                f"{fmt(v['expected_value'])} |"
+                f"| {v['label']} | {_v(a, v['median'])} | {_v(a, v['p05'])} – {_v(a, v['p95'])} | "
+                f"{_v(a, v['expected_value'])} |"
             )
         else:
             L.append(f"| {v['label']} | *not modelled* | | {v['reason']} |")
@@ -673,8 +766,8 @@ def render(a: dict, cs: CardSource) -> str:
         ]
         for v in a["variants"]:
             L.append(
-                f"| `{v['param']}` | {v['variant']} | {fmt(v['median'])} | {fmt(v['p05'])} – "
-                f"{fmt(v['p95'])} | {fmt(v['expected_value'])} |"
+                f"| `{v['param']}` | {v['variant']} | {_v(a, v['median'])} | {_v(a, v['p05'])} – "
+                f"{_v(a, v['p95'])} | {_v(a, v['expected_value'])} |"
             )
         L += ["", "The combined figures weight each variant equally (D14)."]
     if a["assumptions"]:
@@ -684,14 +777,23 @@ def render(a: dict, cs: CardSource) -> str:
             for x in a["assumptions"]
         ]
     c = a["confidence"]
+    tail_txt = (
+        f"Top 5% of futures give {c['top5_share_of_ev']:.0%} of the expected value "
+        "(tail-dominated above 50%, D11)."
+        if a["kind"] != "net"
+        else f"Largest share of a component's expected value from its top 5% of futures: "
+        f"{c['top5_share_of_ev']:.0%} (D11 applies per component; D17)."
+    )
+    swing_txt = (
+        " Swings of the net are absolute changes in DALYs (D17)." if a["kind"] == "net" else ""
+    )
     L += [
         "",
         "### Confidence (D12)",
         "",
-        f"{c['level'].capitalize()}. Top 5% of futures give {c['top5_share_of_ev']:.0%} of the "
-        f"expected value (tail-dominated above 50%, D11). Share of crux swing from parameters "
+        f"{c['level'].capitalize()}. {tail_txt} Share of crux swing from parameters "
         f"backed by measured evidence: {c['swing_share_measured']:.0%}; from expert judgement or "
-        f"speculation only: {c['swing_share_expert_or_speculation']:.0%}.",
+        f"speculation only: {c['swing_share_expert_or_speculation']:.0%}.{swing_txt}",
     ]
     L += ["", "### Known limitations", ""] + [f"- {x}" for x in a["limitations"]]
     pv = a["provenance"]
@@ -742,9 +844,19 @@ def build(
     out.mkdir(parents=True, exist_ok=True)
     (out / "card.md").write_text(render(a, cs))
     title = f"{a['title']}: DALYs {a['window'][0]}–{a['window'][1]}, vs {a['counterfactual_label']}"
-    (out / "dotplot.svg").write_text(
-        dotplot.svg(a["summary"]["dotplot_quantiles"], title, a["mock"])
-    )
+    if a["kind"] == "net":
+        (out / "dotplot.svg").write_text(
+            dotplot.svg_signed(a["summary"]["dotplot_quantiles"], "Net: " + title, a["mock"])
+        )
+        for k, c in a["summary"]["components"].items():
+            verb = "averted" if c["role"] == "benefit" else "lost"
+            (out / f"dotplot-{k}.svg").write_text(
+                dotplot.svg(c["dotplot_quantiles"], f"{c['label']}: DALYs {verb}", a["mock"])
+            )
+    else:
+        (out / "dotplot.svg").write_text(
+            dotplot.svg(a["summary"]["dotplot_quantiles"], title, a["mock"])
+        )
     (out / "card.json").write_text(
         json.dumps(a, indent=1, ensure_ascii=False, default=_jsonable) + "\n"
     )

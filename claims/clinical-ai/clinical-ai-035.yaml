@@ -1,0 +1,24 @@
+id: clinical-ai-035
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: ai_device_underreporting_factor
+description: Actual AI-device harms per harm reported to MAUDE.
+value:
+  interval:
+    low: 10
+    high: 100
+    kind: unqualified
+units: ratio
+geography: United States
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/device-errors
+rationale: MAUDE under-reporting is well documented (Lin et al.), and clinicians often cannot see when AI contributed
+  (Handley et al.). Diagnostic errors from AI rarely enter device reports at all. Treated as a 90% range of a lognormal.
+replace_with: A study comparing MAUDE reports with harms found by active surveillance or chart review for AI devices.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'
