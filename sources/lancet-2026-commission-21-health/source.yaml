@@ -1,0 +1,31 @@
+id: lancet-2026-commission-21-health
+mock: false
+title: "The Lancet Commission on 21st century global threats to health"
+authors: [Christopher J L Murray, Natalia Kanem, "et al. (Lancet Commission on 21st century global threats to health)"]
+publisher: "The Lancet 408: 1603–61"
+type: peer-reviewed
+evidence_date: "2025"
+published: "2026-10-11"
+version: "Corrected version, first online 2026-10-15 (journal issue of 2026-10-17); main text only, appendix not obtained"
+accessed: 2026-11-27
+url: https://www.thelancet.com/action/showPdf?pii=S0140-6736(26)01714-9
+landing_page: https://doi.org/10.1016/S0140-6736(26)01714-9
+doi: 10.1016/S0140-6736(26)01714-9
+license: All rights reserved (Elsevier)
+redistribution: url-only
+sha256: 674d482b92b7fe0ce2fcd42715476bac45d00059e08678c8e042a7a09d80de88
+evidence_basis: [modelled, expert-judgement]
+author_interests:
+  - kind: funder
+    note: >
+      No funding statement for the Commission found in the main text. The declaration of
+      interests lists grants from the Gates Foundation and the US NIH to several authors.
+      Led from IHME (University of Washington); forecasts built on GBD infrastructure.
+peer_review: Lancet Commission (journal peer review).
+notes: >
+  Metric: expected cumulative amenable DALYs 2025–2100, defined as the difference between a
+  plausible best and a plausible worst scenario per threat; not comparable with this repo's
+  expected burden 2026–2031 without conversion. Malicious use of AI (section 5.11, pp 1635–36)
+  is assessed qualitatively from expert and superforecaster judgements (FRI tournament);
+  the method is in the appendix (pp 109–14), which has not been obtained. The file was
+  supplied by the maintainer (journal access is blocked for automated download).
