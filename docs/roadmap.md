@@ -51,7 +51,7 @@ Harms that fall inside a card but outside DALYs (e.g. loss of rights under autoc
 - **Milestone 1 (2026-11-27):** schemas, `aiwelfare` package and CLI (every command, all with `--json`), Monte Carlo engine, card builder with quantile dotplots, tests. Two demonstration cards: data-centre air pollution (real data, US only, built through `datalad run`) and bio misuse (invented data, `mock/`).
 - **Prior-work search, rounds 1–5** (PRs #1, #2): catalogue, search log and summary in `related_work/` and `docs/related-work.md`. The *Lancet* Commission main text and appendix are registered as sources.
 - **Card list:** nine cards defined top-down, and three scope cuts (D2, amended 2026-11-27).
-- **Baselines (D16):** six global GBD 2023 risk factors in `baselines/`, from the GBD subdataset `baselines/gbd/` (every file annexed, never pushed). Cards show their size against each one ("about 1/35,000 of air pollution"). Global deaths and DALYs from ambient particulate matter are recorded as claims for the environmental-footprint card.
+- **Baselines (D16):** six global GBD 2023 risk factors in `baselines/`, all at level 2 of the GBD risk hierarchy (checked against GBD's published naming: their level-3 children, e.g. particulate matter pollution and smoking, carry different names; the two metabolic risks are the same at levels 2 and 3), from the GBD subdataset `baselines/gbd/` (every file annexed, never pushed). Cards show their size against each one ("about 1/35,000 of air pollution"). Global deaths and DALYs from ambient particulate matter are recorded as claims for the environmental-footprint card.
 - **VISION.md:** global scope (scope decision 5) and "estimates do not add up" (modelling decision 7).
 
 ---
@@ -90,9 +90,6 @@ Rounds 1–5 are done and merged (PRs #1, #2). Open items:
 - Retry the items under "Not accessed" in `docs/related-work.md`.
 - Targeted searches each card will need: therapy chatbots, global data-centre electricity and health.
 - Known blind spots: non-English literature.
-
-### GBD baselines: hierarchy check
-The download does not record each risk factor's level in the GBD risk hierarchy. Confirm that all six sit at the same level (D16), e.g. from IHME's risk hierarchy list.
 
 ### D3: map the MIT AI Risk Repository to the cards
 Every entry goes to a card, a card's "leaves out" list, or the scope cuts above. Unmapped entries are coverage gaps.
