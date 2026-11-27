@@ -79,7 +79,7 @@ The order mixes how much evidence is ready with having harms and benefits early.
 
 ### Literature review (prior-work search)
 Rounds 1–5 are done and merged (PRs #1, #2). Open items:
-- Read the *Lancet* Commission appendix (AI method, pp 109–14). The maintainer supplied it on 2026-11-27; not yet registered or read.
+- Read the *Lancet* Commission appendix, section 3.11 (AI method). Registered on 2026-11-27 as `lancet-2026-commission-21-health-appendix`; not yet read in full.
 - Extract Saeri et al.'s subdomain figures (power centralisation, weapons).
 - Retry the items under "Not accessed" in `docs/related-work.md`.
 - Targeted searches each card will need: therapy chatbots, global data-centre electricity and health.

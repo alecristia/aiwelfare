@@ -24,7 +24,7 @@ In the common *importance × tractability × neglectedness* framing, this repo a
 
 ### 2. DALYs as the unit, and why that is a significant limitation
 
-Disability-adjusted life years (DALYs) are the standard unit of global health. They let AI-related harms be compared like-for-like with well-measured burdens such as malaria, tuberculosis or road injuries. That comparability is the main reason for choosing them.
+Disability-adjusted life years (DALYs) are the standard unit of global health. They let AI-related harms be compared like-for-like with well-measured burdens, such as the DALYs GBD attributes to air pollution, tobacco or high blood pressure. That comparability is the main reason for choosing them.
 
 DALYs, however, capture only **health loss: early death and time lived with illness or disability**. They encode a narrow, aggregative view of what matters, close in spirit to a *harm- and suffering-focused* welfarism. Much of what people care about, and much of what AI could affect, falls outside them:
 
@@ -41,11 +41,15 @@ The repo will record such harms wherever the literature discusses them and flag 
 
 ### 3. Short horizon: up to five years
 
-All estimates cover **late 2026 to late 2031**. This keeps the models grounded in systems that exist or are about to, and in observable trends. The cost: risks whose expected harm sits mostly beyond 2031 (including most loss-of-control and existential-risk scenarios) will look small here even if they dominate on longer horizons. The repo reports what probability those scenarios get within the window, and leaves later years out of its numbers rather than ignoring them silently.
+All estimates cover **late 2026 to late 2031**. This keeps the models grounded in systems that exist or are about to, and in observable trends. The cost: risks whose expected harm sits mostly beyond 2031 (including most loss-of-control and existential-risk scenarios) will look small here even if they dominate on longer horizons. The repo leaves later years out of its numbers rather than ignoring them silently. Loss of control, in particular, is currently not estimated at all and is listed as a scope cut in `docs/roadmap.md`.
 
 ### 4. Net effects
 
 Welfare is net. AI also *reduces* DALYs, through diagnostics, drug discovery, health-care access and more. Benefits are estimated in the same format as harms, so that no risk looks large or small for lack of a counterweight.
+
+### 5. Global estimates
+
+All estimates and baselines are **global**. The current readers are mostly outside the United States, so a pathway estimated only for one country is used as evidence towards a global estimate, not shown as a result. The cost: much of the best-measured evidence (e.g. on data-centre air pollution) is from the United States, and extrapolating it adds assumptions.
 
 ## Sources
 
@@ -85,7 +89,7 @@ The main concern here is choosing one internally consistent source rather than m
 
 - **Primary: the Global Burden of Disease study (GBD, IHME).** The most comprehensive and widely used source. The GBD 2023 round, published in *The Lancet* in October 2025, estimates DALYs for 375 diseases and injuries and the burden attributable to 88 risk factors, with uncertainty intervals throughout. All baseline comparisons use GBD unless there is a reason not to.
 - **Cross-check: WHO Global Health Estimates (GHE).** The latest release, from October 2026, covers 2000–2023. GHE and GBD are not fully independent (WHO draws in part on GBD work), and they disagree for some causes. Where they differ materially, the repo shows both.
-- **Disease-specific reports**, for causes used as headline comparisons: e.g. WHO's *World Malaria Report* and *Global Tuberculosis Report*, and UNAIDS for HIV.
+- **Disease-specific reports**, for cross-checking specific causes: e.g. WHO's *World Malaria Report* and *Global Tuberculosis Report*, and UNAIDS for HIV.
 
 ### C. How AI is likely to evolve (2026–2031)
 
@@ -113,7 +117,7 @@ Over a five-year horizon, world health is expected to change slowly and predicta
 A reader should be able to answer questions like these in minutes rather than weeks:
 
 1. *What is the best estimate of the DALYs caused by risk X between 2026 and 2031? What assumptions does it rest on, and who disagrees?*
-2. *How does that compare with malaria, or with road injuries, over the same period?*
+2. *How does that compare with the burden of air pollution, or of tobacco, over the same period?*
 3. *Which risks does the literature rank as largest, and which does it merely discuss most? Are they the same?*
 4. *How does the picture change across open-weight models, locally deployed frontier models and API-served models?*
 5. *What would I have to believe for risk X to be larger than risk Y?*
@@ -130,7 +134,7 @@ There is a single source of truth: the claims, models and results in the repo. E
 **1. Code-first access: the foundation.** The data and models are installable as a Python package and queryable with tools readers already use (pandas, DuckDB, notebooks). Every model can be rerun with different parameters. Disagreeing with an assumption has a clear path: change it, rerun, open a pull request. *Answers questions 1, 4, 5 and 7 in full detail.*
 
 **2. Risk cards and an overview chart: the front door.** A static website generated from the data contains:
-- **One overview chart.** All risks *and benefits* on a single logarithmic scale with uncertainty intervals, next to baseline burdens (malaria, tuberculosis, road injuries), with a switch between the three counterfactuals. Tail-dominated estimates are visibly marked, so the ranking is not read as more precise than it is.
+- **One overview chart.** All risks *and benefits* on a single logarithmic scale with uncertainty intervals, next to baseline burdens (GBD risk factors such as air pollution, tobacco or high blood pressure; see decision D16), with a switch between the three counterfactuals. Tail-dominated estimates are visibly marked, so the ranking is not read as more precise than it is.
 - **One risk card per risk or benefit**, modelled on the *model cards* ML engineers already know: the estimate and interval; its probability and severity components; key sources and evidence types; harms not captured in DALYs; known limitations; date of last change.
 *Answers questions 1, 2, 3 and 6 at a glance.*
 
@@ -227,3 +231,9 @@ This is the simplest approach that still represents uncertainty honestly. It als
 **Decision:** version 1 uses DALYs only. Harms that DALYs miss are recorded qualitatively and flagged "not captured in DALYs" (see *Scope decisions*). A second unit (e.g. WELLBYs) is not planned for version 1.
 
 **Limitation:** see the DALY limitations above. Risks whose harm is mostly non-health (concentration of power, loss of autonomy, epistemic harm) will appear small in every quantitative output.
+
+### 7. Estimates do not add up
+
+**Decision:** neither the baselines nor the cards are summed. GBD attributes the same death to several risk factors at once (e.g. high blood pressure and air pollution), so its risk-factor burdens overlap. The cards overlap in the same way: a cyberattack on a hospital during a conflict could count under both cyberattacks and conflict, and AI pathways interact (AI that speeds up biomedical research may also speed up pathogen design). Each estimate is read on its own, against the baselines, as a sense of scale. Any total AI figure must model these overlaps and interactions explicitly, and say how.
+
+**Limitation:** the headline question asks for the expected impact of AI as a whole. Until a joint model exists, the repo answers it risk by risk and benefit by benefit, not with one number.

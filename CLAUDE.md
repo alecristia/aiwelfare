@@ -10,28 +10,30 @@ This repo estimates the health impact of AI over the next five years (2026–203
 
 1. **`VISION.md`.** The question, scope, sources, modelling approach, and the limitations of each choice. Read it before any change that touches scope, sources or method.
 2. **`docs/decisions.md`.** Binding implementation decisions (D1, D2, …). Follow them. If a task conflicts with a decision, **stop and say so**: propose an edit to `docs/decisions.md` instead of working around it.
-3. **`docs/roadmap.md`.** What is being worked on now, what is parked, and the register of risks and benefits under consideration.
+3. **`docs/roadmap.md`.** The nine cards and the scope cuts, what is being worked on now, and what is parked.
 4. **`docs/examples/risk-card-bio-misuse.md`.** The reference format for risk cards and the proposed `aiwelfare` CLI commands.
 
 Do not copy content from these files into this one; point to them.
 
 ## Current status
 
-**Milestone 1 done (2026-11-27).** The package, schemas and CLI exist. One real card (data-centre air pollution, US only) and one mock card (bio misuse, `mock/`) are built end to end. Run `uv run aiwelfare --help`; run `uv run pytest` and `uv run aiwelfare validate` before committing.
+**Milestone 1 done (2026-11-27).** The package, schemas and CLI exist and are tested. Two cards are built end to end as demonstrations: data-centre air pollution (real data, but **US only**, so it is not shown until a global estimate exists) and bio misuse (invented data, `mock/`). The plan is nine cards defined top-down (D2) with global GBD risk-factor baselines (D16); see `docs/roadmap.md`. Run `uv run aiwelfare --help`; run `uv run pytest` and `uv run aiwelfare validate` before committing.
+
+Self-contained task briefs for separate sessions live in `docs/tasks/`.
 
 ## Layout
 
 ```
 sources/<id>/       source.yaml + the file, tracked by DataLad (D1, D15; procedure: docs/sources.md)
 claims/<risk-id>/   Atomic claims as YAML, one file per claim
-baselines/          Health baselines as <id>.yaml (none real yet; GBD/WHO to come as DataLad subdatasets)
+baselines/          Health baselines as <id>.yaml: global GBD risk factors (D16), GBD as a DataLad subdataset (none yet)
 models/<risk_id>.py One model per card (snake_case module, kebab-case risk ID), declared parameters
 cards/<risk-id>.md  Hand-written prose for each card (frontmatter + plain-language sections)
 results/<risk-id>/  Generated card.md, dotplot.svg, card.json. Only via `aiwelfare rerun` (datalad run)
 mock/               Invented data mirroring the tree above (D13); mock/build/ holds generated mock cards
 src/aiwelfare/      Python package and CLI (schema/, data.py, engine.py, card.py, dotplot.py, cli.py)
 site/               Generated static website (not started). Never hand-edited; built in CI
-docs/               VISION-level docs, decisions, examples, related work
+docs/               VISION-level docs, decisions, roadmap, examples, related work; docs/tasks/ for task briefs
 related_work/       Prior-work catalogue and search log
 tests/
 ```
@@ -59,7 +61,7 @@ tests/
 - Models use Monte Carlo uncertainty propagation in NumPy: probability × severity, with distributions fitted to claims. **No Bayesian inference** in v1.
 - Every model declares its parameters: name, distribution, claim IDs, description. Sliders and the `cruxes` command are generated from these declarations.
 - Every result is labelled with its counterfactual (no modern AI / frozen at 2026 / only open models advance).
-- **Scope:** DALYs only, 2026–2031, and scale only. **No tractability or neglectedness judgements**, including in the "kinds of work" sections, which describe work and never rate it.
+- **Scope:** DALYs only, 2026–2031, global, and scale only. Card and baseline estimates are never summed (VISION.md, Modelling decisions 7). **No tractability or neglectedness judgements**, including in the "kinds of work" sections, which describe work and never rate it.
 
 ### Interfaces
 - Risk cards follow D4 exactly. Every section ends with "dig deeper" CLI commands.
