@@ -1,0 +1,1025 @@
+{
+ "risk": "data-centre-air-pollution",
+ "title": "Air pollution from electricity for AI data centres",
+ "kind": "risk",
+ "one_line": "Power plants and backup generators that supply AI data centres emit fine particles and ozone precursors, which cause premature deaths downwind.",
+ "scope_note": "Contiguous United States only. The three health studies cover all data centres; the AI share is attributed by the model.",
+ "geography": "contiguous United States only",
+ "window": [
+  2027,
+  2031
+ ],
+ "counterfactual": "frozen-2026",
+ "counterfactual_label": "AI frozen at 2026 levels",
+ "summary": {
+  "expected_value": 33008.258350792836,
+  "median": 29735.031830765838,
+  "p05": 11645.482589284866,
+  "p95": 65772.03123226712,
+  "share_zero": 0.0,
+  "top5_share_of_ev": 0.11467923934823064,
+  "tail_dominated": false,
+  "dotplot_quantiles": [
+   9857.176663464006,
+   13039.29799169351,
+   15396.650264435693,
+   17402.984515729037,
+   19303.342058941867,
+   21140.472532767108,
+   23028.41139977718,
+   24860.040401817892,
+   26760.04200960274,
+   28712.28824141871,
+   30767.182983268773,
+   32980.469654232256,
+   35433.687782147994,
+   38074.154861939925,
+   41001.848613157505,
+   44416.39193731483,
+   48435.24122447873,
+   53409.51893759712,
+   60384.44903994125,
+   73310.08225050283
+  ]
+ },
+ "confidence": {
+  "level": "medium",
+  "tail_dominated": false,
+  "top5_share_of_ev": 0.11467923934823064,
+  "swing_share_expert_or_speculation": 0.32355417511997503,
+  "swing_share_measured": 0.0
+ },
+ "by_counterfactual": {
+  "no-ai": {
+   "label": "No modern AI",
+   "modelled": true,
+   "expected_value": 60085.49152835114,
+   "median": 55418.46068081411,
+   "p05": 24599.422195593466,
+   "p95": 111699.05656244459,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.10576413237508418,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    21130.42917107706,
+    27223.84002795402,
+    31398.665049855303,
+    35000.44252394866,
+    38236.78270425864,
+    41422.97663348592,
+    44484.68470504447,
+    47491.83150079779,
+    50566.650363999936,
+    53735.97209419709,
+    57110.105283058794,
+    60569.62448924557,
+    64395.131057168524,
+    68598.87279831432,
+    73282.26196317769,
+    78620.6056842248,
+    84886.96654848842,
+    92778.96067554972,
+    103809.82778492333,
+    123459.96000705902
+   ]
+  },
+  "frozen-2026": {
+   "label": "AI frozen at 2026 levels",
+   "modelled": true,
+   "expected_value": 33008.258350792836,
+   "median": 29735.031830765838,
+   "p05": 11645.482589284866,
+   "p95": 65772.03123226712,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.11467923934823064,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    9857.176663464006,
+    13039.29799169351,
+    15396.650264435693,
+    17402.984515729037,
+    19303.342058941867,
+    21140.472532767108,
+    23028.41139977718,
+    24860.040401817892,
+    26760.04200960274,
+    28712.28824141871,
+    30767.182983268773,
+    32980.469654232256,
+    35433.687782147994,
+    38074.154861939925,
+    41001.848613157505,
+    44416.39193731483,
+    48435.24122447873,
+    53409.51893759712,
+    60384.44903994125,
+    73310.08225050283
+   ]
+  },
+  "open-only": {
+   "label": "Only open-weight / older models advance",
+   "modelled": false,
+   "reason": "Needs the share of AI electricity driven by frontier versus open-weight or older models; no source read yet."
+  }
+ },
+ "cruxes": [
+  {
+   "param": "e2028",
+   "description": "Total US data-centre electricity in 2028 (TWh)",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-020"
+   ],
+   "ev_low": 15440.928774566453,
+   "ev_high": 52011.277642755565,
+   "settings": {
+    "low": 337.835182333214,
+    "high": 566.6108938978422
+   },
+   "swing": 3.3684034427013234
+  },
+  {
+   "param": "dalys_per_death",
+   "description": "DALYs per premature death",
+   "basis": "speculation",
+   "claims": [
+    "data-centre-air-pollution-025"
+   ],
+   "ev_low": 23929.258713749445,
+   "ev_high": 41893.56255927934,
+   "settings": {
+    "low": 8.360616776205147,
+    "high": 14.63714468291732
+   },
+   "swing": 1.7507254637690817
+  },
+  {
+   "param": "study",
+   "description": "Which study's deaths-per-TWh estimate this future uses",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-001",
+    "data-centre-air-pollution-009",
+    "data-centre-air-pollution-014"
+   ],
+   "ev_low": 25219.288577893418,
+   "ev_high": 40564.99267623792,
+   "settings": {
+    "low": "COBRA (Han et al.)",
+    "high": "GEOS-Chem (Chen et al.)"
+   },
+   "swing": 1.6084907609882442
+  },
+  {
+   "param": "post_2028_growth_ratio",
+   "description": "Growth after 2028 as a fraction of 2023–28 growth",
+   "basis": "expert-judgement",
+   "claims": [
+    "data-centre-air-pollution-027"
+   ],
+   "ev_low": 28003.95648865751,
+   "ev_high": 38108.35797881684,
+   "settings": {
+    "low": 0.5257027727213361,
+    "high": 0.9752405770590354
+   },
+   "swing": 1.360820496712739
+  },
+  {
+   "param": "grid_trend_2031",
+   "description": "Deaths per TWh in 2031 relative to the study year",
+   "basis": "expert-judgement",
+   "claims": [
+    "data-centre-air-pollution-026"
+   ],
+   "ev_low": 28682.680767920043,
+   "ev_high": 37288.214630922936,
+   "settings": {
+    "low": 0.7144052576163369,
+    "high": 0.9850318953250964
+   },
+   "swing": 1.3000254380904206
+  },
+  {
+   "param": "rate_ap4",
+   "description": "Deaths per TWh, AP4 (Muller), grid only",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-013",
+    "data-centre-air-pollution-014",
+    "data-centre-air-pollution-015",
+    "data-centre-air-pollution-016",
+    "data-centre-air-pollution-017"
+   ],
+   "ev_low": 29256.168233776258,
+   "ev_high": 36760.52717669701,
+   "settings": {
+    "low": 1.9561045678504334,
+    "high": 4.143251784162517
+   },
+   "swing": 1.2565051883403162
+  },
+  {
+   "param": "conventional_growth",
+   "description": "Annual growth of non-AI data-centre electricity",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-028",
+    "data-centre-air-pollution-023"
+   ],
+   "ev_low": 35817.94914574015,
+   "ev_high": 29608.065686368038,
+   "settings": {
+    "low": 0.004065118017985669,
+    "high": 0.07593167922473991
+   },
+   "swing": 1.2097362092192072
+  },
+  {
+   "param": "rate_cobra",
+   "description": "Deaths per TWh, COBRA (Han et al.), incl. backup generators",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-001",
+    "data-centre-air-pollution-002",
+    "data-centre-air-pollution-008"
+   ],
+   "ev_low": 31020.561189434302,
+   "ev_high": 34937.14305638773,
+   "settings": {
+    "low": 1.8822104404440572,
+    "high": 3.0309202805395206
+   },
+   "swing": 1.126257608398375
+  },
+  {
+   "param": "rate_geoschem",
+   "description": "Deaths per TWh, GEOS-Chem (Chen et al.), grid only",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-009",
+    "data-centre-air-pollution-010"
+   ],
+   "ev_low": 31481.554793718184,
+   "ev_high": 34512.97079294569,
+   "settings": {
+    "low": 3.3422897762159236,
+    "high": 4.225243124944272
+   },
+   "swing": 1.0962918133837658
+  },
+  {
+   "param": "ai_share_source",
+   "description": "Which estimate of AI's share of 2023 electricity this future uses",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-018",
+    "data-centre-air-pollution-021",
+    "data-centre-air-pollution-022"
+   ],
+   "ev_low": 32430.545460834706,
+   "ev_high": 33502.066484685245,
+   "settings": {
+    "low": "IEA via Muller",
+    "high": "LBNL server data (Shehabi et al.)"
+   },
+   "swing": 1.033040487251273
+  },
+  {
+   "param": "rate_backup",
+   "description": "Deaths per TWh from backup generators (added to grid-only studies)",
+   "basis": "modelled",
+   "claims": [
+    "data-centre-air-pollution-007"
+   ],
+   "ev_low": 32773.80020809732,
+   "ev_high": 33159.421880075446,
+   "settings": {
+    "low": 0.1505220408743409,
+    "high": 0.20669919504879605
+   },
+   "swing": 1.0117661567938299
+  }
+ ],
+ "variants": [
+  {
+   "param": "study",
+   "variant": "COBRA (Han et al.)",
+   "expected_value": 25219.261000344333,
+   "median": 23356.310948879982,
+   "p05": 9772.689465253034,
+   "p95": 47158.7548491596,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.10685799438774278,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    8411.220688407395,
+    10855.354458650398,
+    12532.235379256825,
+    14001.320527895423,
+    15462.01459791419,
+    16832.2386351353,
+    18229.109764118446,
+    19677.910393601152,
+    21087.51729963935,
+    22600.413763635755,
+    24150.62429697152,
+    25785.32047510635,
+    27482.833154709006,
+    29275.60717244915,
+    31229.39730842132,
+    33496.818891870666,
+    36186.327808586495,
+    39413.71250993777,
+    43827.28326262173,
+    52264.57328957487
+   ]
+  },
+  {
+   "param": "study",
+   "variant": "GEOS-Chem (Chen et al.)",
+   "expected_value": 40597.238176711195,
+   "median": 38118.47191203054,
+   "p05": 16379.046479743462,
+   "p95": 73521.12274848709,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.10182456980194986,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    14253.928467620575,
+    18013.290775680718,
+    20708.366774984137,
+    23113.260800422246,
+    25400.861352455562,
+    27638.117257357797,
+    29884.19565871744,
+    32152.061362687695,
+    34512.02467739547,
+    36876.40492845318,
+    39350.44803417415,
+    41921.07490856707,
+    44615.28866518986,
+    47467.52566672947,
+    50458.570248262884,
+    53817.766109606884,
+    57732.4041506852,
+    62505.5148333798,
+    68886.71907487974,
+    80584.79666734385
+   ]
+  },
+  {
+   "param": "study",
+   "variant": "AP4 (Muller)",
+   "expected_value": 33143.05689488675,
+   "median": 30093.894898595274,
+   "p05": 12108.183525474056,
+   "p95": 64517.716011735836,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.1125850252151196,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    10318.399483639498,
+    13448.758866828193,
+    15766.725320417218,
+    17767.00409205245,
+    19672.509679822408,
+    21575.1949358789,
+    23415.416766411894,
+    25290.714633086598,
+    27161.28420120136,
+    29093.29481813493,
+    31170.478054292438,
+    33364.9897278306,
+    35698.352356142415,
+    38216.58485098116,
+    41072.53870012506,
+    44371.795909260276,
+    48160.03800585859,
+    53041.72970091803,
+    59624.120545552054,
+    72142.625820632
+   ]
+  },
+  {
+   "param": "ai_share_source",
+   "variant": "LBNL server data (Shehabi et al.)",
+   "expected_value": 33542.26126593728,
+   "median": 30242.532443901677,
+   "p05": 12151.296032686709,
+   "p95": 66360.2723631805,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.11382997733312948,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    10384.459934278117,
+    13501.019934951988,
+    15849.438420414592,
+    17901.757101411615,
+    19778.75403191357,
+    21651.773353106462,
+    23513.55855599723,
+    25355.45956518035,
+    27233.036409119628,
+    29227.726597769117,
+    31278.902858357094,
+    33521.73633354356,
+    35932.5830435497,
+    38609.43785655965,
+    41557.51844149592,
+    45000.504320856504,
+    49018.339600056686,
+    54003.29172273201,
+    61109.83256476213,
+    73994.32868139655
+   ]
+  },
+  {
+   "param": "ai_share_source",
+   "variant": "IEA via Muller",
+   "expected_value": 32473.257008510016,
+   "median": 29222.28081518093,
+   "p05": 11196.509810877764,
+   "p95": 64977.432190581574,
+   "share_zero": 0.0,
+   "top5_share_of_ev": 0.11548429182418143,
+   "tail_dominated": false,
+   "dotplot_quantiles": [
+    9465.250620158376,
+    12569.741059370413,
+    14890.73047128285,
+    16912.283211912025,
+    18815.623705992126,
+    20653.48723864892,
+    22545.997372143007,
+    24377.167144670035,
+    26258.206550366715,
+    28203.875149771295,
+    30260.7963803137,
+    32435.802479491063,
+    34883.79992605583,
+    37531.9024320576,
+    40426.52220814613,
+    43849.42254545047,
+    47851.475797187406,
+    52769.479236873296,
+    59773.21616432412,
+    72593.49505757476
+   ]
+  }
+ ],
+ "breakdown": null,
+ "breakdown_not_modelled": "No source read yet splits AI data-centre electricity by access mode (open-weight, API frontier, locally-run frontier).",
+ "baselines": [],
+ "params": [
+  {
+   "param": "study",
+   "description": "Which study's deaths-per-TWh estimate this future uses",
+   "value": "COBRA (Han et al.) · GEOS-Chem (Chen et al.) · AP4 (Muller) (equal weight)",
+   "fixed": false,
+   "categorical": true,
+   "basis": "modelled",
+   "evidence_types": [
+    "epidemiological-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-001",
+    "data-centre-air-pollution-009",
+    "data-centre-air-pollution-014"
+   ],
+   "fit": "Equal-weight mixture of the three independent models (D14)."
+  },
+  {
+   "param": "rate_cobra",
+   "description": "Deaths per TWh, COBRA (Han et al.), incl. backup generators",
+   "value": "1.9 – 3.0",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model",
+    "epidemiological-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-001",
+    "data-centre-air-pollution-002",
+    "data-centre-air-pollution-008"
+   ],
+   "fit": "Uniform between the low and high CRF results for 2023 divided by 2023 TWh; the two CRFs are alternatives, not interval bounds."
+  },
+  {
+   "param": "rate_geoschem",
+   "description": "Deaths per TWh, GEOS-Chem (Chen et al.), grid only",
+   "value": "3.3 – 4.2",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model",
+    "epidemiological-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-009",
+    "data-centre-air-pollution-010"
+   ],
+   "fit": "Lognormal through the 95% CI for 2023 divided by 2023 generation; the CI covers CRF uncertainty only, so this understates the spread."
+  },
+  {
+   "param": "rate_ap4",
+   "description": "Deaths per TWh, AP4 (Muller), grid only",
+   "value": "1.9 – 4.1",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model",
+    "epidemiological-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-013",
+    "data-centre-air-pollution-014",
+    "data-centre-air-pollution-015",
+    "data-centre-air-pollution-016",
+    "data-centre-air-pollution-017"
+   ],
+   "fit": "Local-air-pollution damages ÷ VSL ÷ TWh (AP4 counts mortality only); uniform between the default and high dose-response runs. Study year 2025, treated as 2023."
+  },
+  {
+   "param": "rate_backup",
+   "description": "Deaths per TWh from backup generators (added to grid-only studies)",
+   "value": "0.15 – 0.21",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "epidemiological-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-007"
+   ],
+   "fit": "Han et al.'s scope-1 deaths (10% of permitted emissions) per 2023 TWh, uniform between CRF results. Added to GEOS-Chem and AP4, which exclude backup generators."
+  },
+  {
+   "param": "e2028",
+   "description": "Total US data-centre electricity in 2028 (TWh)",
+   "value": "340 – 570",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-020"
+   ],
+   "fit": "Uniform across LBNL's 2028 scenario range (no likelihood is given for the scenarios)."
+  },
+  {
+   "param": "post_2028_growth_ratio",
+   "description": "Growth after 2028 as a fraction of 2023–28 growth",
+   "value": "0.52 – 0.97",
+   "fixed": false,
+   "categorical": false,
+   "basis": "expert-judgement",
+   "evidence_types": [
+    "assumption"
+   ],
+   "claims": [
+    "data-centre-air-pollution-027"
+   ],
+   "fit": "Uniform over the assumption's range."
+  },
+  {
+   "param": "ai_share_source",
+   "description": "Which estimate of AI's share of 2023 electricity this future uses",
+   "value": "LBNL server data (Shehabi et al.) · IEA via Muller (equal weight)",
+   "fixed": false,
+   "categorical": true,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-018",
+    "data-centre-air-pollution-021",
+    "data-centre-air-pollution-022"
+   ],
+   "fit": "Equal-weight mixture of the two estimates (D14)."
+  },
+  {
+   "param": "conventional_growth",
+   "description": "Annual growth of non-AI data-centre electricity",
+   "value": "0.0040 – 0.076",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "assumption",
+    "energy-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-028",
+    "data-centre-air-pollution-023"
+   ],
+   "fit": "Uniform over the assumption's range."
+  },
+  {
+   "param": "grid_trend_2031",
+   "description": "Deaths per TWh in 2031 relative to the study year",
+   "value": "0.72 – 0.98",
+   "fixed": false,
+   "categorical": false,
+   "basis": "expert-judgement",
+   "evidence_types": [
+    "assumption"
+   ],
+   "claims": [
+    "data-centre-air-pollution-026"
+   ],
+   "fit": "Uniform over the assumption's range; linear in time from 1.0 in 2023."
+  },
+  {
+   "param": "dalys_per_death",
+   "description": "DALYs per premature death",
+   "value": "8.3 – 15",
+   "fixed": false,
+   "categorical": false,
+   "basis": "speculation",
+   "evidence_types": [
+    "assumption"
+   ],
+   "claims": [
+    "data-centre-air-pollution-025"
+   ],
+   "fit": "Uniform over the placeholder assumption's range."
+  },
+  {
+   "param": "e2023",
+   "description": "Total US data-centre electricity in 2023 (TWh)",
+   "value": "180",
+   "fixed": true,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-019"
+   ],
+   "fit": "Taken as stated."
+  },
+  {
+   "param": "ai_share_lbnl",
+   "description": "AI share of 2023 data-centre electricity, LBNL variant",
+   "value": "0.40",
+   "fixed": true,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-021",
+    "data-centre-air-pollution-022"
+   ],
+   "fit": "AI-server ÷ all-server electricity; assumes cooling and other overheads scale with server load."
+  },
+  {
+   "param": "ai_share_iea",
+   "description": "AI share of 2023 data-centre electricity, IEA variant",
+   "value": "0.15",
+   "fixed": true,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "energy-model"
+   ],
+   "claims": [
+    "data-centre-air-pollution-018"
+   ],
+   "fit": "Taken as stated (global share, applied to the US)."
+  }
+ ],
+ "evidence": {
+  "assumption": {
+   "claims": [
+    "data-centre-air-pollution-025",
+    "data-centre-air-pollution-026",
+    "data-centre-air-pollution-027",
+    "data-centre-air-pollution-028"
+   ],
+   "sources": [],
+   "basis": [
+    "expert-judgement",
+    "speculation"
+   ]
+  },
+  "energy-model": {
+   "claims": [
+    "data-centre-air-pollution-002",
+    "data-centre-air-pollution-004",
+    "data-centre-air-pollution-006",
+    "data-centre-air-pollution-010",
+    "data-centre-air-pollution-013",
+    "data-centre-air-pollution-018",
+    "data-centre-air-pollution-019",
+    "data-centre-air-pollution-020",
+    "data-centre-air-pollution-021",
+    "data-centre-air-pollution-022",
+    "data-centre-air-pollution-023",
+    "data-centre-air-pollution-024"
+   ],
+   "sources": [
+    "chen-2026-data-center-air-quality",
+    "han-2026-health-informed-computing",
+    "muller-2026-data-center-damages",
+    "shehabi-2024-us-data-center-energy"
+   ],
+   "basis": [
+    "modelled"
+   ]
+  },
+  "epidemiological-model": {
+   "claims": [
+    "data-centre-air-pollution-001",
+    "data-centre-air-pollution-003",
+    "data-centre-air-pollution-005",
+    "data-centre-air-pollution-007",
+    "data-centre-air-pollution-009",
+    "data-centre-air-pollution-011",
+    "data-centre-air-pollution-012",
+    "data-centre-air-pollution-014",
+    "data-centre-air-pollution-015",
+    "data-centre-air-pollution-016"
+   ],
+   "sources": [
+    "chen-2026-data-center-air-quality",
+    "han-2026-health-informed-computing",
+    "muller-2026-data-center-damages"
+   ],
+   "basis": [
+    "modelled"
+   ]
+  }
+ },
+ "assumptions": [
+  {
+   "claim": "data-centre-air-pollution-025",
+   "description": "DALYs lost per premature death attributable to data-centre air pollution in the US.",
+   "rationale": "PLACEHOLDER: no source read yet. Air-pollution deaths in the US fall mostly on older adults with cardiovascular and respiratory disease, so years of life lost per death are well below the global average; the range is a wide guess spanning that. Morbidity (years lived with disability, e.g. asthma) is assumed small next to years of life lost.",
+   "replace_with": "GBD 2023 (IHME): ratio of US DALYs to deaths attributable to ambient PM2.5 and ozone, by year."
+  },
+  {
+   "claim": "data-centre-air-pollution-026",
+   "description": "Deaths per TWh in 2027–2031 relative to the study year (grid change).",
+   "rationale": "Han et al.'s own 2028 projections imply ~11% fewer deaths per TWh than in 2023 (Table 1: 705/325 and 1262/580 vs 433/176.39), and the grid is expected to get cleaner; but data-centre demand is delaying coal retirements in some regions (Han et al., p. 2). Range: up to 30% cleaner by 2031, or no change.",
+   "replace_with": "A projection of US power-sector air-pollution mortality per TWh to 2031 (e.g. EPA or EIA scenarios run through a health model)."
+  },
+  {
+   "claim": "data-centre-air-pollution-027",
+   "description": "Growth of US data-centre electricity after 2028, as a fraction of the 2023–2028 scenario growth rate.",
+   "rationale": "No source read projects US data-centre electricity beyond 2028. Assumes growth continues but does not accelerate; grid-connection and chip-supply constraints make slower growth plausible.",
+   "replace_with": "A US data-centre electricity projection to 2030 or later (e.g. EPRI, IEA, or a later LBNL report)."
+  },
+  {
+   "claim": "data-centre-air-pollution-028",
+   "description": "Annual growth of non-AI data-centre electricity after 2023.",
+   "rationale": "LBNL: conventional server electricity doubled from about 30 to nearly 60 TWh over 2014–2023, about 8% a year. Assumes non-AI demand grows no faster than that, and possibly not at all.",
+   "replace_with": "LBNL's 2028 breakdown by server type (Figure 5.1 data) or a later report."
+  }
+ ],
+ "work": [
+  {
+   "slug": "energy-efficient-ml",
+   "name": "More energy-efficient training and inference (hardware, models, serving)",
+   "close_to_ml": "very",
+   "where": "AI labs, chip makers, academia",
+   "refs": []
+  },
+  {
+   "slug": "workload-scheduling",
+   "name": "Shifting AI workloads in time to cleaner hours",
+   "close_to_ml": "yes",
+   "where": "AI labs and cloud providers (scheduling and serving teams)",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-032",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 10,
+      "section": "5"
+     },
+     "quote": "actionable strategies for siting, energy procurement, workload scheduling, and backup-generation management",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "health-informed-siting-and-load-shifting",
+   "name": "Health-informed siting of data centres and shifting load between regions",
+   "close_to_ml": "partly",
+   "where": "Cloud providers, academia (computing systems), grid operators",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-029",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 2,
+      "section": "1"
+     },
+     "quote": "explicitly incorporates public health costs into siting and resource management decisions",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    },
+    {
+     "claim": "data-centre-air-pollution-032",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 10,
+      "section": "5"
+     },
+     "quote": "actionable strategies for siting, energy procurement, workload scheduling, and backup-generation management",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "clean-energy-procurement",
+   "name": "Clean-energy procurement for data centres",
+   "close_to_ml": "no",
+   "where": "Cloud providers, utilities",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-032",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 10,
+      "section": "5"
+     },
+     "quote": "actionable strategies for siting, energy procurement, workload scheduling, and backup-generation management",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "cleaner-backup-generation",
+   "name": "Cleaner backup generation (newer-tier diesel, alternatives to diesel)",
+   "close_to_ml": "no",
+   "where": "Data-centre operators, state air regulators",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-030",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 4,
+      "section": "2.3.1"
+     },
+     "quote": "Tier 4 generators use more advanced exhaust aftertreatment and therefore have lower emission rates than Tier 2 units",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    },
+    {
+     "claim": "data-centre-air-pollution-032",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 10,
+      "section": "5"
+     },
+     "quote": "actionable strategies for siting, energy procurement, workload scheduling, and backup-generation management",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "health-impact-reporting",
+   "name": "Reporting air pollutants and health impacts alongside energy use",
+   "close_to_ml": "no",
+   "where": "AI companies' sustainability teams, regulators",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-031",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 10,
+      "section": "5"
+     },
+     "quote": "We therefore recommend extending existing energy reporting practices to include criteria air pollutants and associated public health impacts across regions.",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    }
+   ]
+  }
+ ],
+ "not_captured": [
+  {
+   "slug": "climate",
+   "text": "Climate damage from the same electricity's greenhouse-gas emissions",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-035",
+     "source": "muller-2026-data-center-damages",
+     "locator": {
+      "section": "Abstract"
+     },
+     "quote": "focusing on damages from local air pollution and greenhouse gas (GHG) emissions",
+     "source_title": "Measuring the Impact of Data Centers in the United States Economy: Monetary Damage from Air Pollution and Greenhouse Gas Emissions",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "morbidity",
+   "text": "Asthma symptoms and other illness, which the DALY conversion treats as small",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-033",
+     "source": "han-2026-health-informed-computing",
+     "locator": {
+      "page": 8,
+      "section": "3.3"
+     },
+     "quote": "approximately 600,000 asthma symptom cases and 1,300 premature deaths, along with other morbidity outcomes",
+     "source_title": "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "near-facility-and-equity",
+   "text": "Local exposure near facilities, and who bears it",
+   "refs": [
+    {
+     "claim": "data-centre-air-pollution-034",
+     "source": "chen-2026-data-center-air-quality",
+     "locator": {
+      "page": 10,
+      "section": "4"
+     },
+     "quote": "Our findings therefore likely underestimate near-facility air quality and health impacts surrounding large data centers",
+     "source_title": "Spatially distributed air quality and health impacts of data center electricity demand in the United States",
+     "mock": false
+    }
+   ]
+  },
+  {
+   "slug": "outside-us",
+   "text": "Data centres outside the United States",
+   "refs": []
+  },
+  {
+   "slug": "after-2031",
+   "text": "Anything after 2031",
+   "refs": []
+  }
+ ],
+ "flip": null,
+ "neighbour": null,
+ "extras": {
+  "deaths": {
+   "expected_value": 2870.784885068673,
+   "p05": 1081.68079170782,
+   "p95": 5438.995635687267
+  }
+ },
+ "limitations": [
+  "US only; no source read yet gives a global estimate.",
+  "None of the three health studies is AI-specific; AI's share of data-centre electricity is attributed in the model, from two estimates that disagree.",
+  "The conversion from deaths to DALYs is a placeholder assumption until a GBD-derived source is added.",
+  "No source projects US data-centre electricity beyond 2028; 2029–2031 extrapolates under an assumption.",
+  "The GEOS-Chem interval covers concentration-response uncertainty only."
+ ],
+ "index_entries": [],
+ "sources": [
+  "chen-2026-data-center-air-quality",
+  "han-2026-health-informed-computing",
+  "muller-2026-data-center-damages",
+  "shehabi-2024-us-data-center-energy"
+ ],
+ "provenance": {
+  "model": "models/data_centre_air_pollution.py",
+  "card_source": "cards/data-centre-air-pollution.md",
+  "commit": "31c0410",
+  "uncommitted_input_changes": false,
+  "seed": 20261125,
+  "draws": 100000
+ },
+ "changelog": [
+  {
+   "commit": "8c7e21d",
+   "date": "2026-11-27",
+   "change": "Milestone 1 (part 2): air-pollution model, card builder, full CLI, mock bio-misuse",
+   "why": "Finishes the work interrupted on 2026-11-25. The air-pollution model now declares its fixed inputs (2023 electricity, AI-share estimates) as parameters instead of hidden constants, so `aiwelfare model` and the card show every number used."
+  },
+  {
+   "commit": "9ab2a10",
+   "date": "2026-11-27",
+   "change": "Milestone 1 (part 1): schemas, CLI scaffold, data-centre air-pollution sources and claims",
+   "why": "Records decisions D11-D15 (approved by the maintainer) and the source-integration procedure. Air pollution is the first card built from real evidence: three independent models of deaths from US data-centre electricity (Han et al. v4, Chen et al. 2026, Muller 2026) plus LBNL's electricity scenarios. 28 claims, each quote checked verbatim against its PDF. Work in progress: model and card are not finished."
+  }
+ ],
+ "mock": false
+}
