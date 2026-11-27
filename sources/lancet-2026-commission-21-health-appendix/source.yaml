@@ -1,0 +1,27 @@
+id: lancet-2026-commission-21-health-appendix
+mock: false
+title: "Methods Appendix: The Lancet Commission on 21st Century Global Threats to Health (supplementary appendix)"
+authors: [Christopher J L Murray, Natalia Kanem, "et al. (Lancet Commission on 21st century global threats to health)"]
+publisher: "The Lancet (supplementary material to Lancet 2026; 408: 1603–61)"
+type: peer-reviewed
+evidence_date: "2025"
+published: "2026-10-11"
+version: "Supplementary appendix as posted with the online publication; 166 pages"
+accessed: 2026-11-27
+url: https://www.thelancet.com/cms/attachment/S0140-6736(26)01714-9/appendix.pdf
+landing_page: https://doi.org/10.1016/S0140-6736(26)01714-9
+doi: 10.1016/S0140-6736(26)01714-9
+license: All rights reserved (Elsevier); posted as supplied by the authors
+redistribution: url-only
+sha256: 4297730c64eb02beb373ac957e88cc47f289d051800ef4f75f7816e53979a02f
+evidence_basis: [modelled, expert-judgement]
+author_interests:
+  - kind: funder
+    note: As for the main text (source lancet-2026-commission-21-health).
+peer_review: "The appendix states it formed part of the original submission and was peer reviewed."
+notes: >
+  Supplied by the maintainer. Malicious use of AI is section 3.11 (from PDF page 110): the
+  plausible worst scenario comes from 117 responses (88 superforecasters, 29 domain experts)
+  to questions on AI-caused extinction and catastrophe through 2100. Registered, not yet
+  read in full; claims not yet extracted. The url is the usual Lancet attachment pattern for
+  this article and has not been checked (automated access to thelancet.com is blocked).
