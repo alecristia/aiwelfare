@@ -66,7 +66,11 @@ The first real benefit, so the overview does not show harms alone. Launch with `
 Replaces the mock card, starting from Righetti's model (GovAI 2025). The mock files stay in `mock/` as the format demonstration.
 
 ### 3. Website and explorer (D6, D8)
-With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Brief: `docs/tasks/website-and-explorer.md`. It can start now against the existing outputs, in parallel with the cards. Once net cards exist, the overview needs an axis that can show signed values.
+With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Brief: `docs/tasks/website-and-explorer.md`. **Built (branch `website-explorer`, not yet merged or published):** `aiwelfare build site` writes `site/` (real, global cards only) and `site/demo/` (adds the mock card, with D13 banners); explorer on Pyodide (D8, amended). The canonical chart has no rows yet because no real card is global; it shows the six baselines. Still open:
+- **Net cards (D17):** the forest plot's axis is log-only. Once net cards land, it needs signed values, and `explorer.summarise_run` should use the engine's net summary.
+- **Maintainer to settle (D7, deferred):** colours, layout, row counts, from the screenshots.
+- **Not built:** D7's group summary rows and expand/collapse (no group has more than one card yet), and the access-mode filter (its meaning on the overview needs a decision). The tail-dominated and close-to-ML filters are built.
+- **Publishing:** GitHub Pages and a CI build need the maintainer's go-ahead (new external services).
 
 ### 4. Remaining cards, in this order (one session each)
 1. Chatbots and mental health (net)

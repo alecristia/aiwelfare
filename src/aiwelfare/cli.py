@@ -25,7 +25,7 @@ app = typer.Typer(
     add_completion=False,
     help="Interrogate AI health-impact estimates (DALYs, 2026–2031).",
 )
-build_app = typer.Typer(no_args_is_help=True, help="Generate outputs (cards).")
+build_app = typer.Typer(no_args_is_help=True, help="Generate outputs (cards, site).")
 app.add_typer(build_app, name="build")
 
 JsonOpt = Annotated[bool, typer.Option("--json", help="Machine-readable output.")]
@@ -744,6 +744,42 @@ def build_card(
         as_json,
         f"Wrote {rel}/card.md, dotplot.svg, card.json",
     )
+
+
+@build_app.command("site")
+def build_site(
+    out: Annotated[
+        str | None, typer.Option(help="Output folder (default: site/ in the repository).")
+    ] = None,
+    allow_regional: Annotated[
+        bool,
+        typer.Option(
+            "--allow-regional",
+            help="Development only: also show non-global cards. Needs --out outside site/.",
+        ),
+    ] = False,
+    as_json: JsonOpt = False,
+) -> None:
+    """Generate the static website: site/ (real, global cards) and site/demo/ (mock, D13)."""
+    from pathlib import Path
+
+    from . import site
+
+    root = data.repo_root()
+    try:
+        res = site.build(root, Path(out).resolve() if out else None, allow_regional)
+    except (ValueError, FileExistsError) as e:
+        _fail(str(e), as_json)
+    s, d = res["site"], res["demo"]
+    lines = [
+        f"Wrote {s['output']}: {len(s['cards'])} card(s) on the canonical chart"
+        + (f" ({', '.join(s['cards'])})" if s["cards"] else ""),
+        *[f"  not shown: {e['risk']}: {e['reason']}" for e in s["excluded"]],
+        f"Wrote {d['output']}: format demo with {len(d['cards'])} card(s), invented data marked (D13)",
+        "Serve locally: python -m http.server --directory " + s["output"],
+    ]
+    # The canonical site holds no mock data; the demo build is reported separately.
+    _emit({**res, "mock": False}, as_json, "\n".join(lines))
 
 
 @app.command()

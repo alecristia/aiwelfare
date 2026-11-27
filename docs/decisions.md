@@ -129,6 +129,11 @@ Cards are organised around the reader's decision, not the model's internals. The
 - The interactive explorer uses an in-browser runtime: **Shinylive** (Python Shiny compiled to run in the browser) or **Observable Framework**. Classic Shiny and Streamlit are rejected because they need a server.
 - If a model is too heavy to run in the browser, its results are **precomputed over a grid of parameter values** and interpolated in the browser.
 
+**Amended 2026-11-27 (runtime chosen):** the explorer runs on **Pyodide directly**, the Python-in-the-browser runtime Shinylive is built on, without the Shiny layer. Observable Framework was rejected because it would need the models reimplemented in JavaScript (two implementations that can drift) or a precomputed grid. Shinylive was rejected because its app runs in an iframe, which makes encoding every setting in the page address (D6) awkward, and it would split the static default chart and the explorer into two views. Pyodide makes them one page (D6): the canonical chart, drawn from the CLI's results, shows at once, and the controls come alive when Python has loaded.
+- The browser runs the **same files** as the CLI: `engine.py`, `explorer.py` and `models/<risk>.py`, copied into the site by `aiwelfare build site`, with the CLI's seed and draw count (100,000). Every number the explorer shows is what `aiwelfare whatif` prints, and the page lists those commands (D10). Tests check this, and the page also checks its own default numbers against the CLI's when it loads.
+- Consequence for models: they may import only NumPy and `aiwelfare.engine`, and read only claim values, evidence basis and evidence type (what `site/data/claims.json` carries).
+- Pyodide is pinned (314.0.8, NumPy 2.4.6) and loaded from the jsDelivr CDN with a subresource-integrity hash, about 10 MB on first visit. NumPy's random streams were checked to match between 2.4.6 and the CLI's version; the page's self-check catches any later drift.
+
 ## D9. No built-in chatbot
 
 **Status:** Decided (see `VISION.md`, layer 4)

@@ -36,6 +36,7 @@ select = ["E", "F", "I", "B", "UP"]
 # Card and terminal rendering: long f-string templates read better unbroken.
 "src/aiwelfare/card.py" = ["E501"]
 "src/aiwelfare/cli.py" = ["E501"]
+"src/aiwelfare/site.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

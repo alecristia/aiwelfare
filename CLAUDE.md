@@ -32,7 +32,7 @@ cards/<risk-id>.md  Hand-written prose for each card (frontmatter + plain-langua
 results/<risk-id>/  Generated card.md, dotplot.svg, card.json. Only via `aiwelfare rerun` (datalad run)
 mock/               Invented data mirroring the tree above (D13); mock/build/ holds generated mock cards
 src/aiwelfare/      Python package and CLI (schema/, data.py, engine.py, card.py, dotplot.py, cli.py)
-site/               Generated static website (not started). Never hand-edited; built in CI
+site/               Generated static website: `aiwelfare build site` (not committed; site/demo/ = mock). Never hand-edited
 docs/               VISION-level docs, decisions, roadmap, examples, related work; docs/tasks/ for task briefs
 related_work/       Prior-work catalogue and search log
 tests/
