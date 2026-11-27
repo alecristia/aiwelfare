@@ -1,0 +1,27 @@
+id: clinical-ai-013
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: dalys_per_monitored_death
+description: DALYs lost per in-hospital sepsis or deterioration death that early warning could avert.
+value:
+  interval:
+    low: 4
+    high: 15
+    kind: unqualified
+units: DALYs per death
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/monitoring
+- conversion/dalys
+rationale: Patients in the monitoring studies are older adults with comorbidity (COMPOSER mean age 63; CHARTwatch
+  median about 67), so remaining healthy life expectancy is well below the global average years of life lost per
+  death. Uniform over the range.
+replace_with: Years of life lost per sepsis death by age from GBD, weighted by the ages of patients covered by AI
+  early warning.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

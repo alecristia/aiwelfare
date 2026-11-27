@@ -1,0 +1,24 @@
+id: clinical-ai-036
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: ai_device_world_to_us_ratio
+description: Global harm from AI medical devices as a multiple of US harm.
+value:
+  interval:
+    low: 1.5
+    high: 4
+    kind: unqualified
+units: ratio
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/device-errors
+rationale: The US is the largest market for cleared AI medical devices; Europe, China, Japan and others add a comparable
+  or smaller amount. Uniform.
+replace_with: Global counts of deployed AI medical devices or of their use, by country.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

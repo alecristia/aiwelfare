@@ -1,0 +1,25 @@
+id: clinical-ai-038
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: dalys_per_device_injury
+description: DALYs lost per injury involving an AI medical device.
+value:
+  interval:
+    low: 0.01
+    high: 1
+    kind: unqualified
+units: DALYs per injury
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/device-errors
+- conversion/dalys
+rationale: Reported injuries range from minor (burns, hearing) to serious missed diagnoses. Treated as a 90% range
+  of a lognormal.
+replace_with: Severity of AI-device injuries from a study of reported events.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

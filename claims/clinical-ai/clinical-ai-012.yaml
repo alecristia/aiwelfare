@@ -1,0 +1,27 @@
+id: clinical-ai-012
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: early_warning_effect_transfer
+description: Share of the mortality effect measured at developer sites that is retained in a typical deployment
+  elsewhere.
+value:
+  interval:
+    low: 0.1
+    high: 1.0
+    kind: unqualified
+units: fraction
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/monitoring
+rationale: All three effect estimates come from non-randomised evaluations at the sites that built the tools (two
+  with commercial interests); CHARTwatch notes earlier evidence was mixed. Effects measured at developer sites are
+  usually larger than in routine use elsewhere. Uniform from 10% to 100%.
+replace_with: The CONCERN cluster-randomised trial (Rossetti et al. 2025, Nature Medicine; two health systems) and
+  external evaluations of commercial tools such as the Epic Sepsis Model.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

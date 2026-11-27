@@ -225,7 +225,7 @@ def test_committed_cards_are_current():
 
 # ---- net cards (D17) -------------------------------------------------------------------
 
-NET_MODEL = '''
+NET_MODEL = """
 import numpy as np
 from aiwelfare.engine import Param, uniform
 
@@ -244,7 +244,7 @@ def params(ds):
 
 def simulate(x, counterfactual):
     return {"good": x["gain"], "bad": x["loss"]}
-'''
+"""
 
 
 @pytest.fixture

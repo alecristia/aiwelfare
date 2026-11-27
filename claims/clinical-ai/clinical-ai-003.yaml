@@ -1,0 +1,36 @@
+id: clinical-ai-003
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: verma-2024-chartwatch
+locator:
+  section: Abstract, Results
+quote: Non-palliative deaths were significantly lower in the intervention period than the pre-intervention period
+  among patients in GIM (1.6% v. 2.1%;
+quantity: early_warning_mortality_relative_risk
+description: 'CHARTwatch: adjusted relative risk of non-palliative in-hospital death after deployment, general internal
+  medicine.'
+value:
+  interval:
+    low: 0.55
+    mid: 0.74
+    high: 1.0
+    kind: ci95
+units: relative risk (intervention vs pre-intervention)
+geography: Toronto, Canada (one academic hospital)
+time_window:
+  start: 2016
+  end: 2022
+  per: period
+counterfactual: not-applicable
+conditions: Nonrandomised controlled pre-post study with propensity overlap weighting; 13,649 GIM admissions; primary
+  outcome non-palliative in-hospital death.
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+- study/chartwatch
+- work/early-warning-deployment
+notes: 'Same sentence continues: ''adjusted relative risk [RR] 0.74, 95% confidence interval [CI] 0.55-1.00''.'
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

@@ -1,0 +1,35 @@
+id: clinical-ai-004
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: verma-2024-chartwatch
+locator:
+  section: Abstract, Results
+quote: In the difference-indifferences analysis, the adjusted relative risk reduction for non-palliative death in
+  GIM was 0.79 (95% CI 0.50–1.24).
+quantity: early_warning_mortality_relative_risk_did
+description: 'CHARTwatch, difference-in-differences against subspecialty units: adjusted relative risk of non-palliative
+  death 0.79.'
+value:
+  interval:
+    low: 0.5
+    mid: 0.79
+    high: 1.24
+    kind: ci95
+units: relative risk
+geography: Toronto, Canada (one academic hospital)
+time_window:
+  start: 2016
+  end: 2022
+  per: period
+counterfactual: not-applicable
+conditions: Secondary analysis controlling for secular trends with cardiology, respirology and nephrology units
+  as comparators.
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+- study/chartwatch
+notes: The paper calls 0.79 a 'relative risk reduction'; as a ratio below 1 it reads as a relative risk.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

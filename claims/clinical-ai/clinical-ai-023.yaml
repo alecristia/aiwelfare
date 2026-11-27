@@ -1,0 +1,25 @@
+id: clinical-ai-023
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: chatbot_health_user_growth_2031
+description: Weekly chatbot health users in 2031 relative to 2026.
+value:
+  interval:
+    low: 1.0
+    high: 3.0
+    kind: unqualified
+units: ratio
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/chatbot-advice
+- exposure
+rationale: Chatbot use grew fast to 2026; growth may slow as adoption saturates. From no growth to a tripling; uniform,
+  linear in time.
+replace_with: A usage forecast to 2030 or later, or repeated usage disclosures.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

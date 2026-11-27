@@ -419,6 +419,11 @@ def _net_move(delta: float) -> str:
     return f"⬇ {fmt(-delta)} DALYs towards benefit"
 
 
+def _net_dalys(v: float) -> str:
+    """'260k DALYs averted' / '1.2k DALYs lost' (D17)."""
+    return "0 DALYs" if v == 0 else f"{fmt(abs(v))} DALYs {'averted' if v < 0 else 'lost'}"
+
+
 def _v(a: dict, v: float) -> str:
     """A value as the card shows it: signed words for net cards, plain otherwise."""
     return fmt_net(v) if a["kind"] == "net" else fmt(v)
@@ -534,7 +539,7 @@ def render(a: dict, cs: CardSource) -> str:
         L += [cs.sections["Is this big?"], ""]
     if a["kind"] == "net":
         gen = (
-            f"In the model, the median future has a net of **{fmt_net(s['median'])} DALYs** over "
+            f"In the model, the median future has a net of **{_net_dalys(s['median'])}** over "
             f"{w0}–{w1}, and 90% of simulated futures fall between {fmt_net(s['p05'])} and "
             f"{fmt_net(s['p95'])}. The net is harmful in {s['share_net_harm']:.0%} of futures."
         )

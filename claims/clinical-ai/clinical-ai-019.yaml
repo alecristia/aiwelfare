@@ -1,0 +1,33 @@
+id: clinical-ai-019
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: bean-2025-llm-medical-assistants-rct
+locator:
+  page: 7
+  section: Experimental performance
+quote: Participants in the control group had 1.76 (95% CI = 1.45 −2.13) times higher odds of identifying a relevant
+  condition
+quantity: chatbot_vs_usual_sources_condition_odds
+description: People using their usual sources had higher odds of naming a relevant condition than people helped
+  by an LLM.
+value:
+  interval:
+    low: 1.45
+    mid: 1.76
+    high: 2.13
+    kind: ci95
+units: odds ratio (control vs LLM users)
+geography: United Kingdom
+time_window:
+  start: 2024
+  end: 2024
+  per: period
+counterfactual: not-applicable
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/chatbot-advice
+- comparator
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

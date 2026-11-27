@@ -1,0 +1,20 @@
+id: clinical-ai-020
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: bean-2025-llm-medical-assistants-rct
+locator:
+  page: 1
+  section: Abstract
+quote: we recommend systematic human user testing to evaluate interactive capabilities prior to public deployments
+  in healthcare.
+quantity: work_human_user_testing
+description: Bean et al. recommend testing medical chatbots with real users before public deployment.
+units: none
+counterfactual: not-applicable
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- work/human-user-testing
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

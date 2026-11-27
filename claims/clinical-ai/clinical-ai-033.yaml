@@ -1,0 +1,21 @@
+id: clinical-ai-033
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: handley-2024-ai-fda-device-reports
+locator:
+  page: 1
+  section: Main text
+quote: A more comprehensive patient safety program should include additional mechanisms for capturing AI safety
+  issues
+quantity: work_ai_patient_safety_reporting
+description: Handley et al. call for an AI patient-safety programme beyond voluntary device reports.
+units: none
+geography: United States
+counterfactual: not-applicable
+evidence_type: incident-data
+evidence_basis: measured
+tags:
+- work/postmarket-monitoring
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

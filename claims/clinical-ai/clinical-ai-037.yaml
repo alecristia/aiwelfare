@@ -1,0 +1,24 @@
+id: clinical-ai-037
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: ai_device_use_growth_2031
+description: Use of AI medical devices in 2031 relative to the rate behind the reported harms (and to 2026).
+value:
+  interval:
+    low: 1.5
+    high: 5
+    kind: unqualified
+units: ratio
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/device-errors
+rationale: The number of cleared AI devices has grown quickly (over a third cleared in or after 2021, Lin et al.).
+  Uniform; harms are assumed to scale with use, linear in time from 2026.
+replace_with: Counts of AI-device clearances and use by year, with a projection.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'
