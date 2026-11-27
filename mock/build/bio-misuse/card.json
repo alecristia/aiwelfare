@@ -1,0 +1,777 @@
+{
+ "risk": "bio-misuse",
+ "title": "AI-assisted biological misuse (MOCK)",
+ "kind": "risk",
+ "one_line": "MOCK: AI models help someone cause a disease outbreak they couldn't otherwise have caused.",
+ "scope_note": "",
+ "geography": "global",
+ "window": [
+  2027,
+  2031
+ ],
+ "counterfactual": "frozen-2026",
+ "counterfactual_label": "AI frozen at 2026 levels",
+ "summary": {
+  "expected_value": 159988.2688631315,
+  "median": 0.0,
+  "p05": 0.0,
+  "p95": 0.0,
+  "share_zero": 0.99044,
+  "top5_share_of_ev": 1.0000000000000002,
+  "tail_dominated": true,
+  "dotplot_quantiles": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "confidence": {
+  "level": "low",
+  "tail_dominated": true,
+  "top5_share_of_ev": 1.0000000000000002,
+  "swing_share_expert_or_speculation": 0.10341973636810574,
+  "swing_share_measured": 0.1745889631506177
+ },
+ "by_counterfactual": {
+  "no-ai": {
+   "label": "No modern AI",
+   "modelled": true,
+   "expected_value": 248213.55522217575,
+   "median": 0.0,
+   "p05": 0.0,
+   "p95": 0.0,
+   "share_zero": 0.99044,
+   "top5_share_of_ev": 0.9999999999999999,
+   "tail_dominated": true,
+   "dotplot_quantiles": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "frozen-2026": {
+   "label": "AI frozen at 2026 levels",
+   "modelled": true,
+   "expected_value": 159988.2688631315,
+   "median": 0.0,
+   "p05": 0.0,
+   "p95": 0.0,
+   "share_zero": 0.99044,
+   "top5_share_of_ev": 1.0000000000000002,
+   "tail_dominated": true,
+   "dotplot_quantiles": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "open-only": {
+   "label": "Only open-weight / older models advance",
+   "modelled": true,
+   "expected_value": 78900.95067741507,
+   "median": 0.0,
+   "p05": 0.0,
+   "p95": 0.0,
+   "share_zero": 0.99044,
+   "top5_share_of_ev": 1.0000000000000002,
+   "tail_dominated": true,
+   "dotplot_quantiles": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "cruxes": [
+  {
+   "param": "severity",
+   "description": "DALYs if an outbreak happens",
+   "basis": "modelled",
+   "claims": [
+    "bio-misuse-005"
+   ],
+   "ev_low": 5.911740192873729,
+   "ev_high": 508435.9921610533,
+   "settings": {
+    "low": 900.3870999509692,
+    "high": 77437301.63318472
+   },
+   "swing": 86004.45479216836
+  },
+  {
+   "param": "evidence",
+   "description": "Which evidence type sets the outbreak probability in this future",
+   "basis": "measured",
+   "claims": [
+    "bio-misuse-001",
+    "bio-misuse-002",
+    "bio-misuse-003"
+   ],
+   "ev_low": 67759.06134086933,
+   "ev_high": 286866.5505165879,
+   "settings": {
+    "low": "lab evaluation",
+    "high": "expert forecast"
+   },
+   "swing": 4.2336263938704
+  },
+  {
+   "param": "p_forecast",
+   "description": "P(outbreak), expert-forecast variant",
+   "basis": "expert-judgement",
+   "claims": [
+    "bio-misuse-001"
+   ],
+   "ev_low": 71117.77628225928,
+   "ev_high": 225436.06248093318,
+   "settings": {
+    "low": 0.003970205807494929,
+    "high": 0.03987666765390923
+   },
+   "swing": 3.169897517411121
+  },
+  {
+   "param": "p_lab",
+   "description": "P(outbreak), lab-evaluation variant",
+   "basis": "measured",
+   "claims": [
+    "bio-misuse-002"
+   ],
+   "ev_low": 82227.93877068398,
+   "ev_high": 191314.43731338243,
+   "settings": {
+    "low": 0.0009960705443347786,
+    "high": 0.009874890867098288
+   },
+   "swing": 2.326635449867194
+  },
+  {
+   "param": "post_2026_share",
+   "description": "Share of the risk from capabilities after 2026",
+   "basis": "expert-judgement",
+   "claims": [
+    "bio-misuse-006"
+   ],
+   "ev_low": 105777.7243170475,
+   "ev_high": 169895.31929551973,
+   "settings": {
+    "low": 0.5179589068389922,
+    "high": 0.8319217909775617
+   },
+   "swing": 1.6061540403941061
+  },
+  {
+   "param": "p_independent",
+   "description": "P(outbreak), independent-evaluation variant",
+   "basis": "measured",
+   "claims": [
+    "bio-misuse-003"
+   ],
+   "ev_low": 121666.51456161513,
+   "ev_high": 192741.7203524672,
+   "settings": {
+    "low": 0.0019832883832968193,
+    "high": 0.019784010955411973
+   },
+   "swing": 1.5841805039533514
+  },
+  {
+   "param": "open_only_share",
+   "description": "Share that remains if only open-weight models advance",
+   "basis": "expert-judgement",
+   "claims": [
+    "bio-misuse-007"
+   ],
+   "ev_low": 124849.61350800042,
+   "ev_high": 124849.61350800042,
+   "settings": {
+    "low": 0.21274760052874236,
+    "high": 0.4374398053079614
+   },
+   "swing": 1.0
+  },
+  {
+   "param": "share_open_weight",
+   "description": "Share of the risk via open-weight models",
+   "basis": "expert-judgement",
+   "claims": [
+    "bio-misuse-008"
+   ],
+   "ev_low": 124849.61350800042,
+   "ev_high": 124849.61350800042,
+   "settings": {
+    "low": 0.41495601448104275,
+    "high": 0.684918292371528
+   },
+   "swing": 1.0
+  },
+  {
+   "param": "share_local_frontier",
+   "description": "Share via locally-run frontier models",
+   "basis": "speculation",
+   "claims": [
+    "bio-misuse-009"
+   ],
+   "ev_low": 124849.61350800042,
+   "ev_high": 124849.61350800042,
+   "settings": {
+    "low": 0.05499290267938214,
+    "high": 0.14505693867743807
+   },
+   "swing": 1.0
+  }
+ ],
+ "variants": [
+  {
+   "param": "evidence",
+   "variant": "expert forecast",
+   "expected_value": 457765.1589183574,
+   "median": 0.0,
+   "p05": 0.0,
+   "p95": 0.0,
+   "share_zero": 0.9834,
+   "top5_share_of_ev": 1.0,
+   "tail_dominated": true,
+   "dotplot_quantiles": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "param": "evidence",
+   "variant": "lab evaluation",
+   "expected_value": 43040.91928320276,
+   "median": 0.0,
+   "p05": 0.0,
+   "p95": 0.0,
+   "share_zero": 0.99628,
+   "top5_share_of_ev": 1.0,
+   "tail_dominated": true,
+   "dotplot_quantiles": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "param": "evidence",
+   "variant": "independent evaluation",
+   "expected_value": 121198.12060534916,
+   "median": 0.0,
+   "p05": 0.0,
+   "p95": 0.0,
+   "share_zero": 0.99184,
+   "top5_share_of_ev": 0.9999999999999999,
+   "tail_dominated": true,
+   "dotplot_quantiles": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ ],
+ "breakdown": {
+  "counterfactual": "frozen-2026",
+  "rows": [
+   {
+    "mode": "open-weight",
+    "label": "Open-weight models",
+    "share_of_ev": 0.5359491448830469,
+    "share_p05": 0.41482651158577405,
+    "share_p95": 0.6848314341986118
+   },
+   {
+    "mode": "api",
+    "label": "API-served frontier models",
+    "share_of_ev": 0.37074964891697926,
+    "share_p05": 0.20517635659610625,
+    "share_p95": 0.495891516141968
+   },
+   {
+    "mode": "local-frontier",
+    "label": "Frontier models run locally / on-premises",
+    "share_of_ev": 0.09330120619997388,
+    "share_p05": 0.05501953617898701,
+    "share_p95": 0.14479294125420966
+   }
+  ]
+ },
+ "breakdown_not_modelled": "",
+ "baselines": [
+  {
+   "id": "malaria",
+   "label": "malaria (MOCK value)",
+   "geography": "global",
+   "dalys_window": 275000000.0,
+   "ratio": 0.00058177552313866,
+   "source": "mock-burden-tables-2025",
+   "mock": true
+  },
+  {
+   "id": "road-injuries",
+   "label": "road injuries (MOCK value)",
+   "geography": "global",
+   "dalys_window": 350000000.0,
+   "ratio": 0.0004571093396089471,
+   "source": "mock-burden-tables-2025",
+   "mock": true
+  }
+ ],
+ "params": [
+  {
+   "param": "evidence",
+   "description": "Which evidence type sets the outbreak probability in this future",
+   "value": "expert forecast · lab evaluation · independent evaluation (equal weight)",
+   "fixed": false,
+   "categorical": true,
+   "basis": "measured",
+   "evidence_types": [
+    "expert-forecast",
+    "independent-evaluation",
+    "lab-evaluation"
+   ],
+   "claims": [
+    "bio-misuse-001",
+    "bio-misuse-002",
+    "bio-misuse-003"
+   ],
+   "fit": "Equal weight per evidence type (D14)."
+  },
+  {
+   "param": "p_forecast",
+   "description": "P(outbreak), expert-forecast variant",
+   "value": "0.0040 – 0.040",
+   "fixed": false,
+   "categorical": false,
+   "basis": "expert-judgement",
+   "evidence_types": [
+    "expert-forecast"
+   ],
+   "claims": [
+    "bio-misuse-001"
+   ],
+   "fit": "Lognormal through the 90% interval."
+  },
+  {
+   "param": "p_lab",
+   "description": "P(outbreak), lab-evaluation variant",
+   "value": "0.0010 – 0.010",
+   "fixed": false,
+   "categorical": false,
+   "basis": "measured",
+   "evidence_types": [
+    "lab-evaluation"
+   ],
+   "claims": [
+    "bio-misuse-002"
+   ],
+   "fit": "Lognormal through the 90% interval."
+  },
+  {
+   "param": "p_independent",
+   "description": "P(outbreak), independent-evaluation variant",
+   "value": "0.0020 – 0.020",
+   "fixed": false,
+   "categorical": false,
+   "basis": "measured",
+   "evidence_types": [
+    "independent-evaluation"
+   ],
+   "claims": [
+    "bio-misuse-003"
+   ],
+   "fit": "Lognormal through the 90% interval."
+  },
+  {
+   "param": "severity",
+   "description": "DALYs if an outbreak happens",
+   "value": "1.0k – 78M",
+   "fixed": false,
+   "categorical": false,
+   "basis": "modelled",
+   "evidence_types": [
+    "epidemiological-model"
+   ],
+   "claims": [
+    "bio-misuse-005"
+   ],
+   "fit": "Lognormal through the 90% interval."
+  },
+  {
+   "param": "post_2026_share",
+   "description": "Share of the risk from capabilities after 2026",
+   "value": "0.52 – 0.83",
+   "fixed": false,
+   "categorical": false,
+   "basis": "expert-judgement",
+   "evidence_types": [
+    "expert-forecast"
+   ],
+   "claims": [
+    "bio-misuse-006"
+   ],
+   "fit": "Uniform over the interval."
+  },
+  {
+   "param": "open_only_share",
+   "description": "Share that remains if only open-weight models advance",
+   "value": "0.21 – 0.44",
+   "fixed": false,
+   "categorical": false,
+   "basis": "expert-judgement",
+   "evidence_types": [
+    "expert-forecast"
+   ],
+   "claims": [
+    "bio-misuse-007"
+   ],
+   "fit": "Uniform over the interval."
+  },
+  {
+   "param": "share_open_weight",
+   "description": "Share of the risk via open-weight models",
+   "value": "0.41 – 0.68",
+   "fixed": false,
+   "categorical": false,
+   "basis": "expert-judgement",
+   "evidence_types": [
+    "expert-forecast"
+   ],
+   "claims": [
+    "bio-misuse-008"
+   ],
+   "fit": "Uniform over the interval."
+  },
+  {
+   "param": "share_local_frontier",
+   "description": "Share via locally-run frontier models",
+   "value": "0.055 – 0.14",
+   "fixed": false,
+   "categorical": false,
+   "basis": "speculation",
+   "evidence_types": [
+    "assumption"
+   ],
+   "claims": [
+    "bio-misuse-009"
+   ],
+   "fit": "Uniform over the assumption's range."
+  }
+ ],
+ "evidence": {
+  "assumption": {
+   "claims": [
+    "bio-misuse-009"
+   ],
+   "sources": [],
+   "basis": [
+    "speculation"
+   ]
+  },
+  "epidemiological-model": {
+   "claims": [
+    "bio-misuse-005"
+   ],
+   "sources": [
+    "mock-outbreak-model-2025"
+   ],
+   "basis": [
+    "modelled"
+   ]
+  },
+  "expert-forecast": {
+   "claims": [
+    "bio-misuse-001",
+    "bio-misuse-006",
+    "bio-misuse-007",
+    "bio-misuse-008"
+   ],
+   "sources": [
+    "mock-expert-survey-2026"
+   ],
+   "basis": [
+    "expert-judgement"
+   ]
+  },
+  "independent-evaluation": {
+   "claims": [
+    "bio-misuse-003"
+   ],
+   "sources": [
+    "mock-aisi-evaluation-2026"
+   ],
+   "basis": [
+    "measured"
+   ]
+  },
+  "lab-evaluation": {
+   "claims": [
+    "bio-misuse-002"
+   ],
+   "sources": [
+    "mock-lab-system-card-2026"
+   ],
+   "basis": [
+    "measured"
+   ]
+  }
+ },
+ "assumptions": [
+  {
+   "claim": "bio-misuse-009",
+   "description": "",
+   "rationale": "MOCK: invented placeholder to show how assumptions are flagged.",
+   "replace_with": "MOCK: a survey of on-premises frontier deployments."
+  }
+ ],
+ "work": [
+  {
+   "slug": "dangerous-capability-evals",
+   "name": "Dangerous-capability evaluations",
+   "close_to_ml": "very",
+   "where": "AI labs, government AI security institutes, independent evaluators",
+   "refs": [
+    {
+     "claim": "bio-misuse-010",
+     "source": "mock-aisi-evaluation-2026",
+     "locator": {
+      "section": "MOCK 6"
+     },
+     "quote": "MOCK: evaluations should cover end-to-end protocols, not single sub-tasks.",
+     "source_title": "MOCK government AI-security-institute evaluation",
+     "mock": true
+    }
+   ]
+  },
+  {
+   "slug": "misuse-classifiers",
+   "name": "Misuse classifiers and monitoring for API models",
+   "close_to_ml": "very",
+   "where": "AI labs",
+   "refs": [
+    {
+     "claim": "bio-misuse-011",
+     "source": "mock-lab-system-card-2026",
+     "locator": {
+      "section": "MOCK 5"
+     },
+     "quote": "MOCK: classifiers screen biology queries on the API.",
+     "source_title": "MOCK frontier-model system card",
+     "mock": true
+    }
+   ]
+  },
+  {
+   "slug": "tamper-resistant-safeguards",
+   "name": "Safeguards that survive fine-tuning (for open-weight models)",
+   "close_to_ml": "very",
+   "where": "Research labs, academia",
+   "refs": []
+  },
+  {
+   "slug": "dna-synthesis-screening",
+   "name": "DNA-synthesis screening and other biosecurity",
+   "close_to_ml": "partly",
+   "where": "Biosecurity organisations, governments",
+   "refs": []
+  }
+ ],
+ "not_captured": [
+  {
+   "slug": "disruption",
+   "text": "Economic and social disruption beyond health loss",
+   "refs": [
+    {
+     "claim": "bio-misuse-012",
+     "source": "mock-consensus-report-2026",
+     "locator": {
+      "section": "MOCK 2.3"
+     },
+     "quote": "MOCK: outbreaks also cause economic and social disruption.",
+     "source_title": "MOCK international consensus report",
+     "mock": true
+    }
+   ]
+  },
+  {
+   "slug": "trust",
+   "text": "Loss of trust in science and public health",
+   "refs": []
+  },
+  {
+   "slug": "after-2031",
+   "text": "Anything after 2031",
+   "refs": []
+  }
+ ],
+ "flip": {
+  "counterfactual": "frozen-2026",
+  "expected_values": {
+   "bio-misuse": 124849.61350800042,
+   "data-centre-air-pollution": 32964.91744268032
+  },
+  "higher": "bio-misuse",
+  "lower": "data-centre-air-pollution",
+  "ratio": 3.787347980624856,
+  "single_parameter_flips": [
+   {
+    "risk": "bio-misuse",
+    "param": "severity",
+    "description": "DALYs if an outbreak happens",
+    "to": 900.3870999509692,
+    "ev_after": 5.911740192873729
+   }
+  ],
+  "mock": true
+ },
+ "neighbour": "data-centre-air-pollution",
+ "extras": {},
+ "limitations": [
+  "MOCK. Every input is invented; this card shows the format only."
+ ],
+ "index_entries": [],
+ "sources": [
+  "mock-aisi-evaluation-2026",
+  "mock-consensus-report-2026",
+  "mock-expert-survey-2026",
+  "mock-lab-system-card-2026",
+  "mock-outbreak-model-2025"
+ ],
+ "provenance": {
+  "model": "mock/models/bio_misuse.py",
+  "card_source": "mock/cards/bio-misuse.md",
+  "commit": "8c7e21d",
+  "uncommitted_input_changes": false,
+  "seed": 20261125,
+  "draws": 100000
+ },
+ "changelog": [
+  {
+   "commit": "8c7e21d",
+   "date": "2026-11-27",
+   "change": "Milestone 1 (part 2): air-pollution model, card builder, full CLI, mock bio-misuse",
+   "why": "Finishes the work interrupted on 2026-11-25. The air-pollution model now declares its fixed inputs (2023 electricity, AI-share estimates) as parameters instead of hidden constants, so `aiwelfare model` and the card show every number used."
+  }
+ ],
+ "mock": true
+}
