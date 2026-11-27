@@ -270,7 +270,7 @@ def analyse(
 
     paths = input_paths(ds, model, cs, risk)
     # The last commit that changed any input (not HEAD), so `datalad rerun` reproduces the card.
-    commit = _git(ds, "log", "-1", "--format=%h", "--", *paths, "src/aiwelfare")
+    commit = _git(ds, "log", "-1", "--format=%h", "--", *paths, "src/aiwelfare", "baselines")
     dirty = bool(_git(ds, "status", "--porcelain", "--", *paths))
 
     return {

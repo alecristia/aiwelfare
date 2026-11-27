@@ -760,8 +760,8 @@ def rerun(risk: RiskArg, include_mock: MockOpt = False, as_json: JsonOpt = False
         return
     if not shutil.which("datalad"):
         _fail("datalad is not installed", as_json)
-    # Inputs: the risk's model, prose and claims, plus the engine that turns them into numbers.
-    inputs = [*cardmod.input_paths(ds, m, cs, rid), "src/aiwelfare"]
+    # Inputs: the risk's model, prose and claims, the engine, and the baselines cards compare against.
+    inputs = [*cardmod.input_paths(ds, m, cs, rid), "src/aiwelfare", "baselines"]
     outdir = f"results/{rid}"
     cmd = [
         "datalad",

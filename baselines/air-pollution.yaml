@@ -1,0 +1,18 @@
+# Generated from the GBD subdataset by script (values copied, not typed). Source: Institute for Health Metrics and Evaluation.
+id: air-pollution
+mock: false
+kind: risk-factor
+label: air pollution
+dalys_per_year: 232308377
+dalys_per_year_interval:
+  low: 193833436
+  high: 263895635
+  kind: ui95
+deaths_per_year: 7901335
+geography: global
+year: 2023
+source: ihme-gbd-2023-risk-factors
+locator:
+  table: IHME-GBD_2023_DATA-a3a514ad-1.csv, rei_id 85 (Air pollution), measure DALYs and Deaths
+notes: 'GBD level-1 risk group: environmental and occupational. Attributable to the risk factor, all causes. Overlaps
+  with other risk factors: not additive (D16). Values rounded to whole numbers from the CSV.'

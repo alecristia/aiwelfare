@@ -1,0 +1,18 @@
+# Generated from the GBD subdataset by script (values copied, not typed). Source: Institute for Health Metrics and Evaluation.
+id: child-maternal-malnutrition
+mock: false
+kind: risk-factor
+label: child and maternal malnutrition
+dalys_per_year: 275856034
+dalys_per_year_interval:
+  low: 240885521
+  high: 315419628
+  kind: ui95
+deaths_per_year: 2568099
+geography: global
+year: 2023
+source: ihme-gbd-2023-risk-factors
+locator:
+  table: IHME-GBD_2023_DATA-a3a514ad-1.csv, rei_id 92 (Child and maternal malnutrition), measure DALYs and Deaths
+notes: 'GBD level-1 risk group: behavioural. Attributable to the risk factor, all causes. Overlaps with other risk
+  factors: not additive (D16). Values rounded to whole numbers from the CSV.'

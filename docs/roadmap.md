@@ -40,18 +40,18 @@ Harms that fall inside a card but outside DALYs (e.g. loss of rights under autoc
 
 ## Now
 
-### 1. Health baselines (GBD risk factors, D16)
-**What:** six global reference lines, GBD **risk factors** (D16), two per GBD level-1 risk group, all at **level 2** of the risk hierarchy. Proposed, to confirm:
+### 1. Health baselines (GBD risk factors, D16): done for the six baselines
+The six global baselines are in `baselines/` (GBD 2023, year 2023), generated from the GBD subdataset `baselines/gbd/`:
 
-| GBD level-1 risk group | Level-2 risk factors |
+| GBD level-1 risk group | Risk factors |
 |---|---|
 | Environmental and occupational | Air pollution; unsafe water, sanitation and handwashing |
 | Behavioural | Tobacco; child and maternal malnutrition |
 | Metabolic | High systolic blood pressure; high fasting plasma glucose |
 
-Attributable DALYs, all ages, both sexes, global, latest GBD year, held constant over the 2026–2031 window. Also needed, for the environmental-footprint card (not a baseline): deaths and DALYs attributable to ambient particulate matter pollution (level 3).
-**How:** GBD as a DataLad subdataset, files tracked by checksum only (D16, D1).
-**Needs the maintainer:** confirm the six; the download needs an IHME account login.
+Still to do:
+- deaths and DALYs attributable to ambient particulate matter pollution, for the environmental-footprint card (maintainer downloading)
+- check that the six sit at the same level of the GBD risk hierarchy (the download does not record it)
 
 ### 2. Clinical AI (net)
 The first real benefit, so the overview does not show harms alone.

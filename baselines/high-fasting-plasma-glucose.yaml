@@ -1,0 +1,18 @@
+# Generated from the GBD subdataset by script (values copied, not typed). Source: Institute for Health Metrics and Evaluation.
+id: high-fasting-plasma-glucose
+mock: false
+kind: risk-factor
+label: high fasting plasma glucose
+dalys_per_year: 161780376
+dalys_per_year_interval:
+  low: 136566317
+  high: 187829413
+  kind: ui95
+deaths_per_year: 5336210
+geography: global
+year: 2023
+source: ihme-gbd-2023-risk-factors
+locator:
+  table: IHME-GBD_2023_DATA-a3a514ad-1.csv, rei_id 105 (High fasting plasma glucose), measure DALYs and Deaths
+notes: 'GBD level-1 risk group: metabolic. Attributable to the risk factor, all causes. Overlaps with other risk
+  factors: not additive (D16). Values rounded to whole numbers from the CSV.'

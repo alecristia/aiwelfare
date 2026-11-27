@@ -13,6 +13,18 @@ properties:
   mock: {type: boolean}
   label: {type: string}
   dalys_per_year: {type: number, exclusiveMinimum: 0}
+  dalys_per_year_interval:
+    type: object
+    additionalProperties: false
+    required: [low, high, kind]
+    properties:
+      low: {type: number}
+      high: {type: number}
+      kind: {enum: [ui95, ci95, unqualified]}
+  deaths_per_year: {type: number, exclusiveMinimum: 0}
+  kind:
+    enum: [risk-factor, cause]
+    description: What the baseline is (D16 uses GBD risk factors).
   geography: {type: string}
   year: {type: integer}
   source: {type: string}

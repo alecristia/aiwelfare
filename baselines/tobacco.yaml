@@ -1,0 +1,18 @@
+# Generated from the GBD subdataset by script (values copied, not typed). Source: Institute for Health Metrics and Evaluation.
+id: tobacco
+mock: false
+kind: risk-factor
+label: tobacco
+dalys_per_year: 203733929
+dalys_per_year_interval:
+  low: 171224727
+  high: 236384489
+  kind: ui95
+deaths_per_year: 7360745
+geography: global
+year: 2023
+source: ihme-gbd-2023-risk-factors
+locator:
+  table: IHME-GBD_2023_DATA-a3a514ad-1.csv, rei_id 98 (Tobacco), measure DALYs and Deaths
+notes: 'GBD level-1 risk group: behavioural. Attributable to the risk factor, all causes. Overlaps with other risk
+  factors: not additive (D16). Values rounded to whole numbers from the CSV.'

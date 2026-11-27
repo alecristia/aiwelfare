@@ -1,0 +1,25 @@
+id: ihme-gbd-2023-risk-factors
+mock: false
+title: "Global Burden of Disease Study 2023 (GBD 2023) Results: deaths and DALYs attributable to six risk factors, global, 2023"
+authors: [Global Burden of Disease Collaborative Network]
+publisher: Institute for Health Metrics and Evaluation (IHME), Seattle
+type: dataset
+evidence_date: "2023"
+published: "2024"
+version: "GBD 2023, GBD Results tool export IHME-GBD_2023_DATA-a3a514ad-1, downloaded 2026-11-27"
+accessed: 2026-11-27
+url: https://vizhub.healthdata.org/gbd-results/
+license: IHME Free-of-Charge Non-Commercial User Agreement
+redistribution: url-only
+sha256: 293aa4281fdb1f53d22d85bc9213f73d07cccad1082263a92cd7ab8e2ab7eb98
+evidence_basis: [modelled]
+author_interests:
+  - kind: funder
+    note: IHME (University of Washington); GBD is funded mainly by the Gates Foundation.
+notes: >
+  The file lives in the GBD subdataset, baselines/gbd/2023-risk-factors/ (zip and extracted
+  CSV, annexed, never pushed). The sha256 is the zip's. Query: context risk; cause all causes;
+  location global; year 2023; all ages; both sexes; deaths and DALYs; number. Citation as
+  given in the download: Global Burden of Disease Collaborative Network. GBD 2023 Results.
+  IHME, 2024. Outputs must carry "Source: Institute for Health Metrics and Evaluation".
+  The level of each risk factor in the GBD risk hierarchy is not recorded in the file.
