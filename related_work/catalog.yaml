@@ -1,0 +1,1191 @@
+# Prior-work catalogue: quantified effects of AI on human health, mortality or welfare.
+#
+# Produced by the prior-work search described in docs/prior-work-search.md (search date 2026-11-25).
+# Every entry below was opened and read before inclusion. Where only part of an item could be read
+# (abstract, summary page, press release), `accessed` says so and the fields reflect only that part.
+# Items that looked relevant but could not be read are listed in docs/related-work.md ("Not accessed"),
+# not here.
+#
+# Field notes:
+#   tier: A multi-risk quantification | B single-pathway quantification |
+#         C probability forecasts usable as inputs | D methods and frameworks
+#   closeness_to_this_repo: 0-3 (3 = near-term, AI-specific, health-denominated, directly usable)
+#   usable_as: precedent | claim source for card X | baseline | method | none
+#   Card ids used in usable_as: bio-misuse and clinical-errors are the only cards named so far in
+#   docs/examples/risk-card-bio-misuse.md. Other pathways are proposed in candidate_new_card and
+#   checked against D2 in docs/related-work.md.
+#   short_quote: verbatim, under 25 words, at most one per item.
+#
+# This file records what each source SAYS. It makes no judgement about how sources should be combined.
+
+items:
+
+  # ---------------------------------------------------------------- TIER A
+  - id: lancet-commission-threats-2026
+    title: "The Lancet Commission on 21st Century Global Threats to Health"
+    authors: "Murray CJL (IHME, University of Washington), Kanem N (co-chair), et al."
+    year: 2026
+    url_or_doi: "https://doi.org/10.1016/S0140-6736(26)01714-9"
+    accessed: "Full text and abstract blocked (HTTP 403). Read via official press release (https://www.news-medical.net/news/20261012/Lancet-Commission-identifies-seventeen-catastrophic-threats-to-global-health.aspx), Medical Xpress (https://medicalxpress.com/news/2026-10-ai-misuse-nuclear-famine-threaten.html) and Health Policy Watch (https://healthpolicy-watch.news/is-the-world-ending-a-lancet-commission-says-maybe/)."
+    tier: A
+    what_is_quantified: "Amenable DALYs (gap between plausible best- and worst-case futures) for 17 threats to health to 2100, including malicious use of AI at about 10.4 billion DALYs (range reported as 0 to 15.6 billion)."
+    units: DALYs
+    time_horizon: "2025-2100 (cumulative)"
+    geography: "Global, 204 countries and territories"
+    harms_benefits_or_both: harms
+    method: "other (GBD-based reference forecast plus best/worst scenarios; for malicious AI, impact multiplied by probability from expert and superforecaster judgement)"
+    evidence_basis: "modelled (most threats); expert judgement (malicious AI and nuclear conflict)"
+    author_interests: "IHME-led academic commission; no AI-developer authorship reported in the coverage read"
+    closeness_to_this_repo: 2
+    closeness_justification: "Only item found that puts an AI risk on the same DALY scale as established health threats, but horizon is 2100, AI is a single lumped 'malicious use' row, and AI benefits are not quantified."
+    usable_as: "precedent; claim source for card bio-misuse (and any malicious-use card) once the full text and appendix are read"
+    candidate_new_card: "none beyond malicious use; the Commission does not split AI misuse by pathway"
+    pre_chatgpt: false
+    short_quote: "action to reduce the risk of malicious AI could avert an estimated 10.4 billion DALYs"
+
+  - id: rp-cross-cause-model-2023
+    title: "Rethink Priorities' Cross-Cause Cost-Effectiveness Model: Introduction and Overview"
+    authors: "Shiller D (overview); model by Baron B, Carter C, Covarrubias A, Davis M, Dickens M, Duffy L, Shiller D, Wildeford P"
+    year: 2023
+    url_or_doi: "https://rethinkpriorities.org/publications/rethink-priorities-cross-cause-cost-effectiveness-model-introduction-and-overview"
+    accessed: "Overview page read in full."
+    tier: A
+    what_is_quantified: "Cost-effectiveness of interventions across global health, animal welfare and existential-risk mitigation (including AI) on a common scale, via user-adjustable distributions."
+    units: "other (DALY-averted equivalents per $1,000)"
+    time_horizon: "Default 1,000-year cutoff for existential-risk value; adjustable"
+    geography: Global
+    harms_benefits_or_both: "both (value of interventions; not a burden estimate)"
+    method: "Monte Carlo (150,000 samples per parameter distribution)"
+    evidence_basis: "modelled; parameters largely expert judgement or placeholders"
+    author_interests: "Rethink Priorities, a research non-profit working with foundations and impact-focused non-profits"
+    closeness_to_this_repo: 1
+    closeness_justification: "Same Monte Carlo, adjustable-parameter approach, but estimates intervention cost-effectiveness over centuries, not the size of AI risks 2026-2031."
+    usable_as: method
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "The CCM follows a Monte Carlo approach to assessing probabilities."
+
+  - id: rp-xrisk-next-generations-2023
+    title: "Is x-risk the most cost-effective if we count only the next few generations?"
+    authors: "Duffy L (Rethink Priorities; byline shows Muresianu L)"
+    year: 2023
+    url_or_doi: "https://forum.effectivealtruism.org/posts/LCfd56cBeRzrMiAhw/is-x-risk-the-most-cost-effective-if-we-count-only-the-next"
+    accessed: "Read via the greaterwrong mirror (https://ea.greaterwrong.com/posts/LCfd56cBeRzrMiAhw); main text verbatim, tail of page only summarised."
+    tier: A
+    what_is_quantified: "DALYs averted per $1,000 for a generic $100M existential-risk mitigation project over 120-180 years, compared with AMF and animal-welfare interventions under 12 scenarios."
+    units: "other (QALYs/DALYs averted per $1,000)"
+    time_horizon: "Next 120-180 years"
+    geography: Global
+    harms_benefits_or_both: "both (intervention value)"
+    method: "Monte Carlo (CCM)"
+    evidence_basis: "modelled; scenario parameters are assumptions"
+    author_interests: "Rethink Priorities (CURVE sequence)"
+    closeness_to_this_repo: 1
+    closeness_justification: "Tests x-risk against global health on a short(er) horizon in DALYs, but risk is generic, not AI-specific, and the quantity is cost-effectiveness, not burden."
+    usable_as: precedent
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "The cost-effectiveness models include only first-order effects of spending on each cause."
+
+  # ---------------------------------------------------------------- TIER B
+  - id: righetti-govai-bioterrorism-2025
+    title: "Dual-Use AI Capabilities and the Risk of Bioterrorism: Converting Capability Evaluations to Risk Assessments"
+    authors: "Righetti L (GovAI)"
+    year: 2025
+    url_or_doi: "https://www.governance.ai/research-paper/dual-use-ai-capabilities-and-the-risk-of-bioterrorism-converting-capability-evaluations-to-risk-assessments"
+    accessed: "Full PDF read (https://cdn.governance.ai/Dual-Use_AI_Capabilities_and_the_Risk_of_Bioterrorism.pdf)."
+    tier: B
+    what_is_quantified: "Expected deaths per year from lone-wolf epidemic bioterrorism: baseline 2,000/yr [146-35,000]; with 'AI Lab & Ops Coach' capabilities 14,000/yr [1,200-305,000]; adding virus discovery 50,000/yr [3,000-984,000] (author, 90% intervals)."
+    units: "deaths (expected per year); probability; $"
+    time_horizon: "Annual, conditional on AI capability thresholds being crossed"
+    geography: "Global (actor counts estimated from US data and scaled)"
+    harms_benefits_or_both: harms
+    method: "Monte Carlo (six-parameter model, 100,000 simulations) with expert elicitation and reference classes; reviewed by 6 experts and 5 superforecasters"
+    evidence_basis: "modelled; parameters from historical cases and expert judgement"
+    author_interests: "GovAI, AI-governance non-profit; double-blind peer reviewed per the report"
+    closeness_to_this_repo: 3
+    closeness_justification: "AI-specific, deaths per year, probability x severity Monte Carlo with an interactive calculator; essentially a ready-made model for one card."
+    usable_as: "claim source for card bio-misuse; method"
+    candidate_new_card: "none (fits bio-misuse); report notes state programmes and anthrax as separate unmodelled threat models"
+    pre_chatgpt: false
+    short_quote: "This is equivalent to 12,000 additional expected deaths per year, or ~$100B."
+
+  - id: han-ren-datacentre-health-2024
+    title: "Health-Informed Computing: Estimating and Addressing the Public Health Impact of Data Centers (v1 title: The Unpaid Toll)"
+    authors: "Han Y, Wu Z, Li P, Wierman A, Ren S (UC Riverside, Caltech)"
+    year: 2024
+    url_or_doi: "https://doi.org/10.48550/arXiv.2412.06288"
+    accessed: "arXiv abstract page (v4, June 2026) read."
+    tier: B
+    what_is_quantified: "Annual US public-health burden of criteria air pollutants from data centres, projected above $20 billion in 2028."
+    units: "$ (monetised health burden)"
+    time_horizon: "Projection to 2028 (earlier versions: 2030)"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: "other (emissions and air-quality health impact modelling)"
+    evidence_basis: modelled
+    author_interests: "Academic; none stated on abstract page"
+    closeness_to_this_repo: 2
+    closeness_justification: "AI-attributable health burden with a near-term projection, but US only and in dollars rather than DALYs."
+    usable_as: "claim source for a data-centre pollution card (candidate)"
+    candidate_new_card: "data-centre-air-pollution (AI compute emissions to PM2.5/ozone mortality)"
+    pre_chatgpt: false
+    short_quote: "projected to push the total annual public health burden of U.S. data centers up to more than $20 billion in 2028"
+
+  - id: chen-selin-datacentre-mortality-2026
+    title: "Spatially distributed air quality and health impacts of data center electricity demand in the United States"
+    authors: "Chen Y, Wang S, Senga JRL, White AS, Wong AYH, Freese LM, Bell ML, Selin NE (MIT, UC Irvine, Yale)"
+    year: 2026
+    url_or_doi: "https://doi.org/10.1088/1748-9326/aebbd4"
+    accessed: "MIT News release (https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119) and CS3 publication page with abstract (https://cs3.mit.edu/publication/118903) read; journal page not opened."
+    tier: B
+    what_is_quantified: "Premature deaths in 2023 from data-centre electricity demand: 513 (95% CI 469-557) from PM2.5 and 137 (90-183) from ozone, about 650 in total."
+    units: deaths
+    time_horizon: "2023 (single year)"
+    geography: "Contiguous United States"
+    harms_benefits_or_both: harms
+    method: "other (power-dispatch model coupled to GEOS-Chem chemical transport model and concentration-response functions)"
+    evidence_basis: modelled
+    author_interests: "Academic; funded in part by MIT Energy Initiative and MIT sustainability fellowships"
+    closeness_to_this_repo: 2
+    closeness_justification: "Gives deaths, directly convertible to DALYs, but covers all data centres (not only AI) and only the US in 2023."
+    usable_as: "claim source for a data-centre pollution card (candidate)"
+    candidate_new_card: "data-centre-air-pollution"
+    pre_chatgpt: false
+    short_quote: "Even if you don't think you are affected because there is not a data center near you, think again,"
+
+  - id: muller-nber-datacentre-damages-2026
+    title: "Measuring the Impact of Data Centers in the United States Economy: Monetary Damage from Air Pollution and Greenhouse Gas Emissions"
+    authors: "Muller NZ (Carnegie Mellon University)"
+    year: 2026
+    url_or_doi: "https://doi.org/10.3386/w35100"
+    accessed: "NBER abstract page read; Fortune coverage (https://fortune.com/2026/04/21/data-centers-environmental-health-costs-25-billion/) read."
+    tier: B
+    what_is_quantified: "Gross external damages of about $25 billion (range $10-33 billion) from ~2,800 US data centres in 2025, from PM2.5 mortality risk and greenhouse gases; Fortune reports $3.7 billion as AI-related."
+    units: "$"
+    time_horizon: "2025"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: "other (AP4 integrated assessment model; social cost of carbon)"
+    evidence_basis: modelled
+    author_interests: "Academic; none stated on page"
+    closeness_to_this_repo: 2
+    closeness_justification: "Second independent estimate of the data-centre pathway, but dollars and US only; AI share only in press coverage."
+    usable_as: "claim source for a data-centre pollution card (candidate)"
+    candidate_new_card: "data-centre-air-pollution"
+    pre_chatgpt: false
+    short_quote: "damages attributable to AI-related energy use are small relative to potential productivity gains"
+
+  - id: hsph-cork-datacentre-sites-2026
+    title: "Analyzing air pollution health, economic risks from AI data centers (interview)"
+    authors: "Feldscher K (interviewer) with Cork M (Harvard T.H. Chan School of Public Health)"
+    year: 2026
+    url_or_doi: "https://hsph.harvard.edu/news/analyzing-air-pollution-health-economic-risks-from-ai-data-centers"
+    accessed: "Interview page read; underlying site reports not opened."
+    tier: B
+    what_is_quantified: "Site-level health damages of on-site gas generation at AI data centres, e.g. $53-99 million and about 3.4-6.5 premature deaths per year for one Loudoun County, Virginia facility."
+    units: "$; deaths"
+    time_horizon: "Annual"
+    geography: "Specific US sites (Virginia, Mississippi)"
+    harms_benefits_or_both: harms
+    method: "other (dispersion modelling and PM2.5 health-impact functions)"
+    evidence_basis: modelled
+    author_interests: "Analyses done at the request of local communities and environmental law organisations; interviewee co-founded a consultancy (EmPower Analytics) selling such analyses"
+    closeness_to_this_repo: 1
+    closeness_justification: "Facility-level, not population-level; useful mainly as a check on on-site generation emissions."
+    usable_as: "claim source for a data-centre pollution card (candidate)"
+    candidate_new_card: "data-centre-air-pollution"
+    pre_chatgpt: false
+    short_quote: "The first thing I'd say is that we can't solve a problem we haven't measured."
+
+  - id: iihs-waymo-crash-rates-2026
+    title: "Rise of the machines: crash experiences of highly automated vehicles and human drivers"
+    authors: "Teoh ER, Kidd DG, Riexinger LE (Insurance Institute for Highway Safety)"
+    year: 2026
+    url_or_doi: "https://www.iihs.org/research-areas/bibliography/ref/2374"
+    accessed: "IIHS news release (https://www.iihs.org/news/detail/waymos-driverless-cars-crash-less-often-than-people) and bibliography page read."
+    tier: B
+    what_is_quantified: "Waymo driverless vehicles had 68% lower police-reportable crash rates and 81% fewer injury crashes per mile than human drivers in the same cities, 2021-2024 (about 50 million driverless miles)."
+    units: "other (crash rates per million vehicle miles)"
+    time_horizon: "2021-2024"
+    geography: "Phoenix, San Francisco, Los Angeles, Austin (US)"
+    harms_benefits_or_both: benefits
+    method: "epidemiological (comparison of federal crash reports with police-reported human crash rates)"
+    evidence_basis: measured
+    author_interests: "IIHS is funded by auto insurers; relies on mileage data supplied voluntarily by Waymo"
+    closeness_to_this_repo: 2
+    closeness_justification: "Independent measured effect for an AI benefit pathway with a clear route to road-injury DALYs; scale-up to 2031 adoption is not modelled."
+    usable_as: "claim source for an autonomous-vehicles card (candidate)"
+    candidate_new_card: "autonomous-vehicles (road injuries averted or caused)"
+    pre_chatgpt: false
+    short_quote: "Waymo's driverless vehicles have crash rates that are 68% lower than human drivers"
+
+  - id: mcglave-ransomware-hospitals-2023
+    title: "Hacked to Pieces? The Effects of Ransomware Attacks on Hospitals and Patients"
+    authors: "McGlave CC, Neprash HT, Nikpay SS (University of Minnesota)"
+    year: 2023
+    url_or_doi: "https://business.depaul.edu/academics/economics/news-and-events/Documents/Ransomware_Manuscript.pdf"
+    accessed: "Manuscript PDF read (year inferred from latest references cited; no date on the manuscript)."
+    tier: B
+    what_is_quantified: "Ransomware attacks raise in-hospital mortality for patients already admitted by 1.28-1.87 percentage points (about 36% relative) and cut hospital volume 17-25% in the attack week."
+    units: "other (percentage-point change in in-hospital mortality)"
+    time_horizon: "Attacks 2016-2021"
+    geography: "United States (Medicare fee-for-service)"
+    harms_benefits_or_both: harms
+    method: epidemiological
+    evidence_basis: measured
+    author_interests: "Academic; funded by the NIHCM Foundation"
+    closeness_to_this_repo: 1
+    closeness_justification: "Not AI-specific; supplies the severity term (deaths per hospital attack) for an AI-enabled cyber pathway."
+    usable_as: "claim source for an AI-cyber card (candidate), severity component"
+    candidate_new_card: "ai-enabled-cyberattacks-on-health-and-critical-infrastructure"
+    pre_chatgpt: false
+    short_quote: "We find that ransomware attacks increase in-hospital mortality for patients who are already admitted at the time of attack."
+
+  - id: obrien-death-by-robots-2022
+    title: "Death by Robots? Automation and Working-Age Mortality in the United States"
+    authors: "O'Brien R (Yale), Bair EF, Venkataramani AS (University of Pennsylvania)"
+    year: 2022
+    url_or_doi: "https://doi.org/10.1215/00703370-9774819"
+    accessed: "Abstract read via Europe PMC (PMID 35195250); publisher page blocked (HTTP 403)."
+    tier: B
+    what_is_quantified: "Causal effect of industrial-robot automation (1993-2007) on age- and sex-specific mortality, finding increases in all-cause mortality at ages 45-54 (effect sizes not in abstract)."
+    units: "other (mortality rates)"
+    time_horizon: "1993-2007"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: epidemiological
+    evidence_basis: measured
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Industrial robots, not modern AI; a measured analogue for the labour-displacement-to-mortality link."
+    usable_as: "claim source for a labour-displacement card (candidate), severity component"
+    candidate_new_card: "labour-displacement-mortality"
+    pre_chatgpt: true
+    short_quote: "increases in automation over the period 1993-2007 led to substantive increases in all-cause mortality for both men and women aged 45-54"
+
+  - id: jones-nber-ai-xrisk-spending-2025
+    title: "How Much Should We Spend to Reduce A.I.'s Existential Risk?"
+    authors: "Jones CI"
+    year: 2025
+    url_or_doi: "https://doi.org/10.3386/w33602"
+    accessed: "NBER abstract page only."
+    tier: B
+    what_is_quantified: "Willingness to pay to reduce AI mortality risk, valuing lives at about $10 million; spending at least 1% of GDP a year is justified in most scenarios."
+    units: "$ (and % of GDP)"
+    time_horizon: "Next one to two decades"
+    geography: "United States (valuation)"
+    harms_benefits_or_both: harms
+    method: "other (economic valuation model; only the abstract was read)"
+    evidence_basis: "modelled; risk inputs are expert judgement"
+    author_interests: "Academic economist; none stated"
+    closeness_to_this_repo: 1
+    closeness_justification: "Monetises AI catastrophic mortality risk but does not estimate it; useful for the conversion between deaths and dollars."
+    usable_as: precedent
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "spending at least 1% of GDP annually to mitigate AI risk can be justified"
+
+  - id: barrett-saferai-cyber-2025
+    title: "Toward Quantitative Modeling of Cybersecurity Risks Due to AI Misuse"
+    authors: "Barrett S, Murray M, Quarks O, Smith M, Kryś J, Campos S, et al. (SaferAI and 11 other organisations)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2512.08864"
+    accessed: "arXiv abstract read; HTML full text read only up to section 2 (rest summarised)."
+    tier: B
+    what_is_quantified: "Nine Monte Carlo risk models of AI-enabled cyber offence (attacker numbers, frequency, success, harm), finding AI uplift in 7 of 9 scenarios; harm is economic."
+    units: "$; probability"
+    time_horizon: "Annual, at current state-of-the-art capability"
+    geography: "Not specified"
+    harms_benefits_or_both: harms
+    method: "Monte Carlo with expert Delphi and LLM-simulated experts mapped from benchmarks"
+    evidence_basis: "modelled; expert judgement"
+    author_interests: "SaferAI (AI-risk non-profit) with industry co-authors (Cisco, Irregular, Flare)"
+    closeness_to_this_repo: 2
+    closeness_justification: "Same probability-times-harm Monte Carlo design tied to benchmarks, but economic harm only and authors warn against using exact numbers; health harms not modelled."
+    usable_as: "method; claim source for an AI-cyber card (candidate), probability component"
+    candidate_new_card: "ai-enabled-cyberattacks-on-health-and-critical-infrastructure"
+    pre_chatgpt: false
+    short_quote: "AI-enabled cyber offense has emerged as a concrete example"
+
+  - id: el-arab-ai-cost-effectiveness-review-2025
+    title: "Systematic review of cost effectiveness and budget impact of artificial intelligence in healthcare"
+    authors: "El Arab RA, Al Moosa OA (Almoosa College of Health Sciences)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.1038/s41746-025-01722-y"
+    accessed: "Full text on PMC (PMC12381244) read; parts of methods only summarised."
+    tier: B
+    what_is_quantified: "19 economic evaluations of clinical AI (2020-2024): ICERs per QALY, DALYs averted, cost savings, e.g. AF screening at GBP 4,847-5,544 per QALY."
+    units: "QALYs; $"
+    time_horizon: "90 days to lifetime (per included study)"
+    geography: "North America, Europe, Asia"
+    harms_benefits_or_both: benefits
+    method: "other (systematic review of model-based economic evaluations)"
+    evidence_basis: modelled
+    author_interests: "Academic; no competing interests declared. Review notes likely optimism in included studies."
+    closeness_to_this_repo: 1
+    closeness_justification: "Per-patient QALY gains for specific tools; no population-scale or 2026-2031 estimate."
+    usable_as: "claim source for a clinical-AI benefit card (candidate)"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: false
+    short_quote: "reported economic benefits may be overstated"
+
+  - id: vithlani-ai-economic-evaluations-2023
+    title: "Economic evaluations of artificial intelligence-based healthcare interventions: a systematic literature review of best practices in their conduct and reporting"
+    authors: "Vithlani J, Hawksworth C, Elvidge J, Ayiku L, Dawoud D (NICE)"
+    year: 2023
+    url_or_doi: "https://doi.org/10.3389/fphar.2023.1220950"
+    accessed: "Full text read; some counts only summarised."
+    tier: B
+    what_is_quantified: "21 health economic evaluations of AI interventions; 13 of 21 report the AI to be cost-effective or dominant, mostly cost per QALY."
+    units: "QALYs; $"
+    time_horizon: "Per included study"
+    geography: "Mixed (US, UK, China, Malawi and others)"
+    harms_benefits_or_both: benefits
+    method: "other (systematic review)"
+    evidence_basis: modelled
+    author_interests: "NICE staff; HTx Horizon 2020 project"
+    closeness_to_this_repo: 1
+    closeness_justification: "Same as El Arab 2025: tool-level QALYs, not population burden."
+    usable_as: "claim source for a clinical-AI benefit card (candidate)"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: false
+    short_quote: "Thirteen studies (13/21, 62%) reported the AI intervention to be cost effective or dominant."
+
+  - id: deloitte-ai-healthcare-europe-2020
+    title: "Socio-economic impact of AI on European health systems"
+    authors: "Deloitte Belgium (no individual authors)"
+    year: 2020
+    url_or_doi: "https://www.deloitte.com/be/en/Industries/health-care/research/the-socio-economic-impact-of-ai-on-healthcare.html"
+    accessed: "Summary page opened; headline figures came from the tool's summary of the page rather than verbatim text, and the PDF was not read. Verify before citing."
+    tier: B
+    what_is_quantified: "Potential annual lives saved (about 380,000-403,000), euros saved and clinician hours freed by eight categories of AI in European health systems."
+    units: "deaths (lives saved); $ (EUR); other (hours)"
+    time_horizon: "Annual, at full potential (no year stated)"
+    geography: Europe
+    harms_benefits_or_both: benefits
+    method: "other (consultancy model; method not described on page)"
+    evidence_basis: "modelled (assumptions not disclosed on page)"
+    author_interests: "Consultancy; commissioning body not stated on page"
+    closeness_to_this_repo: 1
+    closeness_justification: "Only population-scale lives-saved figure for clinical AI found, but pre-generative-AI, potential not realised, method opaque."
+    usable_as: "claim source for a clinical-AI benefit card (candidate), upper-bound only"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: true
+    short_quote: null
+
+  - id: masai-mammography-trial-2026
+    title: "Interval cancer, sensitivity, and specificity comparing AI-supported mammography screening with standard double reading without AI in the MASAI study"
+    authors: "Gommers J, Hernström V, Josefsson V, ..., Lång K"
+    year: 2026
+    url_or_doi: "https://doi.org/10.1016/S0140-6736(25)02464-X"
+    accessed: "Abstracts read via Europe PMC for this paper and the companion Hernström et al. 2025, Lancet Digit Health, doi:10.1016/S2589-7500(24)00267-X."
+    tier: B
+    what_is_quantified: "RCT of 105,934 women in Sweden: AI-supported screening raised cancer detection (6.4 vs 5.0 per 1,000) with non-inferior interval cancer rates (1.55 vs 1.76 per 1,000)."
+    units: "other (cancers per 1,000 screened)"
+    time_horizon: "Screening 2021-2022 with 2-year follow-up"
+    geography: Sweden
+    harms_benefits_or_both: benefits
+    method: "other (randomised controlled trial)"
+    evidence_basis: measured
+    author_interests: "Academic; AI system from ScreenPoint Medical (Transpara)"
+    closeness_to_this_repo: 1
+    closeness_justification: "Strongest measured evidence for one clinical-AI benefit, but outcomes are detection rates, not deaths or DALYs."
+    usable_as: "claim source for a clinical-AI benefit card (candidate)"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: false
+    short_quote: "AI-supported mammography screening showed consistently favourable outcomes compared"
+
+  - id: verma-chartwatch-2024
+    title: "Clinical evaluation of a machine learning-based early warning system for patient deterioration"
+    authors: "Verma AA, Stukel TA, Colacci M, et al., Mamdani M (Unity Health Toronto)"
+    year: 2024
+    url_or_doi: "https://doi.org/10.1503/cmaj.240132"
+    accessed: "Abstract read via Europe PMC."
+    tier: B
+    what_is_quantified: "Non-palliative in-hospital deaths fell from 2.1% to 1.6% (adjusted RR 0.74, 95% CI 0.55-1.00) after deploying an ML early-warning system in one internal-medicine unit."
+    units: "other (in-hospital mortality)"
+    time_horizon: "2016-2022"
+    geography: "Toronto, Canada (one hospital)"
+    harms_benefits_or_both: benefits
+    method: "epidemiological (non-randomised controlled, difference-in-differences)"
+    evidence_basis: measured
+    author_interests: "Academic hospital that developed the system"
+    closeness_to_this_repo: 1
+    closeness_justification: "Measured mortality effect, but a single site; scale-up is not addressed."
+    usable_as: "claim source for a clinical-AI benefit card (candidate)"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: boussina-composer-sepsis-2024
+    title: "Impact of a deep learning sepsis prediction model on quality of care and survival"
+    authors: "Boussina A, Shashikumar SP, Malhotra A, et al., Wardi G (UC San Diego Health)"
+    year: 2024
+    url_or_doi: "https://doi.org/10.1038/s41746-023-00986-6"
+    accessed: "Abstract read via Europe PMC."
+    tier: B
+    what_is_quantified: "Deploying the COMPOSER sepsis model was associated with a 1.9% absolute (17% relative) reduction in in-hospital sepsis mortality (95% CI 0.3-3.5%) among 6,217 patients."
+    units: "other (in-hospital mortality)"
+    time_horizon: "2021-2023"
+    geography: "San Diego, US (two emergency departments)"
+    harms_benefits_or_both: benefits
+    method: "epidemiological (before-after quasi-experiment, Bayesian structural time series)"
+    evidence_basis: measured
+    author_interests: "Academic health system that developed the model"
+    closeness_to_this_repo: 1
+    closeness_justification: "Measured mortality effect at two sites; no population scaling."
+    usable_as: "claim source for a clinical-AI benefit card (candidate)"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: susanto-ml-cds-scoping-review-2023
+    title: "Effects of machine learning-based clinical decision support systems on decision-making, care delivery, and patient outcomes: a scoping review"
+    authors: "Susanto AP, Lyell D, Widyantoro B, Berkovsky S, Magrabi F (Macquarie University)"
+    year: 2023
+    url_or_doi: "https://doi.org/10.1093/jamia/ocad180"
+    accessed: "Abstract read via Europe PMC."
+    tier: B
+    what_is_quantified: "Synthesis of 32 evaluations of ML-based clinical decision support in real settings; effects on patient outcomes were mixed."
+    units: "other (study counts)"
+    time_horizon: "Studies 2016-2021"
+    geography: "High-income countries only"
+    harms_benefits_or_both: both
+    method: "other (scoping review)"
+    evidence_basis: measured
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Shows how thin the outcome evidence is; no pooled effect."
+    usable_as: "claim source for clinical-errors and a clinical-AI benefit card (candidate)"
+    candidate_new_card: "clinical-ai-diagnostics-benefit"
+    pre_chatgpt: false
+    short_quote: "Effects on decision-making, care delivery, and patient outcomes were mixed."
+
+  - id: lin-fda-ai-device-reporting-2025
+    title: "Benefit-Risk Reporting for FDA-Cleared Artificial Intelligence-Enabled Medical Devices"
+    authors: "Lin JC, Jain B, Iyer JM, Rola I, Srinivasan AR, Kang C, Patel H, Parikh RB"
+    year: 2025
+    url_or_doi: "https://doi.org/10.1001/jamahealthforum.2025.3351"
+    accessed: "Abstract read via Europe PMC."
+    tier: B
+    what_is_quantified: "Across all 691 FDA-cleared AI/ML devices to 2023, 489 adverse events were reported involving 36 devices (5.2%); premarket safety evidence was sparse."
+    units: "other (adverse-event counts)"
+    time_horizon: "1995-2023"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: "other (cross-sectional analysis of FDA databases)"
+    evidence_basis: measured
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Passive-surveillance counts; a floor on reported clinical-AI harm, not an incidence."
+    usable_as: "claim source for card clinical-errors"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: handley-ai-fda-device-reports-2024
+    title: "Artificial intelligence related safety issues associated with FDA medical device reports"
+    authors: "Handley JL, Krevat SA, Fong A, Ratwani RM (MedStar Health)"
+    year: 2024
+    url_or_doi: "https://doi.org/10.1038/s41746-024-01357-5"
+    accessed: "Abstract read via Europe PMC."
+    tier: B
+    what_is_quantified: "Of 429 FDA device reports for AI/ML-enabled devices, 108 (25.2%) were potentially AI/ML-related and 148 lacked information to judge."
+    units: "other (report counts)"
+    time_horizon: "Not stated in abstract"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: "other (review of safety reports)"
+    evidence_basis: measured
+    author_interests: "Academic health system"
+    closeness_to_this_repo: 1
+    closeness_justification: "Shows that AI attribution in incident reports is often undeterminable."
+    usable_as: "claim source for card clinical-errors"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "Of the 429 reports reviewed, 108 (25.2%) were potentially AI/ML related"
+
+  - id: perlis-genai-depression-2026
+    title: "Generative AI Use and Depressive Symptoms Among US Adults"
+    authors: "Perlis RH, Gunning FM, Uslu AA, Santillana M, Baum MA, Druckman JN, Ognyanova K, Lazer D"
+    year: 2026
+    url_or_doi: "https://doi.org/10.1001/jamanetworkopen.2025.54820"
+    accessed: "Article page read (later sections only summarised)."
+    tier: B
+    what_is_quantified: "Among 20,847 US adults, daily generative-AI use was associated with higher PHQ-9 scores (beta 1.08) and odds of moderate or worse depression (OR 1.29, 1.15-1.46)."
+    units: "other (PHQ-9 score; odds ratio)"
+    time_horizon: "Cross-sectional, April-May 2025"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: "epidemiological (cross-sectional survey)"
+    evidence_basis: "measured (associational, not causal)"
+    author_interests: "Academic; NSF and NIH funding; lead author reports industry consulting fees and edits a JAMA AI journal"
+    closeness_to_this_repo: 1
+    closeness_justification: "Population-representative exposure and outcome data, but associational; no attributable fraction."
+    usable_as: "claim source for a chatbot mental-health card (candidate)"
+    candidate_new_card: "chatbot-mental-health-harm"
+    pre_chatgpt: false
+    short_quote: "A further limitation is the cross-sectional nature of these data, which does not allow us to test causation."
+
+  - id: olsen-chatbot-psychiatric-records-2026
+    title: "Potentially Harmful Consequences of Artificial Intelligence (AI) Chatbot Use Among Patients With Mental Illness: Early Data From a Large Psychiatric Service System"
+    authors: "Olsen SG, Reinecke-Tellefsen CJ, Østergaard SD (Aarhus University)"
+    year: 2026
+    url_or_doi: "https://doi.org/10.1111/acps.70068"
+    accessed: "Abstract of the preprint read via Europe PMC (medRxiv doi:10.1101/2025.11.19.25340580); journal abstract not available in the index."
+    tier: B
+    what_is_quantified: "Screening of psychiatric health records in the Central Denmark Region found 38 patients with potentially harmful mental-health consequences of chatbot use."
+    units: "other (case counts)"
+    time_horizon: "To late 2025"
+    geography: "Central Denmark Region"
+    harms_benefits_or_both: harms
+    method: "epidemiological (record screening, case series)"
+    evidence_basis: measured
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Gives a case count in a defined population, a possible anchor for prevalence among people already in psychiatric care."
+    usable_as: "claim source for a chatbot mental-health card (candidate)"
+    candidate_new_card: "chatbot-mental-health-harm"
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: heinz-therabot-rct-2025
+    title: "Randomized Trial of a Generative AI Chatbot for Mental Health Treatment"
+    authors: "Heinz MV, Mackin DM, Trudeau BM, et al., Jacobson NC (Dartmouth)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.1056/AIoa2400802"
+    accessed: "Abstract read via Europe PMC."
+    tier: B
+    what_is_quantified: "RCT (N=210): a fine-tuned generative-AI therapy chatbot reduced depression symptoms more than waitlist (mean change -6.13 vs -2.63 at 4 weeks; d about 0.85-0.90)."
+    units: "other (symptom scale change; Cohen's d)"
+    time_horizon: "8 weeks"
+    geography: "United States"
+    harms_benefits_or_both: benefits
+    method: "other (randomised controlled trial)"
+    evidence_basis: measured
+    author_interests: "Developers of the chatbot evaluated it"
+    closeness_to_this_repo: 1
+    closeness_justification: "Measured benefit for the chatbot mental-health pathway, but small, short and developer-run."
+    usable_as: "claim source for a chatbot mental-health card (candidate), benefit side"
+    candidate_new_card: "chatbot-mental-health-benefit"
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: fang-chatbot-psychosocial-rct-2025
+    title: "How AI and Human Behaviors Shape Psychosocial Effects of Extended Chatbot Use: A Longitudinal Randomized Controlled Study"
+    authors: "Fang CM, Liu AR, Danry V, Lee E, Chan SWT, Pataranutaporn P, Maes P, Phang J, Lampe M, Ahmad L, Agarwal S"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2503.17473"
+    accessed: "arXiv abstract read."
+    tier: B
+    what_is_quantified: "Four-week RCT (n=981) of chatbot modalities: no significant condition effects; heavier voluntary use associated with more loneliness, dependence and problematic use."
+    units: "other (psychosocial scales)"
+    time_horizon: "4 weeks"
+    geography: "Not stated on abstract page"
+    harms_benefits_or_both: both
+    method: "other (randomised controlled trial)"
+    evidence_basis: measured
+    author_interests: "Affiliations not shown on the abstract page; press coverage describes it as a joint OpenAI and MIT Media Lab study (unverified)"
+    closeness_to_this_repo: 1
+    closeness_justification: "Measured but non-health outcomes; dose-response is observational within the trial."
+    usable_as: "claim source for a chatbot mental-health card (candidate)"
+    candidate_new_card: "chatbot-mental-health-harm"
+    pre_chatgpt: false
+    short_quote: "No significant effects were detected from experimental conditions"
+
+  # ---------------------------------------------------------------- TIER C
+  - id: williams-fri-llm-biorisk-2025
+    title: "Forecasting LLM-Enabled Biorisk and the Efficacy of Safeguards"
+    authors: "Williams B, Righetti L, Rosenberg J, et al., Karger E, Tetlock PE (Forecasting Research Institute, GovAI, SecureBio)"
+    year: 2025
+    url_or_doi: "https://www.governance.ai/research-paper/forecasting-llm-enabled-biorisk-and-the-efficacy-of-safeguards"
+    accessed: "GovAI summary page read; full PDF not opened."
+    tier: C
+    what_is_quantified: "Median expert annual probability of a human-caused epidemic killing 100,000+: 0.3% baseline, 1.5% conditional on certain LLM capabilities, 0.4% with safeguards and nucleic-acid screening."
+    units: probability
+    time_horizon: "Annual; capability threshold expected after 2030 by median respondent, but already crossed per baselining study"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "expert elicitation (46 biosecurity experts, 22 forecasters) plus capability baselining"
+    evidence_basis: "expert judgement"
+    author_interests: "Forecasting and AI-governance non-profits"
+    closeness_to_this_repo: 3
+    closeness_justification: "AI-specific, annual, death-thresholded probabilities with and without mitigations; direct input for probability term."
+    usable_as: "claim source for card bio-misuse"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "The median expert predicted a 0.3% baseline annual risk of a human-caused epidemic that causes 100,000 deaths."
+
+  - id: fri-leap-wave9-risks-2026
+    title: "Forecasting Major Risks from AI (LEAP Wave 9)"
+    authors: "Forecasting Research Institute"
+    year: 2026
+    url_or_doi: "https://forecastingresearch.substack.com/p/forecasting-major-risks-from-ai"
+    accessed: "Summary post read; full wave report on leap.forecastingresearch.org not opened."
+    tier: C
+    what_is_quantified: "Median expert P(AI-related catastrophe killing >10% of humans) by 2030: 0.08% (slow progress) vs 1% (rapid); P(AI harm event with >=50 deaths or $100B) by 2050: 62%."
+    units: probability
+    time_horizon: "2030, 2050, 2100"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "forecasting tournament (longitudinal expert and superforecaster panel)"
+    evidence_basis: "expert judgement"
+    author_interests: "FRI; funders not stated on page"
+    closeness_to_this_repo: 3
+    closeness_justification: "Gives 2030-dated, death-thresholded AI catastrophe probabilities split by AI-progress scenario, matching the repo's window and its trajectory parameter."
+    usable_as: "claim source for any catastrophic-risk card; scenario inputs"
+    candidate_new_card: "ai-errors-in-critical-infrastructure (named by forecasters as a common route to catastrophe)"
+    pre_chatgpt: false
+    short_quote: "The median expert gave a 62% probability that this would occur by 2050"
+
+  - id: fri-leap-wave10-benefits-2026
+    title: "Experts Forecast Rapid AI Progress Could Bring Health and Wealth Without Happiness (LEAP Wave 10)"
+    authors: "Forecasting Research Institute"
+    year: 2026
+    url_or_doi: "https://forecastingresearch.substack.com/p/forecasting-ai-benefits"
+    accessed: "Summary post read."
+    tier: C
+    what_is_quantified: "Median expert annual deaths from TB, HIV/AIDS and malaria in 2050: 1.65 million (slow AI progress) vs 500,000 (rapid); US life expectancy 2100: 85 vs 95."
+    units: "deaths; other (life expectancy)"
+    time_horizon: "2050, 2100"
+    geography: "Global (disease deaths); US (life expectancy)"
+    harms_benefits_or_both: benefits
+    method: "forecasting tournament"
+    evidence_basis: "expert judgement"
+    author_interests: FRI
+    closeness_to_this_repo: 2
+    closeness_justification: "Rare quantified forecast of AI health benefits against a GBD-style baseline, but dated 2050, not 2031."
+    usable_as: "claim source for benefit cards (candidate)"
+    candidate_new_card: "ai-accelerated-biomedical-research (drug and vaccine discovery)"
+    pre_chatgpt: false
+    short_quote: "over a million fewer deaths from currently non-eradicable diseases"
+
+  - id: fri-leap-introduction-2025
+    title: "Introducing LEAP: The Longitudinal Expert AI Panel"
+    authors: "Forecasting Research Institute"
+    year: 2025
+    url_or_doi: "https://forecastingresearch.substack.com/p/introducing-leap"
+    accessed: "Post read."
+    tier: C
+    what_is_quantified: "Adoption forecasts for 2030 usable as exposure inputs, e.g. 15% of adults using AI companionship daily, 20% of US rideshare trips autonomous; no direct health outcomes."
+    units: "probability; other (adoption shares)"
+    time_horizon: "2030, 2040"
+    geography: "United States mostly"
+    harms_benefits_or_both: both
+    method: "forecasting tournament"
+    evidence_basis: "expert judgement"
+    author_interests: FRI
+    closeness_to_this_repo: 2
+    closeness_justification: "Exposure forecasts inside the window, needed to scale per-user effects (AVs, companions)."
+    usable_as: "claim source for autonomous-vehicles and chatbot cards (candidate), exposure component"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "The median expert predicts that 7% of U.S. electricity consumption will be used for training"
+
+  - id: karger-xpt-2023
+    title: "Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (XPT); published as Subjective-probability forecasts of existential risk, Int J Forecasting 41(2), 2025"
+    authors: "Karger E, Rosenberg J, Jacobs Z, Hickman M, Hadshar R, Gamin K, Smith T, Williams B, McCaslin T, Thomas S, Tetlock PE"
+    year: 2023
+    url_or_doi: "https://forecastingresearch.org/xpt ; https://doi.org/10.1016/j.ijforecast.2024.11.008"
+    accessed: "Working-paper PDF read (key results and Table 9); journal version abstract read on RePEc."
+    tier: C
+    what_is_quantified: "Median P(AI-caused catastrophe killing >=10% of humans) by 2100: 2.13% superforecasters vs 12% domain experts; AI extinction by 2100: 0.38% vs 3%."
+    units: probability
+    time_horizon: "2030, 2050, 2100 (headline AI figures are for 2100)"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "forecasting tournament (89 superforecasters, 80 experts, June-October 2022)"
+    evidence_basis: "expert judgement"
+    author_interests: "FRI; funded by the Musk Foundation and the Long-Term Future Fund"
+    closeness_to_this_repo: 1
+    closeness_justification: "Well-documented catastrophe probabilities, but elicited before ChatGPT and mostly to 2100."
+    usable_as: "claim source for catastrophic-risk cards (historical comparison)"
+    candidate_new_card: none
+    pre_chatgpt: true
+    short_quote: "Experts and superforecasters were furthest apart on AI risk—and less so on the risk of nuclear war."
+
+  - id: rosenberg-fri-adversarial-collaboration-2024
+    title: "Roots of Disagreement on AI Risk: Exploring the Potential and Pitfalls of Adversarial Collaboration"
+    authors: "Rosenberg J, Karger E, Morris A, Hickman M, Hadshar R, Jacobs Z, Tetlock P (FRI)"
+    year: 2024
+    url_or_doi: "https://forecastingresearch.org/s/AIcollaboration.pdf"
+    accessed: "Read via the EA Forum post mirror (https://ea.greaterwrong.com/posts/orhjaZ3AJMHzDzckZ/results-from-an-adversarial-collaboration-on-ai-risk-fri); PDF not opened."
+    tier: C
+    what_is_quantified: "P(AI-caused existential catastrophe by 2100): 20% (concerned group) vs 0.12% (skeptics); identifies 2030-resolving cruxes."
+    units: probability
+    time_horizon: "2100; cruxes to 2030"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "expert elicitation (adversarial collaboration, 22 participants, April-May 2023)"
+    evidence_basis: "expert judgement"
+    author_interests: "FRI; supported by Open Philanthropy"
+    closeness_to_this_repo: 1
+    closeness_justification: "Long horizon; mainly useful for its list of cruxes that resolve by 2030."
+    usable_as: "claim source for crux sections of catastrophic-risk cards"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "predicted a 20% chance of an AI-caused existential catastrophe by 2100"
+
+  - id: saeri-delphi-272-experts-2026
+    title: "Prioritization of Risks from Artificial Intelligence: A Delphi Study of 272 International Experts"
+    authors: "Saeri AK, Graham J, Noetel M, Slattery P, et al. (MIT FutureTech, University of Queensland and others)"
+    year: 2026
+    url_or_doi: "https://arxiv.org/abs/2606.04490"
+    accessed: "alphaXiv abstract page and the MIT Delphi dashboard severity heatmap (https://mit-futuretech.github.io/Delphi-Dashboard/severity_graphs/severity_likelihood_heatmap.html) read."
+    tier: C
+    what_is_quantified: "Expert probability distributions over five severity levels (catastrophic = >1 million deaths or >$100B) for all 24 MIT AI Risk Repository subdomains, 2025-2030; 18 of 24 judged >10% likely to be catastrophic under business as usual."
+    units: probability
+    time_horizon: "2025-2030"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "expert elicitation (three-round Delphi, 214 completers from 37 countries)"
+    evidence_basis: "expert judgement"
+    author_interests: "Academic (MIT AI Risk Initiative)"
+    closeness_to_this_repo: 3
+    closeness_justification: "Same five-year window and risk-by-risk coverage of the MIT taxonomy, with death-thresholded severity bands; the nearest thing to a full set of probability inputs."
+    usable_as: "claim source for most risk cards (probability x severity bands); index cross-check for D3"
+    candidate_new_card: "competitive-dynamics and power-centralisation rank high in the study but mostly fall in 'not captured in DALYs'"
+    pre_chatgpt: false
+    short_quote: "In a business-as-usual scenario, experts judged 18 of 24 risks as having a more than 10% probability"
+
+  - id: grace-thousands-ai-authors-2024
+    title: "Thousands of AI Authors on the Future of AI"
+    authors: "Grace K, Stewart H, Sandkühler JF, Thomas S, Weinstein-Raun B, Brauner J, Korzekwa RC (AI Impacts)"
+    year: 2024
+    url_or_doi: "https://doi.org/10.1613/jair.1.19087"
+    accessed: "arXiv abstract read (arXiv:2401.02843)."
+    tier: C
+    what_is_quantified: "Survey of 2,778 AI researchers: 38-51% gave at least 10% probability to outcomes as bad as human extinction; milestone and automation timelines."
+    units: probability
+    time_horizon: "2027-2116"
+    geography: Global
+    harms_benefits_or_both: both
+    method: "other (expert survey)"
+    evidence_basis: "expert judgement"
+    author_interests: "AI Impacts (research non-profit)"
+    closeness_to_this_repo: 1
+    closeness_justification: "Not time-bounded to the window for harms; useful for capability-timeline inputs."
+    usable_as: "claim source for AI-trajectory parameters"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: aldred-metaculus-fli-workshop-2023
+    title: "AI Risk & Policy Forecasts from Metaculus & FLI's AI Pathways Workshop"
+    authors: "Aldred W (Metaculus)"
+    year: 2023
+    url_or_doi: "https://www.lesswrong.com/posts/eK9SwXrSY4s7p2RgY/ai-risk-and-policy-forecasts-from-metaculus-and-fli-s-ai"
+    accessed: "Read via greaterwrong mirror (https://www.greaterwrong.com/posts/eK9SwXrSY4s7p2RgY/ai-risk-and-policy-forecasts)."
+    tier: C
+    what_is_quantified: "Workshop median P(AI-caused global catastrophe killing >10% of the population) by 2030: 2%; plus policy-event probabilities."
+    units: probability
+    time_horizon: "2025-2030"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "forecasting tournament (workshop, about 20 forecasters, 5-6 per question)"
+    evidence_basis: "expert judgement"
+    author_interests: "Metaculus and Future of Life Institute"
+    closeness_to_this_repo: 2
+    closeness_justification: "2030-dated catastrophe probability, but tiny sample and May 2023 snapshot."
+    usable_as: "claim source for catastrophic-risk cards"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "AI-caused global catastrophe, meaning >10% of the global population being killed, by 2030 was 2%."
+
+  - id: anestrand-ai-disaster-markets-2025
+    title: "Probability of AI-Caused Disaster"
+    authors: "Ånestrand A (Forecasting AI Futures newsletter)"
+    year: 2025
+    url_or_doi: "https://forecastingaifutures.substack.com/p/probability-of-ai-caused-disaster"
+    accessed: "Post read; embedded market widgets did not render, figures are those written in the post (Feb 2025)."
+    tier: C
+    what_is_quantified: "Compiles Manifold and Metaculus prices for AI-caused deaths before 2029 at thresholds from 100 (74%) to 1 million (12%) and beyond; 32% for 1M deaths or $100B before 2030."
+    units: probability
+    time_horizon: "Before 2029/2030; this century"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "other (prediction markets)"
+    evidence_basis: "speculation (thin prediction markets, often <15 forecasters)"
+    author_interests: "Independent newsletter"
+    closeness_to_this_repo: 2
+    closeness_justification: "Only source found giving a full exceedance curve of AI-caused deaths within the window, but from thin, inconsistent markets."
+    usable_as: "claim source for tail shape of catastrophic-risk cards (flagged weak)"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "Individual forecasters have wildly varying predictions"
+
+  - id: longtermwiki-ai-cyber-tail-2026
+    title: "AI Cyber Damage: Bounding the Tail"
+    authors: "Longterm Wiki (no author stated)"
+    year: 2026
+    url_or_doi: "https://www.longtermwiki.com/wiki/ai-cyber-damage-bounding-tail"
+    accessed: "First ~40% of page read verbatim; remainder summarised."
+    tier: C
+    what_is_quantified: "Judgemental probabilities for AI-enabled cyber damage, e.g. 5-20% that single-year AI-cyber damage exceeds 10% of global GDP by 2035; single event >$500B by end-2028 about 8-15%."
+    units: "probability; $"
+    time_horizon: "2028-2035"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "other (judgemental synthesis anchored on incident and insurance data)"
+    evidence_basis: "expert judgement (unattributed)"
+    author_interests: "Unattributed wiki; not maintained since May 2026"
+    closeness_to_this_repo: 1
+    closeness_justification: "Near-term, AI-specific cyber probabilities, but economic only and unattributed."
+    usable_as: "claim source for an AI-cyber card (candidate), flagged weak"
+    candidate_new_card: "ai-enabled-cyberattacks-on-health-and-critical-infrastructure"
+    pre_chatgpt: false
+    short_quote: null
+
+  # ---------------------------------------------------------------- TIER D
+  - id: kapoor-open-foundation-models-2024
+    title: "On the Societal Impact of Open Foundation Models"
+    authors: "Kapoor S, Bommasani R, Klyman K, et al., Liang P, Narayanan A"
+    year: 2024
+    url_or_doi: "https://doi.org/10.48550/arXiv.2403.07918"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Nothing; proposes a marginal-risk assessment framework for open models."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: both
+    method: "other (conceptual framework)"
+    evidence_basis: speculation
+    author_interests: "Academic with some industry co-authors"
+    closeness_to_this_repo: 2
+    closeness_justification: "Defines the marginal-risk question behind the repo's 'only open models advance' counterfactual."
+    usable_as: method
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "we design a risk assessment framework for analyzing their marginal risk"
+
+  - id: wisakanto-pra-for-ai-2025
+    title: "Adapting Probabilistic Risk Assessment for AI"
+    authors: "Wisakanto AK, Rogero J, Casheekar AM, Mallah R"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2504.18536"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Nothing; framework and workbook for likelihood and severity bands."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "other (probabilistic risk assessment framework)"
+    evidence_basis: speculation
+    author_interests: "Authors linked to AI-safety organisations (affiliations not shown on abstract page)"
+    closeness_to_this_repo: 1
+    closeness_justification: "Severity banding could inform how cards discretise severity."
+    usable_as: method
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "introduces the probabilistic risk assessment (PRA) for AI framework"
+
+  - id: murray-saferai-methodology-2025
+    title: "A Methodology for Quantitative AI Risk Modeling"
+    authors: "Murray M, Barrett S, Papadatos H, Quarks O, Smith M, Tlaie Boria A, Touzet C, Campos S (SaferAI)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2512.08844"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Nothing; six-step method combining scenarios, expert input and Monte Carlo into probability-of-damage claims."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "Monte Carlo (method description)"
+    evidence_basis: speculation
+    author_interests: "SaferAI"
+    closeness_to_this_repo: 2
+    closeness_justification: "Closest published methodology to the repo's model structure."
+    usable_as: method
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "Effective risk management requires systematic modeling to characterize potential harms"
+
+  - id: raman-intolerable-risk-thresholds-2025
+    title: "Intolerable Risk Threshold Recommendations for Artificial Intelligence"
+    authors: "Raman D, Madkour N, Murphy ER, Jackson K, Newman J (UC Berkeley CLTC)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2503.05812"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Nothing; threshold recommendations across eight risk categories."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "other (framework)"
+    evidence_basis: speculation
+    author_interests: Academic
+    closeness_to_this_repo: 0
+    closeness_justification: "Threshold-setting, not magnitudes."
+    usable_as: none
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: kim-mocet-2025
+    title: "Monte Carlo Expected Threat (MOCET) Scoring"
+    authors: "Kim J, Potluri S"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2511.16823"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Nothing in the abstract; proposes a metric for real-world bio-uplift risk of models."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "Monte Carlo (metric proposal)"
+    evidence_basis: speculation
+    author_interests: "Not stated"
+    closeness_to_this_repo: 1
+    closeness_justification: "Possible way to turn bio evaluations into an uplift parameter."
+    usable_as: method
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: parikh-epidemiology-of-ai-2026
+    title: "The Epidemiology of Artificial Intelligence"
+    authors: "Parikh H, McCormick T, Johnson E, Hickey L, Ranney M, Mukherjee B"
+    year: 2026
+    url_or_doi: "https://doi.org/10.48550/arXiv.2604.14086"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Nothing in the abstract; frames AI as a determinant of health with ambient versus personal exposure."
+    units: none
+    time_horizon: "n/a"
+    geography: "United States (illustrative survey data)"
+    harms_benefits_or_both: both
+    method: "other (conceptual framework)"
+    evidence_basis: speculation
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Exposure framework relevant to how cards define who is exposed."
+    usable_as: method
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "AI now functions as a determinant of health and propose a conceptual framework"
+
+  - id: mit-ai-risk-repository-v4-2025
+    title: "MIT AI Risk Repository, Version 4 (Repository Update: December 2025)"
+    authors: "MIT AI Risk Initiative (MIT FutureTech)"
+    year: 2025
+    url_or_doi: "https://airisk.mit.edu/blog/repository-update-december-2025"
+    accessed: "Update page read."
+    tier: D
+    what_is_quantified: "Nothing; catalogue of 1,600-1,700+ risks from published frameworks."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "other (taxonomy)"
+    evidence_basis: speculation
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Already the repo's coverage index (D3)."
+    usable_as: "method (index)"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "Version 4 of the MIT AI Risk Repository is now live."
+
+  - id: mit-ai-incident-tracker-2026
+    title: "MIT AI Incident Tracker"
+    authors: "MIT AI Risk Initiative with Arcola AI"
+    year: 2026
+    url_or_doi: "https://airisk.mit.edu/ai-incident-tracker"
+    accessed: "Landing page read."
+    tier: D
+    what_is_quantified: "Classifies about 1,600 AI Incident Database reports by risk, harm type and CSET-based severity using an LLM pipeline; no death counts on the page."
+    units: "other (incident counts)"
+    time_horizon: "Ongoing"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "other (LLM classification of incident reports)"
+    evidence_basis: "measured (reported incidents; classification not validated)"
+    author_interests: Academic
+    closeness_to_this_repo: 1
+    closeness_justification: "Possible incident-based anchor for harms happening now, once severity counts are extracted."
+    usable_as: "method; future claim source"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: oecd-ai-incidents-monitor-2026
+    title: "Overview and methodology of the AI Incidents and Hazards Monitor"
+    authors: "OECD.AI expert group on AI incidents"
+    year: 2026
+    url_or_doi: "https://oecd.ai/en/incidents-methodology"
+    accessed: "Methodology page read."
+    tier: D
+    what_is_quantified: "Method for counting AI incidents and hazards from news, including a health-harm category; no aggregate harm figures."
+    units: "other (incident counts)"
+    time_horizon: "Since November 2024 (pipeline)"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "other (LLM classification of news events)"
+    evidence_basis: "measured (media reports; not independently verified)"
+    author_interests: "Intergovernmental; supported by the Patrick J. McGovern Foundation"
+    closeness_to_this_repo: 1
+    closeness_justification: "Observed-harm source named in VISION.md; needs its own extraction."
+    usable_as: "method; future claim source"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "The AIM detects AI incidents and hazards from reputable international news outlets."
+
+  - id: iasr-2026
+    title: "International AI Safety Report 2026"
+    authors: "Bengio Y (chair), Clare S, Prunkl C (lead writers), and over 100 experts"
+    year: 2026
+    url_or_doi: "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
+    accessed: "Web version read, executive summary and sections 1.1-1.3 verbatim; later chapters only summarised."
+    tier: D
+    what_is_quantified: "No aggregate harm estimate in the parts read; scattered figures (e.g. 700 million weekly users; a ~6% drop in unaided tumour detection after AI exposure)."
+    units: "other"
+    time_horizon: "Evidence to December 2025"
+    geography: Global
+    harms_benefits_or_both: both
+    method: "other (expert synthesis)"
+    evidence_basis: "mixed (synthesis)"
+    author_interests: "Government-backed; independent writing team"
+    closeness_to_this_repo: 1
+    closeness_justification: "The repo's starting synthesis and grouping scheme (D3, D7), but explicitly lacks magnitudes."
+    usable_as: "method (grouping); index"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "Systematic data on their prevalence and severity remains limited."
+
+  - id: federspiel-ai-threats-health-2023
+    title: "Threats by artificial intelligence to human health and human existence"
+    authors: "Federspiel F, Mitchell R, Asokan A, Umana C, McCoy D"
+    year: 2023
+    url_or_doi: "https://doi.org/10.1136/bmjgh-2022-010435"
+    accessed: "Abstract read via Europe PMC (PMC10186390); publisher page blocked (HTTP 403)."
+    tier: D
+    what_is_quantified: "Nothing; qualitative list of AI threats to health via social, political, economic and security determinants."
+    units: none
+    time_horizon: "n/a"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "other (narrative analysis)"
+    evidence_basis: speculation
+    author_interests: "Public-health academics and IPPNW members"
+    closeness_to_this_repo: 1
+    closeness_justification: "Health-framed risk list useful for coverage checks."
+    usable_as: "method (coverage check)"
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: null
+
+  - id: armitage-agi-public-health-2025
+    title: "Artificial General Intelligence and Its Threat to Public Health"
+    authors: "Armitage RC (University of Nottingham)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.1111/jep.70269"
+    accessed: "Full text on PMC (PMC12415933) partly read."
+    tier: D
+    what_is_quantified: "Nothing new; narrative review of population-health threats from AGI."
+    units: none
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "other (narrative review)"
+    evidence_basis: speculation
+    author_interests: Academic
+    closeness_to_this_repo: 0
+    closeness_justification: "No magnitudes."
+    usable_as: none
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "The population-level consequences include widespread unemployment, reduced trust in health systems, catastrophic biological threats"
+
+  - id: rand-extinction-risk-2025
+    title: "On the Extinction Risk from Artificial Intelligence"
+    authors: "Vermeer MJD, Lathrop E, Moon A (RAND)"
+    year: 2025
+    url_or_doi: "https://doi.org/10.7249/RRA3034-1"
+    accessed: "Report landing page read."
+    tier: D
+    what_is_quantified: "Nothing numeric; scenario analysis of nuclear, pathogen and geoengineering routes to extinction."
+    units: none
+    time_horizon: "Long-run"
+    geography: Global
+    harms_benefits_or_both: harms
+    method: "other (exploratory scenario analysis)"
+    evidence_basis: speculation
+    author_interests: "RAND (policy research)"
+    closeness_to_this_repo: 0
+    closeness_justification: "Extinction pathways beyond the window."
+    usable_as: none
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "Extinction threats posed by AI are immensely challenging but cannot be ruled out."
+
+  - id: vandermerwe-govai-power-grid-2026
+    title: "Could AI Enable Catastrophic Cyberattacks on the US Power Grid?"
+    authors: "van der Merwe M (GovAI)"
+    year: 2026
+    url_or_doi: "https://www.governance.ai/research-paper/could-ai-enable-catastrophic-cyberattacks-on-the-us-power-grid"
+    accessed: "Abstract page read; PDF not opened."
+    tier: D
+    what_is_quantified: "What a $100B grid attack would require (~100 million people without power for ~a week); no deaths or probabilities."
+    units: "$; other (people affected)"
+    time_horizon: "n/a"
+    geography: "United States"
+    harms_benefits_or_both: harms
+    method: "other (threat modelling)"
+    evidence_basis: speculation
+    author_interests: "GovAI"
+    closeness_to_this_repo: 1
+    closeness_justification: "Severity scenario for an AI-cyber card; no probability."
+    usable_as: "method; severity scenario for an AI-cyber card (candidate)"
+    candidate_new_card: "ai-enabled-cyberattacks-on-health-and-critical-infrastructure"
+    pre_chatgpt: false
+    short_quote: "Rather, the binding constraint appears to be the operational capacity to coordinate diverse capabilities"
+
+  - id: draelos-llm-unsafe-medical-answers-2025
+    title: "Large language models provide unsafe answers to patient-posed medical questions"
+    authors: "Draelos RL, Afreen S, Blasko B, et al., Shah A"
+    year: 2025
+    url_or_doi: "https://doi.org/10.48550/arXiv.2507.18905"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Rates of unsafe chatbot answers (5% to 13%) and problematic answers (21.6% to 43.2%) across four models; no effect on people measured."
+    units: "other (response rates)"
+    time_horizon: "2025 models"
+    geography: "n/a"
+    harms_benefits_or_both: harms
+    method: "other (physician red-teaming evaluation)"
+    evidence_basis: measured
+    author_interests: "Not stated on abstract page"
+    closeness_to_this_repo: 1
+    closeness_justification: "A hazard rate per answer, one input for a patient-facing chatbot error card; needs exposure and harm-conversion steps."
+    usable_as: "claim source for card clinical-errors (hazard component)"
+    candidate_new_card: "consumer-chatbot-medical-advice-errors"
+    pre_chatgpt: false
+    short_quote: "The rate of problematic responses varies from 21.6 percent (Claude) to 43.2 percent (Llama)"
+
+  - id: carmeno-ai-sustainability-wellbeing-review-2026
+    title: "The impacts of artificial intelligence on environmental sustainability and human well-being"
+    authors: "Luna Carmeno N, Domingos T, O'Neill DW"
+    year: 2026
+    url_or_doi: "https://doi.org/10.48550/arXiv.2602.24091"
+    accessed: "arXiv abstract read."
+    tier: D
+    what_is_quantified: "Direction-of-effect tallies across 1,291 studies (e.g. 44% positive vs 46% negative on well-being); no magnitudes."
+    units: "other (study counts)"
+    time_horizon: "n/a"
+    geography: "n/a"
+    harms_benefits_or_both: both
+    method: "other (systematic review)"
+    evidence_basis: "mixed (synthesis)"
+    author_interests: Academic
+    closeness_to_this_repo: 0
+    closeness_justification: "Counts studies, not effects."
+    usable_as: none
+    candidate_new_card: none
+    pre_chatgpt: false
+    short_quote: "impacts on income and health are generally expected to be positive"
