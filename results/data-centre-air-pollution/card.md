@@ -169,7 +169,7 @@ Medium. Top 5% of futures give 11% of the expected value (tail-dominated above 5
 
 ### Index and provenance
 
-MIT AI Risk Repository mapping not done yet (D3) · model `models/data_centre_air_pollution.py` · prose `cards/data-centre-air-pollution.md` · built from commit `31c0410` · seed 20261125, 100,000 draws
+MIT AI Risk Repository mapping not done yet (D3) · model `models/data_centre_air_pollution.py` · prose `cards/data-centre-air-pollution.md` · inputs as of commit `e7b7a0a` · seed 20261125, 100,000 draws
 
 ### Changelog
 
