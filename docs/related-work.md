@@ -1,6 +1,6 @@
 # Related work: has anyone already quantified AI's health effects?
 
-Summary of the prior-work search set out in [`docs/prior-work-search.md`](prior-work-search.md). It was run on 2026-11-25 and took 57 queries in 4 rounds. It produced 53 catalogue entries: 3 in tier A, 23 in B, 11 in C and 16 in D.
+Summary of the prior-work search set out in [`docs/tasks/prior-work-search.md`](tasks/prior-work-search.md). It was run on 2026-11-25 and took 57 queries in 4 rounds. It produced 53 catalogue entries: 3 in tier A, 23 in B, 11 in C and 16 in D.
 
 - Every item: [`related_work/catalog.yaml`](../related_work/catalog.yaml)
 - Every query, and how the stopping rule was applied: [`related_work/search_log.md`](../related_work/search_log.md)

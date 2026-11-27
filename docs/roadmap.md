@@ -36,6 +36,8 @@ The repo does not estimate these for now. Every output that lists the cards shou
 
 Harms that fall inside a card but outside DALYs (e.g. loss of rights under autocracy) are listed on each card under "What this number leaves out".
 
+Each card is built in its own session from the brief `docs/tasks/build-a-card.md`. The first net card (clinical AI) must first agree a design for harm and benefit components with the maintainer (see the brief).
+
 ---
 
 ## Now
