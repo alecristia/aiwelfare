@@ -1,0 +1,31 @@
+id: clinical-ai-011
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: ai_monitoring_coverage_2031
+description: Share of the world's sepsis-related deaths that occur among patients monitored by an AI early-warning
+  system, 2031.
+value:
+  interval:
+    low: 0.005
+    high: 0.08
+    kind: unqualified
+units: share of global sepsis-related deaths
+geography: global
+time_window:
+  start: 2031
+  end: 2031
+  per: year
+counterfactual: no-ai
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/monitoring
+- uptake
+rationale: Assumes continued diffusion of EHR-based early-warning tools, mainly where electronic health records
+  exist, from the 2026 range up to several times that by 2031. Treated as a 90% range; sampled together with the
+  2026 value so 2031 is never below 2026.
+replace_with: A forecast or repeated survey of AI early-warning deployment, ideally global.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

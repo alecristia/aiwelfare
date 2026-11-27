@@ -1,0 +1,25 @@
+id: lin-2025-fda-ai-device-reporting
+mock: false
+title: "Benefit-Risk Reporting for FDA-Cleared Artificial Intelligence-Enabled Medical Devices"
+authors: ["John C. Lin", "Bhav Jain", "Jay M. Iyer", "Ishan Rola", "Anusha R. Srinivasan", "Chaerim Kang", "Heta Patel", "Ravi B. Parikh"]
+publisher: "JAMA Health Forum 6(9):e253351"
+type: peer-reviewed
+evidence_date: "1995"
+published: "2025-09-26"
+version: "published version of record (Europe PMC full-text XML, PMC12475944)"
+accessed: 2026-11-27
+url: https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12475944/fullTextXML
+landing_page: https://doi.org/10.1001/jamahealthforum.2025.3351
+doi: 10.1001/jamahealthforum.2025.3351
+license: "CC BY 4.0"
+redistribution: url-only
+sha256: 2c3b0f988458e9475acf7186f43efccbae0571ad72336720a75af79c07969e8b
+evidence_basis: [measured]
+author_interests:
+  - kind: industry-affiliation
+    note: "Senior author reports grants and personal fees or equity from several health-AI companies, outside the submitted work."
+notes: >
+  Cross-sectional analysis of all 691 AI/ML devices cleared by the FDA to July 2023, linked to
+  MAUDE adverse-event reports and recalls (searched November 2024). US only; voluntary reporting,
+  known to under-report. Evidence covers 1995/2024. Kept url-only, like the other sources, so
+  nothing is mirrored without checking.

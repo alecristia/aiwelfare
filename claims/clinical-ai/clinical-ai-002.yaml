@@ -1,0 +1,35 @@
+id: clinical-ai-002
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: boussina-2024-composer-sepsis
+locator:
+  page: 3
+  table: '2'
+quote: Observed outcomes in the pre-intervention period, the expected counterfactual values from causal impact analysis,
+  and the actual post-intervention values.
+quantity: composer_expected_sepsis_mortality
+description: Expected in-hospital sepsis mortality without COMPOSER in the post-intervention period (causal-impact
+  counterfactual).
+value:
+  interval:
+    low: 9.8
+    mid: 11.4
+    high: 13.0
+    kind: ci95
+units: percent in-hospital mortality among septic patients
+geography: San Diego, United States (two emergency departments)
+time_window:
+  start: 2022
+  end: 2023
+  per: period
+counterfactual: not-applicable
+conditions: 'Table 2, row ''In-hospital mortality %'': pre-intervention 10.3%; expected 11.4% (9.8%-13.0%); actual
+  9.5%.'
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+- study/composer
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

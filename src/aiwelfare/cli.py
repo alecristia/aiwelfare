@@ -37,6 +37,10 @@ CfOpt = Annotated[
 ]
 SeedOpt = Annotated[int, typer.Option(help="Random seed.")]
 RiskArg = Annotated[str, typer.Argument(help="e.g. risk/data-centre-air-pollution")]
+ComponentOpt = Annotated[
+    str | None,
+    typer.Option(help="Net cards (D17): one component instead of the net; see `model`."),
+]
 
 MOCK_BANNER = "⚠️  INCLUDES INVENTED (MOCK) DATA. Do not quote any figure."
 DEFAULT_CF = cardmod.DEFAULT_COUNTERFACTUAL
@@ -88,6 +92,28 @@ def _settings_line(s: dict) -> str:
             f"{k}={v}" for k, v in s["fixed_parameters"].items()
         )
     return out
+
+
+def _check_component(model: engine.Model, component: str | None, as_json: bool) -> None:
+    if component is not None and component not in model.components:
+        known = ", ".join(model.components) or "none (not a net card)"
+        _fail(f"{model.risk} has no component {component}; components: {known}", as_json)
+
+
+def _summarise(model: engine.Model, cf: str, seed: int, fixed=None, component=None):
+    """(draws, summary): the net (signed, D17), one component, or a single-quantity risk."""
+    if component is not None:
+        y, _ = model.run(cf, seed=seed, fixed=fixed, component=component)
+        return y, engine.summarise(y)
+    comps, _ = model.run_components(cf, seed=seed, fixed=fixed)
+    return model.net(comps), engine.summarise_model(model, comps)
+
+
+def _label(model: engine.Model, component: str | None) -> str:
+    if component is None:
+        return model.module.TITLE + (" (net: harms − benefits)" if model.is_net else "")
+    role, label = model.components[component]
+    return f"{model.module.TITLE}: {label} ({role}, DALYs {'averted' if role == 'benefit' else 'lost'})"
 
 
 def _check_cf(model: engine.Model, cf: str, as_json: bool) -> None:
@@ -209,10 +235,16 @@ def show(
     _check_cf(model, counterfactual, as_json)
     a = cardmod.analyse(ds, rid, counterfactual, seed=seed)
     text = cardmod.render(a, cardmod.load_card_source(ds, rid))
+    plot = dotplot.text_signed if model.is_net else dotplot.text
     text = text.replace(
         "![Quantile dotplot](dotplot.svg)",
-        "```\n" + dotplot.text(a["summary"]["dotplot_quantiles"]) + "\n```",
+        "```\n" + plot(a["summary"]["dotplot_quantiles"]) + "\n```",
     )
+    for k, c in a["summary"].get("components", {}).items():
+        text = text.replace(
+            f"![{c['label']}](dotplot-{k}.svg)",
+            f"{c['label']} ({c['role']}):\n```\n" + dotplot.text(c["dotplot_quantiles"]) + "\n```",
+        )
     if as_json:
         _emit(a, True, "")
     else:
@@ -223,37 +255,53 @@ def show(
 def dist(
     risk: RiskArg,
     counterfactual: CfOpt = DEFAULT_CF,
+    component: ComponentOpt = None,
     seed: SeedOpt = engine.DEFAULT_SEED,
     include_mock: MockOpt = False,
     as_json: JsonOpt = False,
 ) -> None:
-    """Quantile dotplot and percentiles of a risk's distribution."""
+    """Quantile dotplot and percentiles of a risk's distribution (net cards: the net, D17)."""
     ds = data.load(include_mock=include_mock)
     model = _load_model(ds, _risk_id(risk), as_json)
     _check_cf(model, counterfactual, as_json)
-    y, _ = model.run(counterfactual, seed=seed)
-    s = engine.summarise(y)
+    _check_component(model, component, as_json)
+    y, s = _summarise(model, counterfactual, seed, component=component)
+    signed = model.is_net and component is None
     pct = {
         f"p{int(q * 100):02d}": float(np.quantile(y, q))
         for q in (0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99)
     }
     st = _settings(counterfactual, seed, len(y))
+    if signed:
+        tails = s["tail_dominated_components"]
+        last = (
+            f"expected value: {dotplot.fmt_net(s['expected_value'])} · net harm in "
+            f"{s['share_net_harm']:.0%} of futures · tail-dominated components (D11): "
+            + (", ".join(tails) if tails else "none")
+        )
+        fv = dotplot.fmt_net
+    else:
+        last = (
+            f"expected value: {fmt(s['expected_value'])} · nothing happens in "
+            f"{s['share_zero']:.0%} of futures · top 5% give {s['top5_share_of_ev']:.0%} of the "
+            "expected value" + (" (TAIL-DOMINATED, D11)" if s["tail_dominated"] else "")
+        )
+        fv = fmt
     text = "\n".join(
         [
-            f"{model.module.TITLE}: DALYs {model.module.WINDOW[0]}–{model.module.WINDOW[1]}",
+            f"{_label(model, component)}: DALYs {model.module.WINDOW[0]}–{model.module.WINDOW[1]}",
             _settings_line(st),
             "",
-            dotplot.text(s["dotplot_quantiles"]),
+            (dotplot.text_signed if signed else dotplot.text)(s["dotplot_quantiles"]),
             "",
-            "  ".join(f"{k}: {fmt(v)}" for k, v in pct.items()),
-            f"expected value: {fmt(s['expected_value'])} · nothing happens in {s['share_zero']:.0%} of "
-            f"futures · top 5% give {s['top5_share_of_ev']:.0%} of the expected value"
-            + (" (TAIL-DOMINATED, D11)" if s["tail_dominated"] else ""),
+            "  ".join(f"{k}: {fv(v)}" for k, v in pct.items()),
+            last,
         ]
     )
     _emit(
         {
             "risk": model.risk,
+            "component": component,
             "settings": st,
             "summary": s,
             "percentiles": pct,
@@ -268,30 +316,38 @@ def dist(
 def cruxes(
     risk: RiskArg,
     counterfactual: CfOpt = DEFAULT_CF,
+    component: ComponentOpt = None,
     seed: SeedOpt = engine.DEFAULT_SEED,
     include_mock: MockOpt = False,
     as_json: JsonOpt = False,
 ) -> None:
-    """Sensitivity analysis: which parameters drive the estimate (one at a time, 5th → 95th)."""
+    """Sensitivity analysis: which parameters drive the estimate (one at a time, 5th → 95th).
+
+    Swings are ratios, except for the net of a net card (D17): there they are absolute
+    changes in DALYs, since the net can change sign.
+    """
     ds = data.load(include_mock=include_mock)
     model = _load_model(ds, _risk_id(risk), as_json)
     _check_cf(model, counterfactual, as_json)
-    y, _ = model.run(counterfactual, seed=seed)
-    s = engine.summarise(y)
-    rows = engine.cruxes(model, counterfactual, seed=seed)
+    _check_component(model, component, as_json)
+    _, s = _summarise(model, counterfactual, seed, component=component)
+    rows = engine.cruxes(model, counterfactual, seed=seed, component=component)
     conf = engine.confidence(s, rows)
     st = _settings(counterfactual, seed, 20_000)
     lines = [
-        f"{model.module.TITLE}",
+        _label(model, component),
         _settings_line(st),
         "",
-        f"{'parameter':26s} {'swing':>6s}  {'EV low':>8s} {'EV high':>8s}  basis",
+        f"{'parameter':26s} {'swing':>8s}  {'EV low':>12s} {'EV high':>12s}  basis",
     ]
     for r in rows:
+        sw = fmt(r["swing"]) if r["swing_kind"] == "absolute" else f"×{r['swing']:.2f}"
         lines.append(
-            f"{r['param']:26s} ×{r['swing']:<5.2f}  {fmt(r['ev_low']):>8s} {fmt(r['ev_high']):>8s}  "
+            f"{r['param']:26s} {sw:>8s}  {fmt(r['ev_low']):>12s} {fmt(r['ev_high']):>12s}  "
             f"{r['basis']}"
         )
+    if model.is_net and component is None:
+        lines += ["", "EV in DALYs lost (negative = net benefit); swing = |EV high − EV low|."]
     lines += [
         "",
         f"confidence (D12): {conf['level']} · measured share of swing "
@@ -301,6 +357,7 @@ def cruxes(
     _emit(
         {
             "risk": model.risk,
+            "component": component,
             "settings": st,
             "cruxes": rows,
             "confidence": conf,
@@ -322,6 +379,7 @@ def whatif(
         ),
     ],
     counterfactual: CfOpt = DEFAULT_CF,
+    component: ComponentOpt = None,
     seed: SeedOpt = engine.DEFAULT_SEED,
     include_mock: MockOpt = False,
     as_json: JsonOpt = False,
@@ -330,6 +388,7 @@ def whatif(
     ds = data.load(include_mock=include_mock)
     model = _load_model(ds, _risk_id(risk), as_json)
     _check_cf(model, counterfactual, as_json)
+    _check_component(model, component, as_json)
     params = {p.name: p for p in model.params}
     fixed: dict = {}
     for item in set_:
@@ -346,20 +405,21 @@ def whatif(
             fixed[k] = idx
         else:
             fixed[k] = float(v)
-    base, _ = model.run(counterfactual, seed=seed)
-    new, _ = model.run(counterfactual, seed=seed, fixed=fixed)
-    b, n = engine.summarise(base), engine.summarise(new)
+    new, n = _summarise(model, counterfactual, seed, fixed, component)
+    _, b = _summarise(model, counterfactual, seed, None, component)
+    signed = model.is_net and component is None
+    fv = dotplot.fmt_net if signed else fmt
     st = _settings(
         counterfactual, seed, len(new), {k: set_[i].split("=", 1)[1] for i, k in enumerate(fixed)}
     )
     text = "\n".join(
         [
-            f"{model.module.TITLE}",
+            _label(model, component),
             _settings_line(st),
             "",
-            f"{'':16s} {'default':>10s} {'yours':>10s}",
+            f"{'':16s} {'default':>14s} {'yours':>14s}",
             *[
-                f"{lab:16s} {fmt(b[k]):>10s} {fmt(n[k]):>10s}"
+                f"{lab:16s} {fv(b[k]):>14s} {fv(n[k]):>14s}"
                 for lab, k in (
                     ("expected value", "expected_value"),
                     ("median", "median"),
@@ -368,7 +428,11 @@ def whatif(
                 )
             ],
             "",
-            f"expected value ×{n['expected_value'] / b['expected_value']:.2g}"
+            (
+                f"expected value moves {dotplot.fmt_net(n['expected_value'] - b['expected_value'])}"
+                if signed
+                else f"expected value ×{n['expected_value'] / b['expected_value']:.2g}"
+            )
             if b["expected_value"]
             else "",
         ]
@@ -376,6 +440,7 @@ def whatif(
     _emit(
         {
             "risk": model.risk,
+            "component": component,
             "settings": st,
             "default": b,
             "yours": n,
@@ -391,21 +456,26 @@ def compare(
     a: Annotated[str, typer.Argument(help="risk/<id>")],
     b: Annotated[str, typer.Argument(help="risk/<id> or baseline/<id>")],
     counterfactual: CfOpt = DEFAULT_CF,
+    component: ComponentOpt = None,
     seed: SeedOpt = engine.DEFAULT_SEED,
     include_mock: MockOpt = False,
     as_json: JsonOpt = False,
 ) -> None:
-    """Compare a risk with another risk or a baseline."""
+    """Compare a risk with another risk or a baseline.
+
+    For a net card (D17) the first row is the net in DALYs lost (negative = net benefit),
+    and the ratio compares sizes (|net|), or use --component for one component.
+    """
     ds = data.load(include_mock=include_mock)
     ma = _load_model(ds, _risk_id(a), as_json)
     _check_cf(ma, counterfactual, as_json)
-    ya, _ = ma.run(counterfactual, seed=seed)
-    sa = engine.summarise(ya)
+    _check_component(ma, component, as_json)
+    ya, sa = _summarise(ma, counterfactual, seed, component=component)
     years = ma.module.WINDOW[1] - ma.module.WINDOW[0] + 1
     rows = [
         {
             "id": a,
-            "label": ma.module.TITLE,
+            "label": _label(ma, component),
             "geography": getattr(ma.module, "GEOGRAPHY", "global"),
             **{k: sa[k] for k in ("expected_value", "median", "p05", "p95")},
         }
@@ -437,7 +507,7 @@ def compare(
     else:
         mb = _load_model(ds, _risk_id(b), as_json)
         _check_cf(mb, counterfactual, as_json)
-        sb = engine.summarise(mb.run(counterfactual, seed=seed)[0])
+        _, sb = _summarise(mb, counterfactual, seed)
         rows.append(
             {
                 "id": b,
@@ -448,7 +518,9 @@ def compare(
         )
         mock = mock or _risk_mock(ds, mb)
     ratio = (
-        rows[0]["expected_value"] / rows[1]["expected_value"] if rows[1]["expected_value"] else None
+        abs(rows[0]["expected_value"]) / abs(rows[1]["expected_value"])
+        if rows[1]["expected_value"]
+        else None
     )
     st = _settings(counterfactual, seed, len(ya))
     lines = [

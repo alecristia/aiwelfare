@@ -1,0 +1,18 @@
+id: clinical-ai-006
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: yuan-2025-ai-early-warning-meta-analysis
+locator:
+  section: Abstract, Results
+quote: A total of five studies met the inclusion criteria, all of which underwent prospective clinical validation.
+quantity: early_warning_evidence_base
+description: The pooled early-warning estimate rests on five non-randomised prospective studies.
+units: none
+counterfactual: not-applicable
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/monitoring
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

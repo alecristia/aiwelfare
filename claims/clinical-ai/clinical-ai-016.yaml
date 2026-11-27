@@ -1,0 +1,32 @@
+id: clinical-ai-016
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: draelos-2025-llm-unsafe-medical-answers
+locator:
+  page: 1
+  section: Abstract
+quote: unsafe responses varying from 5% (Claude) to 13% (GPT-4o, Llama).
+quantity: chatbot_unsafe_answer_rate
+description: Share of chatbot answers to patient-posed primary-care questions that physicians judged could harm
+  a patient if acted upon.
+value:
+  interval:
+    low: 0.05
+    high: 0.13
+    kind: model-range
+units: share of responses
+geography: not stated (US-trained physicians, English questions)
+time_window:
+  start: 2024
+  end: 2024
+  per: period
+counterfactual: not-applicable
+conditions: Four chatbots (Claude, Gemini, GPT-4o, Llama3-70B), late-2024 versions; 222 questions; one physician
+  evaluator per response. The discussion gives GPT-4o 13.5%, Llama 13.1%, Claude 5.0%.
+evidence_type: independent-evaluation
+evidence_basis: measured
+tags:
+- pathway/chatbot-advice
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

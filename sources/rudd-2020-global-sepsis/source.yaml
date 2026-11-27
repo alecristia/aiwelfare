@@ -1,0 +1,25 @@
+id: rudd-2020-global-sepsis
+mock: false
+title: "Global, regional, and national sepsis incidence and mortality, 1990-2017: analysis for the Global Burden of Disease Study"
+authors: ["Kristina E. Rudd", "Sarah Charlotte Johnson", "Kareha M. Agesa", "et al.", "Mohsen Naghavi"]
+publisher: "The Lancet 395(10219):200-211"
+type: peer-reviewed
+evidence_date: "2017"
+published: "2020-01-18"
+version: "published version of record (Europe PMC full-text XML, PMC6970225)"
+accessed: 2026-11-27
+url: https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6970225/fullTextXML
+landing_page: https://doi.org/10.1016/S0140-6736(19)32989-7
+doi: 10.1016/S0140-6736(19)32989-7
+license: "CC BY 4.0"
+redistribution: url-only
+sha256: e7f5fd299379d9c7809799bbea75f1d3de9f0e96189f442e0e03d0ae8a9a18b4
+evidence_basis: [modelled]
+author_interests:
+  - kind: funder
+    note: "Funded by the Bill & Melinda Gates Foundation, NIH, University of Pittsburgh, BC Children's Hospital Foundation, Wellcome Trust and the Fleming Fund."
+notes: >
+  GBD 2017-based estimate of sepsis-related deaths from multiple-cause-of-death data, all ages, in
+  and out of hospital. Sepsis is not a GBD cause, so this sits beside GBD rather than in it.
+  Evidence covers 2017. Kept url-only, like the other sources, so nothing is mirrored without
+  checking.

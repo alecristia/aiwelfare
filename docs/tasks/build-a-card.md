@@ -44,7 +44,11 @@ From the prior-work catalogue (`related_work/catalog.yaml`; read each entry's `a
 
 Risk IDs above are proposals; confirm with the maintainer if unsure.
 
-## Prerequisite for net cards (the first one builds it)
+## Prerequisite for net cards: done (D17)
+
+**Done 2026-11-27** on branch `clinical-ai-card`; see D17 in `docs/decisions.md`. Net models declare `COMPONENTS`, `simulate()` returns one magnitude per component, and the net (harms − benefits) is shown on a mirrored log axis. The original brief for this step is kept below for reference.
+
+### Original brief
 
 Four cards are **net** (D2): clinical AI, chatbots and mental health, autonomous vehicles, and any other card with both a harm and a benefit component. The engine and card format do not support this yet: a model returns one quantity (DALYs lost), and the dotplot uses a log axis that cannot show a negative or zero-straddling net.
 
@@ -124,3 +128,45 @@ Copy the frontmatter keys of `cards/data-centre-air-pollution.md`: `one_line`, `
 - Its estimate is global and labelled with its counterfactual.
 - Tests, validation and lint pass.
 - The pull request explains what drives the estimate, what the main assumptions are, and what is parked.
+
+## Lessons from the first card session (2026-11-27)
+
+- **Bot checks and paywalls:** do not work around them. Add the item to "Items for the maintainer to fetch" in `docs/roadmap.md`, carry on with what can be read, and record the gap in the card's limitations.
+- **Full text from Europe PMC:** when the PDF links sit behind a bot check, the REST endpoint `https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML` often works for open-access papers. Use it as the source `url`.
+- **Annex text files explicitly.** This repo's `.gitattributes` annexes binary files only, so an XML or HTML full text would be committed to git itself. Download with `datalad download-url --nosave`, then `git annex add --force-large <file>` and `git annex registerurl <key> <url>`.
+- **Checking quotes:** the generator used for clinical-AI claims, which checks each quote against the source text with whitespace and hyphens normalised, was a scratch script (not in the repo). Re-create one, or promote it into `src/aiwelfare` if a second card needs it.
+- **Evidence basis of assumption parameters:** cite only the `assumption` claim in the parameter's `claims`, and put supporting context in the assumption's rationale. Citing a measured context claim would make the parameter count as "measured" for D12.
+- **Known quirk, not fixed:** for single-quantity cards, `card._crux_rows` assumes a parameter's high end raises the estimate. Net cards check the direction; harm cards do not, and no crux currently shown on a harm card is affected (air pollution's `conventional_growth` would be, if it ranked in the top three).
+
+## In progress: Clinical AI (`clinical-ai`), paused 2026-11-27
+
+Branch `clinical-ai-card`. Decisions agreed with the maintainer:
+- **Modelled:** hospital early warning (benefit); unsafe chatbot advice, counted only as the **excess over people's usual sources** (harm); errors from AI medical devices (harm).
+- **Listed as not modelled:** diagnostics and screening; hallucinations in guidelines; biased algorithms.
+
+**Done:**
+- [x] D17 and engine support, tests (commit `fd3bebd`)
+- [x] Nine sources registered and read (commit `7871a28`):
+  - COMPOSER, CHARTwatch, the Yuan meta-analysis, Rudd 2020
+  - OpenAI's report, Draelos, Bean
+  - Lin, Handley
+- [x] 41 claims in `claims/clinical-ai/`: quotes checked mechanically; 18 are assumptions with rationale and `replace_with`
+- [x] `models/clinical_ai.py`: three components, one effect variant per study (D14); `open-only` is not modelled
+- [x] `cards/clinical-ai.md`: prose, cruxes, kinds of work, not captured, limitations
+
+**Next, in order:**
+1. Read the whole card in the terminal, as a reader would: `uv run aiwelfare show risk/clinical-ai`, then the same with `--counterfactual no-ai`. Check:
+   - the kinds-of-work and not-captured sections
+   - that every "dig deeper" command runs, including `--component`
+   - the crux wording
+2. Add tests:
+   - add `clinical-ai` to `test_every_model_parameter_cites_existing_claims`, `test_card_has_d4_sections_in_order_with_commands` (net cards use a different kinds-of-work heading, so adjust `D4_HEADINGS`) and `test_committed_cards_are_current`
+   - add JSON-contract entries for `dist`, `cruxes`, `whatif` and `compare` with `--component`
+3. Commit the inputs, then `uv run aiwelfare rerun risk/clinical-ai`, and check that `datalad rerun <that commit>` changes nothing.
+4. Add a "Clinical AI" section to `related_work/search_log.md`: the searches run this session (global AI health DALY estimates, TB CXR CAD screening volumes, chatbot health usage, RCTs of AI early warning, hospital adoption of sepsis models) and what each found.
+5. Update `CLAUDE.md` "Current status" and the roadmap row, then open the pull request (do not merge).
+
+**Where the estimate stood when paused** (not a published number; regenerate before quoting):
+- **Direction:** a net benefit, with the net harmful in a minority of futures.
+- **What drives it:** the global coverage of AI early warning, and how much of the developer-site effect transfers. Both are speculation.
+- **Confidence:** low. The chatbot-advice component is tail-dominated.

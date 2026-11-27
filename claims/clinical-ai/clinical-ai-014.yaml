@@ -1,0 +1,28 @@
+id: clinical-ai-014
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: openai-2026-healthcare-ally
+locator:
+  page: 2
+  section: Introduction
+quote: Of our more than 800 million regular users, one in four submits a prompt about healthcare every week.
+quantity: chatgpt_weekly_health_share
+description: A quarter of ChatGPT's regular users send a healthcare prompt each week.
+value:
+  point: 0.25
+units: share of regular (weekly) users
+geography: global
+time_window:
+  start: 2025
+  end: 2025
+  per: year
+counterfactual: not-applicable
+conditions: '''Healthcare'' includes insurance, billing and administrative questions, not only clinical advice.'
+evidence_type: measured-data
+evidence_basis: measured
+tags:
+- pathway/chatbot-advice
+- exposure
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

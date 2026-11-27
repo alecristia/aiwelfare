@@ -1,0 +1,21 @@
+id: clinical-ai-030
+mock: false
+risk: clinical-ai
+claim_type: qualitative
+source: lin-2025-fda-ai-device-reporting
+locator:
+  section: Discussion
+quote: the well-documented underreporting of safety events in MAUDE necessitates a shift toward more proactive safety
+  monitoring.
+quantity: maude_underreporting
+description: MAUDE is known to under-report safety events.
+units: none
+geography: United States
+counterfactual: not-applicable
+evidence_type: incident-data
+evidence_basis: measured
+tags:
+- pathway/device-errors
+- work/postmarket-monitoring
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

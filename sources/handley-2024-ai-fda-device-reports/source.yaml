@@ -1,0 +1,24 @@
+id: handley-2024-ai-fda-device-reports
+mock: false
+title: "Artificial intelligence related safety issues associated with FDA medical device reports"
+authors: ["Jessica L. Handley", "Seth A. Krevat", "Allan Fong", "Raj M. Ratwani"]
+publisher: "npj Digital Medicine 7:351"
+type: peer-reviewed
+evidence_date: "2024"
+published: "2024"
+version: "published version of record"
+accessed: 2026-11-27
+url: https://www.nature.com/articles/s41746-024-01357-5.pdf
+landing_page: https://doi.org/10.1038/s41746-024-01357-5
+doi: 10.1038/s41746-024-01357-5
+license: "CC BY 4.0"
+redistribution: url-only
+sha256: 1a2ec73353dba01316fbb49a14caffb0a24805a31f526a02e6f4bcdba6b95b3e
+evidence_basis: [measured]
+author_interests:
+  - kind: none-identified
+    note: "Academic health system (MedStar); authors declare no competing interests."
+notes: >
+  Review of 429 MAUDE reports for AI/ML-enabled devices: whether AI/ML plausibly contributed. US
+  only. Evidence covers 2024. Kept url-only, like the other sources, so nothing is mirrored
+  without checking.

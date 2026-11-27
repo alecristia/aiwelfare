@@ -1,0 +1,25 @@
+id: draelos-2025-llm-unsafe-medical-answers
+mock: false
+title: "Large language models provide unsafe answers to patient-posed medical questions"
+authors: ["Rachel L. Draelos", "Samina Afreen", "Barbara Blasko", "Tiffany L. Brazile", "Natasha Chase", "Dimple Patel Desai", "Jessica Evert", "Heather L. Gardner", "Lauren Herrmann", "Aswathy Vaikom House", "Stephanie Kass", "Marianne Kavan", "Kirshma Khemani", "Amanda Koire", "Lauren M. McDonald", "Zahraa Rabeeah", "Amy Shah"]
+publisher: "arXiv (cs.CL)"
+type: preprint
+evidence_date: "2024"
+published: "2025"
+version: "arXiv v2"
+accessed: 2026-11-27
+url: https://arxiv.org/pdf/2507.18905v2
+landing_page: https://arxiv.org/abs/2507.18905v2
+doi: 10.48550/arXiv.2507.18905
+license: "arXiv non-exclusive distribution licence 1.0"
+redistribution: url-only
+sha256: ad8d78c94a0a4c3202b85289c0b147c0fdbc8ef7b2aaa43098145b09424ba633
+evidence_basis: [measured]
+author_interests:
+  - kind: industry-affiliation
+    note: "First author founded and runs Glass Box Medicine, a health-AI consulting company; no external funding (personal funds)."
+notes: >
+  Physician red-teaming of 888 responses (Claude, Gemini, GPT-4o, Llama3-70B) to 222 patient-posed
+  primary-care questions, collected late 2024; one physician evaluator per response. 'Unsafe'
+  means the response could harm a patient if acted upon (potential, not observed harm). Evidence
+  covers 2024. Kept url-only, like the other sources, so nothing is mirrored without checking.

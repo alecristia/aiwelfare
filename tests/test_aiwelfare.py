@@ -221,3 +221,88 @@ def test_committed_cards_are_current():
         new = json.loads(json.dumps(fresh["summary"]))
         assert stored.pop("dotplot_quantiles") == pytest.approx(new.pop("dotplot_quantiles"))
         assert stored == pytest.approx(new)
+
+
+# ---- net cards (D17) -------------------------------------------------------------------
+
+NET_MODEL = """
+import numpy as np
+from aiwelfare.engine import Param, uniform
+
+RISK = "toy-net"
+TITLE = "Toy net card"
+WINDOW = (2027, 2031)
+COUNTERFACTUALS = {"no-ai": "No modern AI"}
+NOT_MODELLED = {}
+COMPONENTS = {"good": ("benefit", "a benefit"), "bad": ("harm", "a harm")}
+
+def params(ds):
+    return [
+        Param("gain", "benefit size", [], uniform(100, 1000), "toy"),
+        Param("loss", "harm size", [], uniform(10, 2000), "toy"),
+    ]
+
+def simulate(x, counterfactual):
+    return {"good": x["gain"], "bad": x["loss"]}
+"""
+
+
+@pytest.fixture
+def net_model(tmp_path):
+    path = tmp_path / "toy_net.py"
+    path.write_text(NET_MODEL)
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("toy_net", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return engine.Model(mod, mod.params(None), path)
+
+
+def test_net_is_harms_minus_benefits(net_model):
+    comps, x = net_model.run_components("no-ai", n=2000)
+    y, _ = net_model.run("no-ai", n=2000)
+    assert np.allclose(y, x["loss"] - x["gain"])
+    assert np.allclose(net_model.run("no-ai", n=2000, component="good")[0], x["gain"])
+    assert (y < 0).any() and (y > 0).any()  # straddles zero
+
+
+def test_net_summary_reports_components_and_sign(net_model):
+    comps, _ = net_model.run_components("no-ai", n=5000)
+    s = engine.summarise_net(net_model, comps)
+    assert set(s["components"]) == {"good", "bad"}
+    assert s["components"]["good"]["role"] == "benefit"
+    assert 0 < s["share_net_harm"] < 1
+    assert s["p05"] < 0 < s["p95"]
+    assert s["tail_dominated"] == any(c["tail_dominated"] for c in s["components"].values())
+
+
+def test_net_cruxes_are_absolute_and_component_cruxes_are_ratios(net_model):
+    rows = engine.cruxes(net_model, "no-ai", n=2000)
+    assert all(r["swing_kind"] == "absolute" for r in rows)
+    loss = next(r for r in rows if r["param"] == "loss")
+    assert loss["swing"] == pytest.approx(loss["ev_high"] - loss["ev_low"])
+    assert rows[0]["param"] == "loss"  # wider range, bigger absolute swing
+    comp = engine.cruxes(net_model, "no-ai", n=2000, component="bad")
+    assert all(r["swing_kind"] == "ratio" for r in comp)
+    conf = engine.confidence(engine.summarise(np.ones(10)), rows)
+    assert conf["level"] in {"low", "medium", "high"}
+
+
+def test_net_component_must_be_magnitude(net_model):
+    net_model.module.simulate = lambda x, cf: {"good": -x["gain"], "bad": x["loss"]}
+    with pytest.raises(ValueError, match="magnitude"):
+        net_model.run("no-ai", n=100)
+
+
+def test_signed_dotplot_mirrors_log_axis():
+    from aiwelfare import dotplot
+
+    q = [-1e5, -1e4, -1e3, 0, 1e3, 1e4] + [-5e3] * 14
+    zeros, neg, pos, (lo, hi) = dotplot._signed_layout(q, 2)
+    assert zeros == 1 and sum(neg.values()) == 17 and sum(pos.values()) == 2
+    assert (lo, hi) == (3, 5)
+    svg = dotplot.svg_signed(q, "t")
+    assert "net benefit" in svg and "net harm" in svg
+    assert "net benefit" in dotplot.text_signed(q)
+    assert dotplot.fmt_net(-33000) == "33k averted" and dotplot.fmt_net(1200) == "1.2k lost"

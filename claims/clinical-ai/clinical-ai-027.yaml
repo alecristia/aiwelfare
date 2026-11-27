@@ -1,0 +1,27 @@
+id: clinical-ai-027
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: chatbot_harm_excess_share
+description: Share of the harm from unsafe chatbot advice that would not have happened with people's usual sources
+  (search, own knowledge).
+value:
+  interval:
+    low: 0.0
+    high: 0.5
+    kind: unqualified
+units: fraction
+geography: global
+counterfactual: no-ai
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/chatbot-advice
+- comparator
+rationale: Bean et al. found LLM help no better or worse than usual sources for choosing what to do, but worse for
+  naming relevant conditions; usual sources also give unsafe advice. Agreed with the maintainer (2026-11-27) to
+  count only the excess. Uniform from 0 to 50%.
+replace_with: A randomised comparison of health outcomes (not just decisions) between chatbot and search users.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

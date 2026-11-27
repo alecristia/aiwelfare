@@ -1,0 +1,26 @@
+id: yuan-2025-ai-early-warning-meta-analysis
+mock: false
+title: "AI-Powered early warning systems for clinical deterioration significantly improve patient outcomes: a meta-analysis"
+authors: ["Shixin Yuan", "Zihuan Yang", "Junjie Li", "Changde Wu", "Songqiao Liu"]
+publisher: "BMC Medical Informatics and Decision Making"
+type: peer-reviewed
+evidence_date: "2013"
+published: "2025-06-02"
+version: "published version of record (Europe PMC full-text XML, PMC12131336)"
+accessed: 2026-11-27
+url: https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12131336/fullTextXML
+landing_page: https://doi.org/10.1186/s12911-025-03048-x
+doi: 10.1186/s12911-025-03048-x
+license: "CC BY-NC-ND 4.0"
+redistribution: url-only
+sha256: 3c3c949494594c7c5b63ff476914ae86cc23e06565b3f52ccee6373ba27773b0
+evidence_basis: [measured]
+author_interests:
+  - kind: none-identified
+    note: "Academic authors; funding 'Not applicable'."
+notes: >
+  Meta-analysis of five prospective, non-randomised evaluations of ML early-warning systems in
+  non-ICU adult inpatients (searched to April 2024), random-effects odds ratios. Includes the
+  Kaiser Permanente 19-hospital study (Escobar et al.) and CHARTwatch (Verma et al.), so it
+  overlaps with verma-2024-chartwatch. Evidence covers 2013/2024. Kept url-only, like the other
+  sources, so nothing is mirrored without checking.

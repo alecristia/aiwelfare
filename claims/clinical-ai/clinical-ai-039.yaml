@@ -1,0 +1,24 @@
+id: clinical-ai-039
+mock: false
+risk: clinical-ai
+claim_type: assumption
+source: null
+quantity: dalys_per_device_death
+description: DALYs lost per death involving an AI medical device.
+value:
+  interval:
+    low: 5
+    high: 20
+    kind: unqualified
+units: DALYs per death
+geography: global
+counterfactual: not-applicable
+evidence_type: assumption
+evidence_basis: speculation
+tags:
+- pathway/device-errors
+- conversion/dalys
+rationale: Deaths in hospital care fall mostly on older, sick adults. Uniform.
+replace_with: Ages of patients in AI-device death reports and GBD years of life lost by age.
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

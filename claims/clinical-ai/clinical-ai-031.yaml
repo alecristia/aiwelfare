@@ -1,0 +1,22 @@
+id: clinical-ai-031
+mock: false
+risk: clinical-ai
+claim_type: estimate
+source: handley-2024-ai-fda-device-reports
+locator:
+  page: 1
+  section: Main text
+quote: Of the 429 reports reviewed, 108 (25.2%) were potentially AI/ML related
+quantity: ai_device_reports_ai_related_share
+description: Share of safety reports for AI/ML-enabled devices in which AI/ML plausibly contributed.
+value:
+  point: 0.252
+units: share of reports
+geography: United States
+counterfactual: not-applicable
+evidence_type: incident-data
+evidence_basis: measured
+tags:
+- pathway/device-errors
+extracted_by: Claude Code (Opus 5.5), for review
+extracted_on: '2026-11-27'

@@ -1,0 +1,24 @@
+id: openai-2026-healthcare-ally
+mock: false
+title: "AI as a Healthcare Ally: How Americans are navigating the system with ChatGPT"
+authors: ["OpenAI"]
+publisher: "OpenAI"
+type: lab-disclosure
+evidence_date: "2025"
+published: "2026-01"
+version: "January 2026 PDF, accessed 2026-11-27"
+accessed: 2026-11-27
+url: https://cdn.openai.com/pdf/2cb29276-68cd-4ec6-a5f4-c01c5e7a36e9/OpenAI-AI-as-a-Healthcare-Ally-Jan-2026.pdf
+landing_page: https://cdn.openai.com/pdf/2cb29276-68cd-4ec6-a5f4-c01c5e7a36e9/OpenAI-AI-as-a-Healthcare-Ally-Jan-2026.pdf
+license: "not stated"
+redistribution: url-only
+sha256: 5fdd86ddb939a706048bc336cf2877a16c70c498cf718f5df096ac679d2b8fa5
+evidence_basis: [measured]
+author_interests:
+  - kind: developer-self-report
+    note: "OpenAI reports usage of its own product; the report also argues for policy changes. Usage figures come from anonymised message data that cannot be checked independently."
+notes: >
+  Global usage figures for ChatGPT health prompts; 'healthcare' includes insurance and
+  administrative questions, not only clinical advice. Most of the report is about the United
+  States. Evidence covers 2025. Kept url-only, like the other sources, so nothing is mirrored
+  without checking.
