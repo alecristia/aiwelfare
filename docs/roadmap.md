@@ -60,7 +60,7 @@ The first real benefit, so the overview does not show harms alone.
 Replaces the mock card, starting from Righetti's model (GovAI 2025).
 
 ### 4. Website and explorer (D6, D8)
-With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10).
+With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Task brief for a separate session: `docs/tasks/website-and-explorer.md`.
 
 ### 5. Remaining cards, in this order
 1. Chatbots and mental health (net)
