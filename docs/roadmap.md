@@ -32,13 +32,23 @@ The single list of risks and benefits being considered, with their status. A car
 
 ### 1. Health baselines (GBD / WHO)
 **Why now:** every card's magnitude line needs baselines (D4, D6), and the air-pollution card currently says "no sourced baselines yet". The same data would replace that card's placeholder DALYs-per-death assumption.
-**Work:** pick the baseline set (e.g. malaria, tuberculosis, road injuries, ambient air pollution); add them under `baselines/` with sources; check what IHME's terms of use allow us to redistribute (D1).
-**Needs the maintainer:** which baselines; adding GBD as a DataLad subdataset is a new external source.
+**Work:** GBD as a DataLad subdataset (approved 2026-11-27), tracked by URL and checksum only under IHME's terms (D1). Six baselines, two per GBD level-1 cause group, as causes rather than risk factors, global and US values, latest GBD year held constant over the window:
+- non-communicable: neoplasms, diabetes mellitus
+- communicable, maternal, neonatal and nutritional: malaria, nutritional deficiencies
+- injuries: road injuries, interpersonal violence
 
-### 2. Cards, one at a time, through the milestone-1 pipeline
-Each card: register sources → extract claims → model → prose → `aiwelfare rerun`. Proposed order (to confirm):
+**Needs the maintainer:** confirm the adjustments proposed on 2026-11-27 (causes not risk factors; interpersonal violence rather than conflict; US values alongside global). GBD exports need an IHME login, so the maintainer may need to download the files.
+
+### 2. First cards, through the milestone-1 pipeline
+Each card: register sources → extract claims → model → prose → `aiwelfare rerun`. Order confirmed 2026-11-27:
 1. **Clinical-AI diagnostics and monitoring benefit**: puts a benefit on the chart, so harms are not shown alone.
 2. **Bio-misuse, real**: replaces the mock card, starting from Righetti's model.
+
+### 3. Website and explorer (D6, D8), after bio misuse
+**Why here:** with three real cards (air pollution, clinical-AI benefit, bio misuse), the overview has a benefit, a tail-dominated risk and a steady harm to show, enough to test the forest plot, sliders and counterfactual switch on real data. Later cards then appear on the site as they are built.
+**Work:** static site generated from `results/` (D8, D10: nothing computed that the CLI cannot reproduce); forest-plot overview with baselines as reference lines (D6); in-browser explorer (Shinylive or Observable Framework, D8).
+
+### 4. Remaining cards, continuing the order above
 3. **Chatbot mental-health harm**
 4. **AI-enabled cyberattacks on health and critical infrastructure**
 5. **Autonomous vehicles**
@@ -64,9 +74,6 @@ Every entry goes to a card or to the "not captured in DALYs" register; unmapped 
 
 ### Air-pollution card: known gaps
 Listed under the card's "Known limitations": global extension beyond the US, the DALYs-per-death source (see baselines, above), the `open-only` counterfactual, the access-mode breakdown, and a source for energy-efficient ML.
-
-### Website and explorer (D6, D8)
-Static site, forest-plot overview and parameter explorer. Waits until several real cards exist.
 
 ### Overview chart details (D7)
 Row counts, colours and layout: deferred by D7 until real estimates exist.
