@@ -87,6 +87,7 @@ Cards are organised around the reader's decision, not the model's internals. The
 - Outcomes of "nothing happens" (zero DALYs) are shown in **a separate column left of the log axis**, so the point mass at zero stays visible.
 - **No violin or density plots.** On a log scale they cannot show the zero mass, and would misrepresent exactly the tail-dominated risks that matter most.
 - Dotplots appear on cards only. The overview chart stays simpler (D6).
+- **Net cards (D17, amended 2026-11-27):** each component keeps its own log-axis dotplot as above. The net, which can be negative, is shown on a **mirrored log axis**: net benefit on the left (log of |value| growing leftwards), a central column for zero, net harm on the right. Both sides share the same decades.
 
 ## D6. Overview chart and parameter explorer: one interface
 
@@ -206,3 +207,18 @@ Definitions:
 - **Attributable DALYs, all ages, both sexes, latest GBD year**, held constant over the 2026–2031 window and flagged as such on cards, until IHME forecasts replace them.
 - **Overlap is expected.** GBD attributes a death to several risk factors at once, so baselines are not additive. Each is read one line at a time, as a sense of scale.
 - **Provenance:** GBD is a DataLad subdataset; downloaded files are tracked by checksum only. IHME's user agreement forbids redistributing its data; outputs carry "Source: Institute for Health Metrics and Evaluation" (D1).
+
+## D17. Net cards: harm and benefit components
+
+**Status:** Decided 2026-11-27 (agreed with the maintainer before the clinical-AI card was built)
+
+D2 puts harms and benefits of one technology on one card, shown as a net effect. The engine and card format previously handled one non-negative quantity.
+
+- **Model contract:** a net model declares `COMPONENTS` (name → `harm` or `benefit`, plus a label). `simulate()` returns one array per component, each a **magnitude** (DALYs, ≥ 0). Models without `COMPONENTS` are unchanged.
+- **Sign convention:** net = harms − benefits, in DALYs lost. Positive is net harm, negative is net benefit (DALYs averted), consistent with harm cards. Cards say it in words ("~X DALYs averted") and give the chance that the net is harmful.
+- **Card:** the header shows the net. "Is this big?" shows the net on a mirrored log axis (D5, as amended), then each component with its own log-axis dotplot and summary. Baseline ratios use |net|.
+- **Tail flag (D11)** is computed per component; the net is flagged tail-dominated if any component is.
+- **Cruxes and confidence (D12):** for the net, a parameter's swing is the absolute change in expected value (DALYs), because a ratio breaks when the net crosses zero. D12 shares use these absolute swings instead of logs. For a single component, swings stay ratios.
+- **CLI:** `show`, `dist`, `whatif`, `cruxes` and `compare` work on the net by default; `--component <name>` gives one component. `--json` includes every component's summary.
+- **Overview chart (D6):** the row is the net, so the forest plot needs a signed axis (symmetric log, as on cards). Left to the website task.
+- **Not yet:** access-mode breakdown per component (`breakdown` returns none for net models).
