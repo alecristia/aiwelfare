@@ -24,12 +24,18 @@ To change a decision, edit it here in the same pull request as the code change, 
 
 **Status:** Decided
 
-A risk or benefit gets its own card only if **all three** hold:
+**Amended 2026-11-27:** cards were drifting towards a fine-grained list (one per pathway the literature happened to measure), the problem the repo exists to avoid (VISION.md, "Readable at every zoom level").
+
+**Cards are defined from the top down.** Start from the International AI Safety Report's groups (D7) plus a benefits group, and aim for **8–12 cards** in total. The finer pathways a card covers are **components of its model**: the card shows them, but the overview chart shows one row per card.
+
+A candidate gets its own card only if **all three** hold:
 1. **It has a distinct causal pathway to DALYs**, with its own probability × severity model.
 2. **It needs its own evidence.** If two candidates would be modelled from the same sources, they share one card.
-3. **It matters for the reader's decision.** If two candidates would be addressed by different kinds of work, they get separate cards.
+3. **It would be large enough to matter on the overview chart, and it matters for the reader's decision.** Different kinds of work alone no longer justify a split: if one half would be small, or the two halves are the harm and benefit of the same technology, they are components of one card.
 
-The expected total is **15–30 cards**, risks and benefits combined.
+**Harms and benefits of the same technology share a card** and are shown as a net effect, with both components visible on the card (VISION.md, "Net effects").
+
+Candidates that fail these tests are components of a broader card, entries in the "not captured in DALYs" register, or noted in the roadmap for later.
 
 ## D3. External taxonomies are indexes, not cards
 
