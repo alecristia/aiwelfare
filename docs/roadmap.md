@@ -2,7 +2,7 @@
 
 What we are working on **now**, and what we will **circle back to**. Update this file when a strand starts, finishes or changes status. Decisions themselves stay in `docs/decisions.md`; this file only tracks work.
 
-Last updated: 2026-11-27.
+Last updated: 2026-11-27 (end of the session that ran milestone 1, the prior-work review and the baselines).
 
 ---
 
@@ -34,34 +34,41 @@ The repo does not estimate these for now. Every output that lists the cards shou
 
 Harms that fall inside a card but outside DALYs (e.g. loss of rights under autocracy) are listed on each card under "What this number leaves out".
 
-Each card is built in its own session from the brief `docs/tasks/build-a-card.md`. The first net card (clinical AI) must first agree a design for harm and benefit components with the maintainer (see the brief).
+---
+
+## Task briefs (launch each in its own session)
+
+| Brief | Use |
+|---|---|
+| `docs/tasks/build-a-card.md` | Build one card end to end. Launch once per card: "Read `docs/tasks/build-a-card.md` and build the card **<name>**." |
+| `docs/tasks/website-and-explorer.md` | Build the static site and parameter explorer |
+| `docs/tasks/prior-work-search.md` | The literature search (done; kept for reference and for follow-up rounds) |
+
+---
+
+## Done
+
+- **Milestone 1 (2026-11-27):** schemas, `aiwelfare` package and CLI (every command, all with `--json`), Monte Carlo engine, card builder with quantile dotplots, tests. Two demonstration cards: data-centre air pollution (real data, US only, built through `datalad run`) and bio misuse (invented data, `mock/`).
+- **Prior-work search, rounds 1–5** (PRs #1, #2): catalogue, search log and summary in `related_work/` and `docs/related-work.md`. The *Lancet* Commission main text and appendix are registered as sources.
+- **Card list:** nine cards defined top-down, and three scope cuts (D2, amended 2026-11-27).
+- **Baselines (D16):** six global GBD 2023 risk factors in `baselines/`, from the GBD subdataset `baselines/gbd/` (every file annexed, never pushed). Cards show their size against each one ("about 1/35,000 of air pollution"). Global deaths and DALYs from ambient particulate matter are recorded as claims for the environmental-footprint card.
+- **VISION.md:** global scope (scope decision 5) and "estimates do not add up" (modelling decision 7).
 
 ---
 
 ## Now
 
-### 1. Health baselines (GBD risk factors, D16): done for the six baselines
-The six global baselines are in `baselines/` (GBD 2023, year 2023), generated from the GBD subdataset `baselines/gbd/`:
+### 1. Clinical AI (net)
+The first real benefit, so the overview does not show harms alone. Launch with `docs/tasks/build-a-card.md`.
+**Prerequisite:** it is the first net card, and the engine and card format cannot yet show harm and benefit components or a net that may be negative (D5 dotplots use a log axis). The session first proposes a design, the maintainer agrees it, and it is recorded as a decision before the card is built (see the brief).
 
-| GBD level-1 risk group | Risk factors |
-|---|---|
-| Environmental and occupational | Air pollution; unsafe water, sanitation and handwashing |
-| Behavioural | Tobacco; child and maternal malnutrition |
-| Metabolic | High systolic blood pressure; high fasting plasma glucose |
+### 2. Biological misuse, real
+Replaces the mock card, starting from Righetti's model (GovAI 2025). The mock files stay in `mock/` as the format demonstration.
 
-Still to do:
-- check that the six sit at the same level of the GBD risk hierarchy (the download does not record it)
+### 3. Website and explorer (D6, D8)
+With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Brief: `docs/tasks/website-and-explorer.md`. It can start now against the existing outputs, in parallel with the cards. Once net cards exist, the overview needs an axis that can show signed values.
 
-### 2. Clinical AI (net)
-The first real benefit, so the overview does not show harms alone.
-
-### 3. Biological misuse, real
-Replaces the mock card, starting from Righetti's model (GovAI 2025).
-
-### 4. Website and explorer (D6, D8)
-With baselines and three cards (clinical AI, bio misuse, and the global environmental footprint if ready), the overview has a benefit, a tail-dominated risk and a steady harm, enough to test the forest plot, sliders and counterfactual switch on real data. Static site generated from `results/` (D8); nothing computed that the CLI cannot reproduce (D10). Task brief for a separate session: `docs/tasks/website-and-explorer.md`.
-
-### 5. Remaining cards, in this order
+### 4. Remaining cards, in this order (one session each)
 1. Chatbots and mental health (net)
 2. Cyberattacks on health and critical infrastructure
 3. Autonomous vehicles (net)
@@ -83,6 +90,9 @@ Rounds 1–5 are done and merged (PRs #1, #2). Open items:
 - Retry the items under "Not accessed" in `docs/related-work.md`.
 - Targeted searches each card will need: therapy chatbots, global data-centre electricity and health.
 - Known blind spots: non-English literature.
+
+### GBD baselines: hierarchy check
+The download does not record each risk factor's level in the GBD risk hierarchy. Confirm that all six sit at the same level (D16), e.g. from IHME's risk hierarchy list.
 
 ### D3: map the MIT AI Risk Repository to the cards
 Every entry goes to a card, a card's "leaves out" list, or the scope cuts above. Unmapped entries are coverage gaps.
